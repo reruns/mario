@@ -1,0 +1,49 @@
+-Game class
+  -Loads the map and renders the whole thing on the canvas
+  -Sets up the viewport
+  -Makes and positions the player
+  -set input handlers
+  
+  #update
+    calls update on all of the entities
+    redraws the foreground
+
+  
+movableObject:
+  position, velocity, acceleration
+  hitbox dimensions
+  reference to the game
+    
+    
+Enemy:
+  movableObject
+  
+  #collideWith
+    checks collision. Bounces off of walls and other enemies. Kills marios.
+  
+Mario:
+  #collideWith
+    gets expelled from walls, bonks blocks, destroys blocks as big Mario
+    note: collision with blocks is determined by which one is over the center
+      if you're slightly to the side, you slip past it.
+    
+    
+Item
+  #collideWith
+    item pickup logic 
+    
+Mushroom
+  type
+  
+  #update
+    movement logic for mushrooms
+    get impulse from being block bonked
+    
+    
+Sprite
+  holds the image for a sprite sheet
+   #update
+    method to set the position and sprite for the next frame
+  
+  #render
+    method to actually place the new image on the canvas

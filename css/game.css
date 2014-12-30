@@ -1,0 +1,13 @@
+html, body, ul, li {
+  margin: 0;
+  border: 0;
+  padding: 0;
+
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: blue;
+}
