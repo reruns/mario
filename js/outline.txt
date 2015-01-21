@@ -8,8 +8,11 @@
     calls update on all of the entities
     redraws the foreground
 
-  
-movableObject:
+LevelLoader:
+  Reads in a BIG ASS ARRAY of all the different types of things
+  and puts together the whole dang level.
+
+Object:
   position, velocity, acceleration
   hitbox dimensions
   reference to the game
@@ -20,12 +23,18 @@ Enemy:
   
   #collideWith
     checks collision. Bounces off of walls and other enemies. Kills marios.
+    gets killed by block bonk from below
+    
+  Specific enemy behaviors:
+    koopas get replaced with shells 
+    shells get kicked if touched from the side, instead of killing
   
 Mario:
   #collideWith
     gets expelled from walls, bonks blocks, destroys blocks as big Mario
     note: collision with blocks is determined by which one is over the center
       if you're slightly to the side, you slip past it.
+  Crazy-ass sprite shifting if you're in star mode!
     
     
 Item
@@ -38,12 +47,26 @@ Mushroom
   #update
     movement logic for mushrooms
     get impulse from being block bonked
+      this can be implemented by giving them the appropriate accel
+      just if they overlap a block from the bottom.
+      of course, only AFTER they finish sliding out of the block.
     
     
 Sprite
   holds the image for a sprite sheet
    #update
-    method to set the position and sprite for the next frame
+    method to set the sprite for the next frame
   
   #render
     method to actually place the new image on the canvas
+    
+Water levels:
+  make a separate class for water Marios
+    less gravity
+    swimming sprite
+    fireballs are the same
+    jump works when not on the ground
+  different enemies
+    
+What about the demo?
+  Honestly no idea
