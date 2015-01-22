@@ -11,11 +11,11 @@
 LevelLoader:
   Reads in a BIG ASS ARRAY of all the different types of things
   and puts together the whole dang level.
+  
 
-Object:
+Entity
   position, velocity, acceleration
-  hitbox dimensions
-  reference to the game
+  hitbox offset and dimensions
     
     
 Enemy:

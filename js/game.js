@@ -1,4 +1,3 @@
-//cross-browser RAF
 var requestAnimFrame = (function(){
   return window.requestAnimationFrame       ||
     window.webkitRequestAnimationFrame ||
@@ -10,13 +9,22 @@ var requestAnimFrame = (function(){
     };
 })();
 
-
 //create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext('2d');
-canvas.width = 256;
-canvas.height = 240;
+//we might have to get the size and calculate the scaling
+//but this method should let us make it however big.
+//Cool!
+canvas.width = 512;
+canvas.height = 480;
+ctx.scale(2,2);
 document.body.appendChild(canvas);
+
+//viewport
+var vX = 0,
+    vY = 0,
+    vWidth = 256,
+    vHeight = 240;
 
 //load our images
 resources.load([
@@ -33,12 +41,8 @@ function init() {
   main();
 }
 
+var player = new Mario.Player([0,0], this);
 var gameTime = 0;
-
-var player = {
-  pos: [0,0],
-  sprite: new Sprite('sprites/player.png',[80,0],[16,32],0)
-};
 
 //set up the game loop
 function main() {
@@ -62,12 +66,17 @@ function update(dt) {
 }
 
 function handleInput(dt) {
-  //for now do nothing
+   if (input.isDown('LEFT')) { // 'd' or left arrow
+      player.moveLeft();
+   }
+   else if (input.isDown('RIGHT')) { // 'k' or right arrow
+      player.moveRight();
+   }
 }
 
 //update all the moving stuff
 function updateEntities(dt) {
-  player.sprite.update(dt);
+  player.update(dt);
   
   //update everyone else
 }
@@ -78,16 +87,16 @@ function checkCollisions() {
 
 //draw the game!
 function render() {
-    ctx.fillStyle = "#FFFF00";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#7974FF";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Render the player if the game isn't over
-    renderEntity(player);
+  // Render the player if the game isn't over
+  renderEntity(player);
 };
 
 function renderEntity(entity) {
-    ctx.save();
-    ctx.translate(entity.pos[0], entity.pos[1]);
-    entity.sprite.render(ctx);
-    ctx.restore();
+  ctx.save();
+  entity.render(ctx, vX, vY);
+  ctx.restore();
 }

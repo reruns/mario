@@ -1,8 +1,14 @@
-var Util = {};
+(function() {
+    if (typeof Mario === 'undefined') {
+        window.Mario = {};
+    }
 
-Util.inherits = function(subclass, superclass) {
-    function Surrogate() {};
+    var Util = Mario.Util = {};
 
-    Surrogate.prototype = superclass.prototype;
-    subclass.prototype = new Surrogate();
-}
+    Util.inherits = function(subclass, superclass) {
+        function Surrogate() {};
+
+        Surrogate.prototype = superclass.prototype;
+        subclass.prototype = new Surrogate();
+    }
+})()
