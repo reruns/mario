@@ -2,13 +2,13 @@
 	if (typeof Mario === 'undefined')
 		window.Mario = {};
 
-	var Player = Mario.Player = function(pos) { 
-		this.big = false;
+	var Player = Mario.Player = function(pos) {
+		this.power = 0;
 
 		Mario.Entity.call(this, {
 			pos: pos,
 			sprite: new Mario.Sprite('sprites/player.png',[80,0],[16,32],0),
-			hitbox: [0,0,16,16]
+			hitbox: [0,0,16,32]
 		});
 	}
 
@@ -26,9 +26,12 @@
 			this.acc[0] = -.1
 		}
 	}
-  
+
   Player.prototype.setAnimation = function() {
     //compute changes to the sprite based on movement
+		if (this.vel[0] > 0) {
+			this.left = false;
+		}
     this.sprite.pos[0] = 96;
     this.sprite.frames = [0,1,2];
     this.sprite.speed = 10;
