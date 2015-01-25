@@ -109,9 +109,12 @@ function render() {
   //we don't actually scroll vertically
   for(var i = 0; i < 15; i++) {
     //give it some extra space
-    for (var j = Math.floor(vX / 16); j < Math.floor(vX / 16) + 20; j++){
+    for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
       if (statics[i][j]) {
         renderEntity(statics[i][j]);
+      }
+      if (scenery[j]) {
+        renderEntity(scenery[j]);
       }
     }
   }
