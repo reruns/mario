@@ -104,20 +104,26 @@ function render() {
   ctx.fillStyle = "#7974FF";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Render the player if the game isn't over
-  renderEntity(player);
-  //we don't actually scroll vertically
+  //scenery gets drawn first to get layering right.
+  for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++) {
+    if (scenery[j]) {
+      renderEntity(scenery[j]);
+    }
+  }
+
+  //then we draw every static object.
   for(var i = 0; i < 15; i++) {
-    //give it some extra space
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
       if (statics[i][j]) {
         renderEntity(statics[i][j]);
       }
-      if (scenery[j]) {
-        renderEntity(scenery[j]);
-      }
     }
   }
+
+  //then the player
+  renderEntity(player);
+
+  //and lastly, those little rope things that go in front of mario.
 };
 
 function renderEntity(entity) {
