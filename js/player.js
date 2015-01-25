@@ -7,8 +7,8 @@
 
 		Mario.Entity.call(this, {
 			pos: pos,
-			sprite: new Mario.Sprite('sprites/player.png',[80,0],[16,32],0),
-			hitbox: [0,0,16,32]
+			sprite: new Mario.Sprite('sprites/player.png',[80,32],[16,16],0),
+			hitbox: [0,0,16,16]
 		});
 	}
 
@@ -42,6 +42,9 @@
 			this.vel[0] = 3 * this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
 		}
+
+		//TODO: I'm pretty sure gravity in SMB is actually more like a constant factor.
+		this.acc[1] = .2
 		//acceleration doesn't actually work this way
 		//but as long as we update often enough it's okay.
 		this.vel[0] += this.acc[0];
@@ -50,5 +53,27 @@
 		this.pos[1] += this.vel[1];
     //this.setAnimation();
 		this.sprite.update(dt);
+	}
+
+	Player.prototype.checkCollisions = function(statics) {
+		//x-axis first!
+		var h = this.power > 0 ? 2 : 1;
+		var w = 1;
+		if (this.pos[1] % 16 != 0) {
+			h += 1;
+		}
+		if (this.pos[0] % 16 != 0) {
+			w += 1;
+		}
+		var baseX = Math.floor(this.pos[0] / 16);
+		var baseY = Math.floor(this.pos[1] / 16);
+
+		for (var i = 0; i < h; i++) {
+			for (var j = 0; j < w; j++) {
+				if (statics[baseY + i][baseX + j]) {
+					statics[baseY + i][baseX + j].isCollideWith(this);
+				}
+			}
+		}
 	}
 })();

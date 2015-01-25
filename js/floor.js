@@ -22,11 +22,13 @@
 			//x coords overlap
 			if (!(hpos1[1] > hpos2[1]+ent.hitbox[3] || (hpos1[1]+this.hitbox[3] < hpos2[1]))) {
 				//both overlap
-				if (hpos2[1] == hpos1[0] + this.hitbox[0]) {
+				//TODO: Make this check less janky somehow?
+				if (Math.abs(hpos2[1] + ent.hitbox[3] - hpos1[1]) <= ent.vel[1]) {
 					//entity is standing on the floor.
+					//TODO: Make this a function like below
 					ent.vel[1] = 0;
 					ent.pos[1] = hpos1[1] - ent.hitbox[3] - ent.hitbox[1];
-					this.standing = true;
+					ent.standing = true;
 				} else {
 					//entity is falling into a pit, hit the floor from the side
 					ent.collideWall(this);

@@ -42,9 +42,7 @@ function init() {
   main();
 }
 
-var player = new Mario.Player([0,0], this);
-var statics = [[]];
-statics[0][0] = new Mario.Floor([128,0], new Mario.Sprite('sprites/tiles.png',[0,0],[16,16],0));
+var player = new Mario.Player([16,192], this);
 var gameTime = 0;
 
 //set up the game loop
@@ -86,7 +84,7 @@ function updateEntities(dt) {
 
 //scan for collisions
 function checkCollisions() {
-  statics[0][0].isCollideWith(player);
+  player.checkCollisions(statics);
   //Decompose movement into x and y axes, step one at a time. For each axis:
   //Get the coordinate of the forward-facing edge.
   //Figure out which lines of tiles the bounding box intersects with.
@@ -105,7 +103,15 @@ function render() {
 
   // Render the player if the game isn't over
   renderEntity(player);
-  renderEntity(statics[0][0])
+  //we don't actually scroll vertically
+  for(var i = 0; i < 15; i++) {
+    //give it some extra space
+    for (var j = vX / 16; j < vX / 16 + 20; j++){
+      if (statics[i][j]) {
+        renderEntity(statics[i][j]);
+      }
+    }
+  }
 };
 
 function renderEntity(entity) {
