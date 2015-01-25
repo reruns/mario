@@ -105,9 +105,11 @@ function render() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //scenery gets drawn first to get layering right.
-  for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++) {
-    if (scenery[j]) {
-      renderEntity(scenery[j]);
+  for(var i = 0; i < 15; i++) {
+    for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
+      if (scenery[i][j]) {
+        renderEntity(scenery[i][j]);
+      }
     }
   }
 
