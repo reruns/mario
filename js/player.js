@@ -42,6 +42,11 @@
 			this.vel[0] = 3 * this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
 		}
+		if (this.vel[0] < 0) {
+			this.left = true
+		} else {
+			this.left = false;
+		}
 
 		//TODO: I'm pretty sure gravity in SMB is actually more like a constant factor.
 		this.acc[1] = .2

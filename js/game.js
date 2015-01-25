@@ -42,7 +42,7 @@ function init() {
   main();
 }
 
-var player = new Mario.Player([16,192], this);
+var player = new Mario.Player([40,192], this);
 var gameTime = 0;
 
 //set up the game loop
@@ -78,6 +78,9 @@ function handleInput(dt) {
 //update all the moving stuff
 function updateEntities(dt) {
   player.update(dt);
+  if (player.pos[0] > vX + 80) {
+    vX = player.pos[0] - 80;
+  }
 
   //update everyone else
 }
@@ -106,7 +109,7 @@ function render() {
   //we don't actually scroll vertically
   for(var i = 0; i < 15; i++) {
     //give it some extra space
-    for (var j = vX / 16; j < vX / 16 + 20; j++){
+    for (var j = Math.floor(vX / 16); j < Math.floor(vX / 16) + 20; j++){
       if (statics[i][j]) {
         renderEntity(statics[i][j]);
       }
