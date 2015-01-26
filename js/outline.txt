@@ -40,3 +40,5 @@ TODO: Make level loader use hashes instead of arrays where possible.
 Should be a free performance gain.
 
 Should also make item deletion less weird.
+
+TODO: Make gravity exist higher up instead of having a magic number.

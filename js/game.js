@@ -101,6 +101,10 @@ function updateEntities(dt) {
   items.forEach (function(ent) {
     ent.update(dt);
   });
+
+  enemies.forEach (function(ent) {
+    ent.update(dt);
+  })
 }
 
 //scan for collisions
@@ -112,6 +116,9 @@ function checkCollisions() {
   items.forEach(function(item) {
     item.checkCollisions();
   });
+  enemies.forEach (function(ent) {
+    ent.checkCollisions();
+  })
 }
 
 //draw the game!
@@ -134,6 +141,10 @@ function render() {
   items.forEach (function (item) {
     renderEntity(item);
   });
+
+  enemies.forEach (function(enemy) {
+    renderEntity(enemy);
+  })
 
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {

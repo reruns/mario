@@ -4,6 +4,7 @@ var wallSprite = new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0);
 var qblockSprite = new Mario.Sprite('sprites/tiles.png', [384, 0], [16,16], 8, [0,0,0,0,1,2,1])
 var ublockSprite = new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0);
 var superShroomSprite = new Mario.Sprite('sprites/items.png', [0,0], [16,16], 0);
+var goombaSprite = new Mario.Sprite('sprites/enemy.png', [0, 16], [16,16], 3, [0,1]);
 
 var cloudSprites = [
   new Mario.Sprite('sprites/tiles.png', [0,320],[16,32],0),
@@ -26,6 +27,7 @@ var bushSprites = [
 var statics = [];
 var scenery = [];
 var blocks = [];
+var enemies = [];
 var items = [];
 
 for (var i = 0; i < 15; i++) {
@@ -39,6 +41,7 @@ putCloud(7, 3);
 putBigHill(0,12);
 putThreeBush(11, 12);
 putQBlock(8, 9, new Mario.Mushroom([128, 144], superShroomSprite));
+putGoomba(15, 12);
 
 
 function putFloor(start, end) {
@@ -46,6 +49,10 @@ function putFloor(start, end) {
     statics[13][i] = new Mario.Floor([16*i,208], floorSprite);
     statics[14][i] = new Mario.Floor([16*i,224], floorSprite);
   }
+}
+
+function putGoomba(x, y) {
+  enemies.push(new Mario.Goomba([16*x, 16*y], goombaSprite, enemies.length));
 }
 
 function putWall(x, y, height) {
