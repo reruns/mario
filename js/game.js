@@ -107,18 +107,11 @@ function updateEntities(dt) {
 function checkCollisions() {
   if (player.powering.length !== 0) { return; }
   player.checkCollisions();
-  
+
+  //Apparently for each will just skip indices where things were deleted.
   items.forEach(function(item) {
     item.checkCollisions();
   });
-  //Decompose movement into x and y axes, step one at a time. For each axis:
-  //Get the coordinate of the forward-facing edge.
-  //Figure out which lines of tiles the bounding box intersects with.
-  //This will give minimum and maximum value on the OPPOSITE axis.
-  //Scan along those lines of tiles until you find the closest static obstacle
-  //Then loop through every moving obstacle and determine the closest thing
-  //The total movement of the player is the minimum between the distance to the
-  //closest obstacle, and the amount that you wanted to move.
 }
 
 //draw the game!

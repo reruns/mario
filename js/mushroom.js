@@ -2,7 +2,7 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
-  var Item = Mario.Item = function(pos, sprite) {
+  var Mushroom = Mario.Mushroom = function(pos, sprite) {
     this.spawning = false;
     this.waiting = 0;
 
@@ -13,11 +13,11 @@
     });
   }
 
-  Item.prototype.render = function(ctx, vX, vY) {
+  Mushroom.prototype.render = function(ctx, vX, vY) {
     this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
   }
 
-  Item.prototype.spawn = function(idx) {
+  Mushroom.prototype.spawn = function(idx) {
     this.idx = idx;
     this.spawning = true;
     this.targetpos = [];
@@ -26,7 +26,7 @@
     this.vel[1] = -.5;
   }
 
-  Item.prototype.update = function(dt) {
+  Mushroom.prototype.update = function(dt) {
     if (this.spawning) {
       if (this.pos[1] <= this.targetpos[1]) {
         this.pos[1] = this.targetpos[1];
@@ -49,11 +49,11 @@
     }
   }
 
-  Item.prototype.collideWall = function() {
+  Mushroom.prototype.collideWall = function() {
     this.vel[0] = -this.vel[0];
   }
 
-  Item.prototype.checkCollisions = function() {
+  Mushroom.prototype.checkCollisions = function() {
     if(this.spawning) {
       return;
     }
@@ -78,7 +78,7 @@
   }
 
   //we have access to player everywhere, so let's just do this.
-  Item.prototype.isPlayerCollided = function() {
+  Mushroom.prototype.isPlayerCollided = function() {
     //the first two elements of the hitbox array are an offset, so let's do this now.
     var hpos1 = [this.pos[0] + this.hitbox[0], this.pos[1] + this.hitbox[1]];
     var hpos2 = [player.pos[0] + player.hitbox[0], player.pos[1] + player.hitbox[1]];

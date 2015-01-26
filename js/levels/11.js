@@ -38,7 +38,7 @@ putFloor(0, 69);
 putCloud(7, 3);
 putBigHill(0,12);
 putThreeBush(11, 12);
-putQBlock(8, 9, new Mario.Item([128, 144], superShroomSprite));
+putQBlock(8, 9, new Mario.Mushroom([128, 144], superShroomSprite));
 
 
 function putFloor(start, end) {

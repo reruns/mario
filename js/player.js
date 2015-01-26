@@ -49,22 +49,23 @@
 
 	Player.prototype.jump = function() {
 		if (this.jumping) {
-			this.jumping -= 10;
+			this.jumping -= 1;
 		} else if (this.standing && this.canJump) {
-			this.jumping = 150;
+			this.jumping = 16;
 			this.canJump = false;
 			this.standing = false;
-			this.acc[1] = -.2;
-		}
-
-		if (this.jumping <= 0) {
-			this.jumping = 0;
+			this.vel[1] = -3;
 		}
 	}
 
 	Player.prototype.noJump = function() {
 		this.canJump = true;
-		this.jumping = 0;
+		if (this.jumping <= 8) {
+			this.jumping = 0;
+		} else {
+			this.jumping -= 1;
+		}
+
 	}
 
   Player.prototype.setAnimation = function() {
@@ -131,8 +132,11 @@
 			this.left = false;
 		}
 
-		if (!this.jumping)
-			this.acc[1] = .2
+		if (this.jumping) {
+			this.acc[1] = 0;
+		} else {
+			this.acc[1] = .2;
+		}
 
 		//approximate acceleration
 		this.vel[0] += this.acc[0];
