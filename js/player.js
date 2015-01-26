@@ -49,6 +49,9 @@
 	}
 
 	Player.prototype.jump = function() {
+		if (this.vel[1] > 0) {
+			return;
+		}
 		if (this.jumping) {
 			this.jumping -= 1;
 		} else if (this.standing && this.canJump) {
@@ -186,6 +189,7 @@
 
 		for (var i = 0; i < h; i++) {
 			for (var j = 0; j < w; j++) {
+				if (baseY < 0) { i++;}
 				if (statics[baseY + i][baseX + j]) {
 					statics[baseY + i][baseX + j].isCollideWith(this);
 				}

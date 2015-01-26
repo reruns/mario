@@ -13,10 +13,12 @@
 
 	Mario.Util.inherits(Floor, Mario.Entity);
 
+	//TODO: Figure out why some blocks are having non-integer positions
+	//TODO: Prevent holding left/right against a wall from making you float
 	Floor.prototype.isCollideWith = function (ent) {
 		//the first two elements of the hitbox array are an offset, so let's do this now.
-		var hpos1 = [this.pos[0] + this.hitbox[0], this.pos[1] + this.hitbox[1]];
-		var hpos2 = [ent.pos[0] + ent.hitbox[0], ent.pos[1] + ent.hitbox[1]];
+		var hpos1 = [Math.round(this.pos[0] + this.hitbox[0]), Math.round(this.pos[1] + this.hitbox[1])];
+		var hpos2 = [Math.round(ent.pos[0] + ent.hitbox[0]), Math.round(ent.pos[1] + ent.hitbox[1])];
 
 		//if the hitboxes actually overlap
 		if (!(hpos1[0] > hpos2[0]+ent.hitbox[2] || (hpos1[0]+this.hitbox[2] < hpos2[0]))) {

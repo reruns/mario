@@ -11,7 +11,6 @@ var brickSprite = new Mario.Sprite('sprites/tiles.png', [16, 0], [16,16], 0);
 var brickBounceSprite = new Mario.Sprite('sprites/tiles.png',[32,0],[16,16],0);
 var ublockSprite = new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0);
 var superShroomSprite = new Mario.Sprite('sprites/items.png', [0,0], [16,16], 0);
-var goombaSprite = new Mario.Sprite('sprites/enemy.png', [0, 16], [16,16], 3, [0,1]);
 
 //TODO: Make pipes their own type of object, change this.
 var pipeLEndSprite = new Mario.Sprite('sprites/tiles.png', [0, 128], [16,16], 0);
@@ -94,7 +93,7 @@ putTwoCloud(180, 2);
 putBigHill(192, 12);
 putCloud(200, 3);
 
-
+//interactable terrain
 putQBlock(16, 9, null);
 putBrick(20, 9, null);
 putQBlock(21, 9, new Mario.Mushroom([336, 144], superShroomSprite));
@@ -172,6 +171,24 @@ putWall(187, 13, 7);
 putWall(188, 13, 8);
 putWall(189, 13, 8);
 
+//and enemies
+putGoomba(22, 12);
+putGoomba(40, 12);
+putGoomba(50, 12);
+putGoomba(51, 12);
+putGoomba(82, 4);
+putGoomba(84, 4);
+putGoomba(100, 12);
+putGoomba(102, 12);
+putGoomba(114, 12);
+putGoomba(115, 12);
+putGoomba(122, 12);
+putGoomba(123, 12);
+putGoomba(125, 12);
+putGoomba(126, 12);
+putGoomba(170, 12);
+putGoomba(171, 12);
+
 function putFloor(start, end) {
   for (var i = start; i < end; i++) {
     statics[13][i] = new Mario.Floor([16*i,208], floorSprite);
@@ -180,7 +197,7 @@ function putFloor(start, end) {
 }
 
 function putGoomba(x, y) {
-  enemies.push(new Mario.Goomba([16*x, 16*y], goombaSprite, enemies.length));
+  enemies.push(new Mario.Goomba([16*x, 16*y], new Mario.Sprite('sprites/enemy.png', [0, 16], [16,16], 3, [0,1]), enemies.length));
 }
 
 function putWall(x, y, height) {
