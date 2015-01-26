@@ -19,13 +19,17 @@
 	Player.prototype.moveRight = function() {
 		//we're on the ground
 		if (this.vel[1] === 0) {
-			this.acc[0] = .1
+			this.acc[0] = .1;
+		} else {
+			this.acc[0] = 0.05;
 		}
 	}
 
 	Player.prototype.moveLeft = function() {
 		if (this.vel[1] === 0) {
 			this.acc[0] = -.1
+		} else {
+			this.acc[0] = -0.05;
 		}
 	}
 
