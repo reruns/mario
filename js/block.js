@@ -35,13 +35,14 @@
           ent.vel[1] = 0;
           ent.pos[1] = hpos1[1] - ent.hitbox[3] - ent.hitbox[1];
           ent.standing = true;
-        } else if (Math.abs(hpos2[1] - hpos1[1] - this.hitbox[3]) <= ent.vel[1]) {
+        } else if (Math.abs(hpos2[1] - hpos1[1] - this.hitbox[3]) <= Math.abs(ent.vel[1])) {
           //ent is under the block.
           //it can't phase through us!
           ent.vel[1] = 0;
-          ent.pos[1] = hpos1[1] + this.hitbox[1];
+          ent.pos[1] = hpos1[1] + this.hitbox[3];
           if (ent instanceof Mario.Player) {
             this.bonk(ent.power);
+            ent.jumping = 0;
           }
         } else {
           //entity is hitting it from the side, we're a wall
@@ -56,7 +57,9 @@
       this.break;
     } else {
       this.standing = false;
-      this.opos = this.pos;
+      this.opos = [];
+      this.opos[0] = this.pos[0];
+      this.opos[1] = this.pos[1];
       if (this.bounceSprite) {
         this.osprite = this.sprite;
         this.sprite = this.bounceSprite;
@@ -81,7 +84,15 @@
         }
         this.standing = true;
       }
+    } else {
+      if (this.sprite === this.usedSprite) {
+        var x = this.pos[0] / 16, y = this.pos[1] / 16;
+        statics[y][x] = new Mario.Floor(this.pos, this.usedSprite);
+        delete blocks[y][x];
+      }
     }
+
+    this.pos[1] += this.vel[1];
     this.sprite.update(dt);
   }
 

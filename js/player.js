@@ -95,7 +95,7 @@
 		this.sprite.update(dt);
 	}
 
-	Player.prototype.checkCollisions = function(statics) {
+	Player.prototype.checkCollisions = function(objects) {
 		//x-axis first!
 		var h = this.power > 0 ? 2 : 1;
 		var w = 1;
@@ -110,8 +110,8 @@
 
 		for (var i = 0; i < h; i++) {
 			for (var j = 0; j < w; j++) {
-				if (statics[baseY + i][baseX + j]) {
-					statics[baseY + i][baseX + j].isCollideWith(this);
+				if (objects[baseY + i][baseX + j]) {
+					objects[baseY + i][baseX + j].isCollideWith(this);
 				}
 			}
 		}

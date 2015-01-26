@@ -2,6 +2,8 @@ var floorSprite = new Mario.Sprite('sprites/tiles.png', [0,0],[16,16],0);
 var cloudSprite = new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0);
 var wallSprite = new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0);
 var qblockSprite = new Mario.Sprite('sprites/tiles.png', [384, 0], [16,16], 8, [0,0,0,0,1,2,1])
+var ublockSprite = new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0);
+
 var cloudSprites = [
   new Mario.Sprite('sprites/tiles.png', [0,320],[16,32],0),
   new Mario.Sprite('sprites/tiles.png', [16,320],[16,32],0),
@@ -59,7 +61,8 @@ function putCloud(x, y) {
 function putQBlock(x, y) {
   blocks[y][x] = new Mario.Block( {
     pos: [x*16, y*16],
-    sprite: qblockSprite
+    sprite: qblockSprite,
+    usedSprite: ublockSprite
   });
 }
 

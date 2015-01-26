@@ -100,6 +100,7 @@ function updateEntities(dt) {
 //scan for collisions
 function checkCollisions() {
   player.checkCollisions(statics);
+  player.checkCollisions(blocks);
   //Decompose movement into x and y axes, step one at a time. For each axis:
   //Get the coordinate of the forward-facing edge.
   //Figure out which lines of tiles the bounding box intersects with.
