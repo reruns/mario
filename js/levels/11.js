@@ -1,3 +1,8 @@
+//all of this sprite setup lives here because it changes from level to level.
+//When it's time to add more levels, we'll move the functions to a level.js file
+//and turn each level/area into its own setup function
+//which we call when it's time.
+
 var floorSprite = new Mario.Sprite('sprites/tiles.png', [0,0],[16,16],0);
 var cloudSprite = new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0);
 var wallSprite = new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0);
@@ -41,7 +46,6 @@ putCloud(7, 3);
 putBigHill(0,12);
 putThreeBush(11, 12);
 putQBlock(8, 9, new Mario.Mushroom([128, 144], superShroomSprite));
-putGoomba(15, 12);
 
 
 function putFloor(start, end) {

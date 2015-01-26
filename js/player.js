@@ -4,9 +4,10 @@
 
 	var Player = Mario.Player = function(pos) {
 		this.power = 0;
-		this.powering = [];
+		this.powering = this.damaging = [];
 		this.jumping = 0;
 		this.canJump = true;
+		this.invincibility = 0;
 
 		Mario.Entity.call(this, {
 			pos: pos,
@@ -107,10 +108,10 @@
 				case 1: this.sprite = this.startSprite;
 								this.pos[1] += 16;
 								break;
-				case 2: this.sprite = this.midSprite;
+				case 2: this.sprite = this.twoSprite;
 								this.pos[1] -= 16;
 								break;
-				case 3: this.sprite = this.bigSprite;
+				case 3: this.sprite = this.threeSprite;
 								break;
 				case 4: this.sprite = this.endSprite;
 								this.pos[1] -= 16;
@@ -120,6 +121,28 @@
 				delete items[this.touchedItem];
 			}
 			return;
+		}
+
+		if (this.damaging.length !== 0) {
+			switch (this.damaging.shift()) {
+				case 0: this.sprite.pos = [160, 0];
+								break;
+				case 1: this.sprite = this.twoSprite;
+								// this.pos[1] += 16;
+								break;
+				case 2: this.sprite = this.threeSprite;
+								// this.pos[1] -= 16;
+								break;
+				case 3: this.sprite = this.endSprite;
+								// this.pos[1] += 16;
+								break;
+			}
+			console.log(this.sprite);
+			return;
+		}
+
+		if (this.invincibility) {
+			this.invincibility -= Math.round(dt * 60);
 		}
 
 		if (Math.abs(this.vel[0]) > 2) {
@@ -173,16 +196,30 @@
 	}
 
 	Player.prototype.powerUp = function(idx) {
-		//TODO: This animation still plays too fast, need to work on it a bit.
+		//TODO: This animation still plays too fast
 	  this.powering = [0,2,1,2,1,2,3,1,2,3,1,4];
 		this.touchedItem = idx;
 
 		if (this.power === 0) {
-			this.midSprite = new Mario.Sprite('sprites/player.png', [320, this.sprite.pos[1] - 32], [16, 32], 0);
-			this.bigSprite = new Mario.Sprite('sprites/player.png', [80, this.sprite.pos[1] - 32], [16, 32], 0);
+			this.twoSprite = new Mario.Sprite('sprites/player.png', [320, this.sprite.pos[1] - 32], [16, 32], 0);
+			this.threeSprite = new Mario.Sprite('sprites/player.png', [80, this.sprite.pos[1] - 32], [16, 32], 0);
 			this.endSprite = new Mario.Sprite('sprites/player.png', [128, this.sprite.pos[1]- 32], [16,32], 0);
 			this.power = 1;
 			this.hitbox = [0,0,16,32];
+		}
+	}
+
+	Player.prototype.damage = function() {
+		if (this.power === 0) { //if you're already small, you dead!
+			this.die();
+		} else { //otherwise, you get turned into small mario
+			this.damaging = [0,1,2,1,2,1,2,1,2,1,2,3];
+			this.twoSprite = new Mario.Sprite('sprites/player.png', [240, 32], [16, 16], 0);
+			this.threeSprite = new Mario.Sprite('sprites/player.png', [240, 0], [16, 32], 0);
+			this.endSprite = new Mario.Sprite('sprites/player.png', [160, 32], [16,16], 0);
+			this.invincibility = 120;
+			this.power = 0;
+			this.hitbox = [0,0,16,16];
 		}
 	}
 })();

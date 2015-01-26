@@ -2,6 +2,8 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
+  //TODO: On console the hitbox is smaller. Measure it and edit this.
+
   var Goomba = Mario.Goomba = function(pos, sprite, idx) {
     this.dying = false;
     Mario.Entity.call(this, {
@@ -20,7 +22,10 @@
   Goomba.prototype.update = function(dt, vX) {
     if (this.pos[0] - vX > 336) { //if we're too far away, do nothing.
       return;
+    } else if (this.pos[0] - vX < -32) {
+      delete enemies[this.idx];
     }
+
     if (this.dying) {
       this.dying -= 1;
       if (!this.dying) {
@@ -69,8 +74,8 @@
   }
 
   Goomba.prototype.isCollideWith = function(ent) {
-    if (ent instanceof Mario.Player && this.dying) {
-      return; //we still collide with other enemies while dying, weirdly.
+    if (ent instanceof Mario.Player && (this.dying || ent.invincibility)) {
+      return;
     }
 
     //the first two elements of the hitbox array are an offset, so let's do this now.

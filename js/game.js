@@ -103,7 +103,7 @@ function updateEntities(dt) {
   });
 
   enemies.forEach (function(ent) {
-    ent.update(dt);
+    ent.update(dt, vX);
   })
 }
 
@@ -160,7 +160,9 @@ function render() {
   }
 
   //then the player
-  renderEntity(player);
+  if (player.invincibility % 2 === 0) {
+    renderEntity(player);
+  }
 
   //and if we get to them, those little rope thingies on bridges
 };
