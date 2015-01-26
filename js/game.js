@@ -92,18 +92,22 @@ function updateEntities(dt) {
   updateables.forEach (function(ent) {
     ent.update(dt);
   });
-  items.forEach (function(ent) {
-    ent.update(dt);
-  });
 
   if (player.pos[0] > vX + 80) {
     vX = player.pos[0] - 80;
   }
+
+  if (player.powering.length !== 0) { return; }
+  items.forEach (function(ent) {
+    ent.update(dt);
+  });
 }
 
 //scan for collisions
 function checkCollisions() {
+  if (player.powering.length !== 0) { return; }
   player.checkCollisions();
+  
   items.forEach(function(item) {
     item.checkCollisions();
   });

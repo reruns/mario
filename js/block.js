@@ -52,8 +52,8 @@
         }
         this.standing = true;
         if (this.item) {
+          this.item.spawn(items.length);
           items.push(this.item);
-          this.item.spawn();
         }
       }
     } else {

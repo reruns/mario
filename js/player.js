@@ -4,6 +4,7 @@
 
 	var Player = Mario.Player = function(pos) {
 		this.power = 0;
+		this.powering = [];
 		this.jumping = 0;
 		this.canJump = true;
 
@@ -79,6 +80,29 @@
   }
 
 	Player.prototype.update = function(dt) {
+		if (this.powering.length !== 0) {
+			switch (this.powering.shift()) {
+				case 0: this.sprite.pos[0] = 80;
+								this.startSprite = this.sprite;
+								break;
+				case 1: this.sprite = this.startSprite;
+								this.pos[1] += 16;
+								break;
+				case 2: this.sprite = this.midSprite;
+								this.pos[1] -= 16;
+								break;
+				case 3: this.sprite = this.bigSprite;
+								break;
+				case 4: this.sprite = this.endSprite;
+								this.pos[1] -= 16;
+								break;
+			}
+			if (this.powering.length === 0) {
+				delete items[this.touchedItem];
+			}
+			return;
+		}
+
 		if (Math.abs(this.vel[0]) > 2) {
 			this.vel[0] = 2 * this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
@@ -123,6 +147,20 @@
 					blocks[baseY + i][baseX + j].isCollideWith(this);
 				}
 			}
+		}
+	}
+
+	Player.prototype.powerUp = function(idx) {
+		//TODO: This animation still plays too fast, need to work on it a bit.
+	  this.powering = [0,2,1,2,1,2,3,1,2,3,1,4];
+		this.touchedItem = idx;
+
+		if (this.power === 0) {
+			this.midSprite = new Mario.Sprite('sprites/player.png', [320, this.sprite.pos[1] - 32], [16, 32], 0);
+			this.bigSprite = new Mario.Sprite('sprites/player.png', [80, this.sprite.pos[1] - 32], [16, 32], 0);
+			this.endSprite = new Mario.Sprite('sprites/player.png', [128, this.sprite.pos[1]- 32], [16,32], 0);
+			this.power = 1;
+			this.hitbox = [0,0,16,32];
 		}
 	}
 })();
