@@ -68,12 +68,14 @@
 
   Player.prototype.setAnimation = function() {
     //compute changes to the sprite based on movement
-		if (this.vel[0] > 0) {
-			this.left = false;
+		if (this.left) {
+			this.sprite.img = 'sprites/playerl.png'
+		} else {
+			this.sprite.img = 'sprites/player.png'
 		}
-    this.sprite.pos[0] = 96;
-    this.sprite.frames = [0,1,2];
-    this.sprite.speed = 10;
+    // this.sprite.pos[0] = 96;
+    // this.sprite.frames = [0,1,2];
+    // this.sprite.speed = 10;
   }
 
 	Player.prototype.update = function(dt) {
@@ -83,7 +85,7 @@
 		}
 		if (this.vel[0] < 0) {
 			this.left = true
-		} else {
+		} else if (this.vel[0] > 0){
 			this.left = false;
 		}
 
@@ -95,7 +97,7 @@
 		this.vel[1] += this.acc[1];
 		this.pos[0] += this.vel[0];
 		this.pos[1] += this.vel[1];
-    //this.setAnimation();
+    this.setAnimation();
 		this.sprite.update(dt);
 	}
 

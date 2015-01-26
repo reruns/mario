@@ -32,7 +32,9 @@ var vX = 0,
 resources.load([
   'sprites/player.png',
   'sprites/enemy.png',
-  'sprites/tiles.png'
+  'sprites/tiles.png',
+  'sprites/playerl.png',
+  'sprites/items.png'
 ]);
 resources.onReady(init);
 
@@ -93,8 +95,6 @@ function updateEntities(dt) {
   if (player.pos[0] > vX + 80) {
     vX = player.pos[0] - 80;
   }
-
-  //update everyone else
 }
 
 //scan for collisions
@@ -147,7 +147,5 @@ function render() {
 };
 
 function renderEntity(entity) {
-  ctx.save();
   entity.render(ctx, vX, vY);
-  ctx.restore();
 }

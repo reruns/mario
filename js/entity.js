@@ -9,11 +9,11 @@
 	  this.pos = options.pos;
 	  this.sprite = options.sprite;
 	  this.hitbox = options.hitbox;
-	  left = true;
+	  this.left = false;
 	}
 
 	Entity.prototype.render = function(ctx, vX, vY) {
-		this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY)
+		this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY, this.left)
 	}
 
 	Entity.prototype.collideWall = function(wall) {
