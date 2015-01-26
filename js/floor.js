@@ -18,22 +18,32 @@
 		var hpos1 = [this.pos[0] + this.hitbox[0], this.pos[1] + this.hitbox[1]];
 		var hpos2 = [ent.pos[0] + ent.hitbox[0], ent.pos[1] + ent.hitbox[1]];
 
+		//if the hitboxes actually overlap
 		if (!(hpos1[0] > hpos2[0]+ent.hitbox[2] || (hpos1[0]+this.hitbox[2] < hpos2[0]))) {
-			//x coords overlap
 			if (!(hpos1[1] > hpos2[1]+ent.hitbox[3] || (hpos1[1]+this.hitbox[3] < hpos2[1]))) {
-				//both overlap
-				//TODO: Make this check less janky somehow?
+
+				//if the entity is over the block, it's basically floor
+				var center = hpos2[0] + ent.hitbox[2] / 2;
 				if (Math.abs(hpos2[1] + ent.hitbox[3] - hpos1[1]) <= ent.vel[1]) {
-					//entity is standing on the floor.
-					//TODO: Make this a function like below
 					ent.vel[1] = 0;
 					ent.pos[1] = hpos1[1] - ent.hitbox[3] - ent.hitbox[1];
 					ent.standing = true;
+				} else if (Math.abs(hpos2[1] - hpos1[1] - this.hitbox[3]) > ent.vel[1] &&
+				center + 2 >= hpos1[0] && center - 2 <= hpos1[0] + this.hitbox[2]) {
+					//ent is under the block.
+					ent.vel[1] = 0;
+					ent.pos[1] = hpos1[1] + this.hitbox[3];
+					if (ent instanceof Mario.Player) {
+						this.bonk(ent.power);
+						ent.jumping = 0;
+					}
 				} else {
-					//entity is falling into a pit, hit the floor from the side
+					//entity is hitting it from the side, we're a wall
 					ent.collideWall(this);
 				}
 			}
 		}
 	}
+
+	Floor.prototype.bonk = function() {;}
 })();
