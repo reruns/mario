@@ -51,6 +51,10 @@
           this.sprite = this.osprite;
         }
         this.standing = true;
+        if (this.item) {
+          items.push(this.item);
+          this.item.spawn();
+        }
       }
     } else {
       if (this.sprite === this.usedSprite) {

@@ -13,7 +13,7 @@
 	}
 
 	Entity.prototype.render = function(ctx, vX, vY) {
-		this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY, this.left)
+		this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY)
 	}
 
 	Entity.prototype.collideWall = function(wall) {

@@ -92,6 +92,10 @@ function updateEntities(dt) {
   updateables.forEach (function(ent) {
     ent.update(dt);
   });
+  items.forEach (function(ent) {
+    ent.update(dt);
+  });
+
   if (player.pos[0] > vX + 80) {
     vX = player.pos[0] - 80;
   }
@@ -99,8 +103,10 @@ function updateEntities(dt) {
 
 //scan for collisions
 function checkCollisions() {
-  player.checkCollisions(statics);
-  player.checkCollisions(blocks);
+  player.checkCollisions();
+  items.forEach(function(item) {
+    item.checkCollisions();
+  });
   //Decompose movement into x and y axes, step one at a time. For each axis:
   //Get the coordinate of the forward-facing edge.
   //Figure out which lines of tiles the bounding box intersects with.
@@ -127,6 +133,11 @@ function render() {
     }
   }
 
+  //then items
+  items.forEach (function (item) {
+    renderEntity(item);
+  });
+
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
@@ -143,7 +154,7 @@ function render() {
   //then the player
   renderEntity(player);
 
-  //and lastly, those little rope things that go in front of mario.
+  //and if we get to them, those little rope thingies on bridges
 };
 
 function renderEntity(entity) {

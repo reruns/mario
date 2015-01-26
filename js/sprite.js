@@ -16,7 +16,7 @@
     this._index += this.speed*dt;
   }
 
-  Sprite.prototype.render = function(ctx, posx, posy, vX, vY, left) {
+  Sprite.prototype.render = function(ctx, posx, posy, vX, vY) {
     var frame;
 
     if (this.speed > 0) {
@@ -36,11 +36,6 @@
     var y = this.pos[1];
 
     x += frame*this.size[0];
-
-    ctx.drawImage(resources.get(this.img),
-                  x, y,
-                this.size[0], this.size[1],
-                Math.round(posx - vX),Math.round(posy - vY),
-                this.size[0],this.size[1]);
+    ctx.drawImage(resources.get(this.img), x, y, this.size[0], this.size[1], Math.round(posx - vX),Math.round(posy - vY), this.size[0],this.size[1]);
   }
 })();

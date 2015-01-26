@@ -3,6 +3,7 @@ var cloudSprite = new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0);
 var wallSprite = new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0);
 var qblockSprite = new Mario.Sprite('sprites/tiles.png', [384, 0], [16,16], 8, [0,0,0,0,1,2,1])
 var ublockSprite = new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0);
+var superShroomSprite = new Mario.Sprite('sprites/items.png', [0,0], [16,16], 0);
 
 var cloudSprites = [
   new Mario.Sprite('sprites/tiles.png', [0,320],[16,32],0),
@@ -25,6 +26,7 @@ var bushSprites = [
 var statics = [];
 var scenery = [];
 var blocks = [];
+var items = [];
 
 for (var i = 0; i < 15; i++) {
   statics[i] = [];
@@ -36,7 +38,7 @@ putFloor(0, 69);
 putCloud(7, 3);
 putBigHill(0,12);
 putThreeBush(11, 12);
-putQBlock(8, 9);
+putQBlock(8, 9, new Mario.Item([128, 144], superShroomSprite));
 
 
 function putFloor(start, end) {
@@ -58,9 +60,10 @@ function putCloud(x, y) {
 }
 
 //TODO: make blocks actually hold items!
-function putQBlock(x, y) {
+function putQBlock(x, y, item) {
   blocks[y][x] = new Mario.Block( {
     pos: [x*16, y*16],
+    item: item,
     sprite: qblockSprite,
     usedSprite: ublockSprite
   });
