@@ -100,6 +100,7 @@
   }
 
 	Player.prototype.update = function(dt) {
+		//TODO: consolidate logic for powering up and down, and make sure this holds for fire flowers.
 		if (this.powering.length !== 0) {
 			switch (this.powering.shift()) {
 				case 0: this.sprite.pos[0] = 80;
@@ -221,5 +222,9 @@
 			this.power = 0;
 			this.hitbox = [0,0,16,16];
 		}
+	}
+
+	Player.prototype.die = function () {
+		//TODO: This will work the same way as block#bonk.
 	}
 })();

@@ -2,6 +2,8 @@
   if (typeof Mario === 'undefined')
     window.Mario = {};
 
+  //TODO: clean up the logic for sprite switching.
+  //TODO: There's a weird bug with the collision logic. Look into it.
 
   var Block = Mario.Block = function(options) {
     this.item = options.item;
