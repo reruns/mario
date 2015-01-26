@@ -20,8 +20,6 @@ Item
     item pickup logic
 
 Mushroom
-  type
-
   #update
     movement logic for mushrooms
     get impulse from being block bonked
@@ -37,5 +35,6 @@ Water levels:
     jump works when not on the ground
   different enemies
 
-What about the demo?
-  Honestly no idea
+
+TODO: Make level loader use hashes instead of arrays.
+Should be a free performance gain.

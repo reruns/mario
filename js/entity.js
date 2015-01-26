@@ -18,12 +18,15 @@
 
 	Entity.prototype.collideWall = function(wall) {
 		//the wall will always be a 16x16 block with hitbox = [0,0,16,16].
-		this.vel[0] = 0;
-		this.acc[0] = 0;
 		if (this.pos[0] > wall.pos[0]) {
+			//from the right
 			this.pos[0] = wall.pos[0] + 16 - this.hitbox[0];
+			this.vel[0] = Math.max(0, this.vel[0]);
+			this.acc[0] = Math.max(0, this.acc[0]);
 		} else {
 			this.pos[0] = wall.pos[0] - this.hitbox[2] - this.hitbox[0];
+			this.vel[0] = Math.min(0, this.vel[0]);
+			this.acc[0] = Math.min(0, this.acc[0]);
 		}
 	}
 })();
