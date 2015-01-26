@@ -12,6 +12,7 @@ var requestAnimFrame = (function(){
 //create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext('2d');
+var updateables = [];
 //we might have to get the size and calculate the scaling
 //but this method should let us make it however big.
 //Cool!
@@ -67,17 +68,28 @@ function update(dt) {
 }
 
 function handleInput(dt) {
-   if (input.isDown('LEFT')) { // 'd' or left arrow
-      player.moveLeft();
-   }
-   else if (input.isDown('RIGHT')) { // 'k' or right arrow
-      player.moveRight();
-   }
+  if (input.isDown('JUMP')) {
+    player.jump();
+  } else {
+    //we need this to handle the timing for how long you hold it
+    player.noJump();
+  }
+  if (input.isDown('LEFT')) { // 'd' or left arrow
+    player.moveLeft();
+  }
+  else if (input.isDown('RIGHT')) { // 'k' or right arrow
+    player.moveRight();
+  } else {
+    player.noWalk();
+  }
 }
 
 //update all the moving stuff
 function updateEntities(dt) {
   player.update(dt);
+  updateables.forEach (function(ent) {
+    ent.update(dt);
+  });
   if (player.pos[0] > vX + 80) {
     vX = player.pos[0] - 80;
   }
@@ -100,6 +112,7 @@ function checkCollisions() {
 
 //draw the game!
 function render() {
+  updateables = [];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "#7974FF";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -118,6 +131,10 @@ function render() {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
       if (statics[i][j]) {
         renderEntity(statics[i][j]);
+      }
+      if (blocks[i][j]) {
+        renderEntity(blocks[i][j]);
+        updateables.push(blocks[i][j]);
       }
     }
   }

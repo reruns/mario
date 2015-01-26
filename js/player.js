@@ -4,6 +4,8 @@
 
 	var Player = Mario.Player = function(pos) {
 		this.power = 0;
+		this.jumping = 0;
+		this.canJump = true;
 
 		Mario.Entity.call(this, {
 			pos: pos,
@@ -27,6 +29,39 @@
 		}
 	}
 
+	Player.prototype.noWalk = function() {
+		this.acc[0] = 0;
+
+		if (this.left) {
+			this.vel[0] += 0.2;
+		} else {
+			this.vel[0] -= 0.2;
+		}
+
+		if (Math.abs(this.vel[0]) <= 0.3)
+			this.vel[0] = 0;
+	}
+
+	Player.prototype.jump = function() {
+		if (this.jumping) {
+			this.jumping -= 10;
+		} else if (this.standing && this.canJump) {
+			this.jumping = 150;
+			this.canJump = false;
+			this.standing = false;
+			this.acc[1] = -.2;
+		}
+
+		if (this.jumping <= 0) {
+			this.jumping = 0;
+		}
+	}
+
+	Player.prototype.noJump = function() {
+		this.canJump = true;
+		this.jumping = 0;
+	}
+
   Player.prototype.setAnimation = function() {
     //compute changes to the sprite based on movement
 		if (this.vel[0] > 0) {
@@ -38,8 +73,8 @@
   }
 
 	Player.prototype.update = function(dt) {
-		if (Math.abs(this.vel[0]) > 3) {
-			this.vel[0] = 3 * this.vel[0] / Math.abs(this.vel[0]);
+		if (Math.abs(this.vel[0]) > 2) {
+			this.vel[0] = 2 * this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
 		}
 		if (this.vel[0] < 0) {
@@ -48,10 +83,10 @@
 			this.left = false;
 		}
 
-		//TODO: I'm pretty sure gravity in SMB is actually more like a constant factor.
-		this.acc[1] = .2
-		//acceleration doesn't actually work this way
-		//but as long as we update often enough it's okay.
+		if (!this.jumping)
+			this.acc[1] = .2
+
+		//approximate acceleration
 		this.vel[0] += this.acc[0];
 		this.vel[1] += this.acc[1];
 		this.pos[0] += this.vel[0];

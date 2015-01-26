@@ -1,5 +1,4 @@
 //simple resource loader
-//TODO: Simplify this
 (function() {
     var resourceCache = {};
     var loading = [];
@@ -54,7 +53,7 @@
         readyCallbacks.push(func);
     }
 
-    window.resources = { 
+    window.resources = {
         load: load,
         get: get,
         onReady: onReady,

@@ -16,6 +16,8 @@
             key = 'RIGHT'; break;
         case 40:
             key = 'DOWN'; break;
+        case 88:
+            key = 'JUMP'; break;
         default:
             key = String.fromCharCode(code);
         }
