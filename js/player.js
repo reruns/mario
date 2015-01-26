@@ -68,15 +68,33 @@
 	}
 
   Player.prototype.setAnimation = function() {
-    //compute changes to the sprite based on movement
+		//okay cool, now set the sprite
+    if (this.jumping) {
+			this.sprite.pos[0] = 160;
+			this.sprite.speed = 0;
+		} else if (this.standing) {
+			if (Math.abs(this.vel[0]) > 0) {
+				if (this.vel[0] * this.acc[0] >= 0) {
+					this.sprite.pos[0] = 96;
+					this.sprite.frames = [0,1,2];
+					this.sprite.speed = Math.abs(this.vel[0]) * 5;
+				} else {
+					this.left = !this.left;
+					this.sprite.pos[0] = 144;
+					this.sprite.speed = 0;
+				}
+			} else {
+				this.sprite.pos[0] = 80;
+				this.sprite.speed = 0;
+			}
+		}
+
+		//which way are we facing?
 		if (this.left) {
 			this.sprite.img = 'sprites/playerl.png'
 		} else {
 			this.sprite.img = 'sprites/player.png'
 		}
-    // this.sprite.pos[0] = 96;
-    // this.sprite.frames = [0,1,2];
-    // this.sprite.speed = 10;
   }
 
 	Player.prototype.update = function(dt) {
