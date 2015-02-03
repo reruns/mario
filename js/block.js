@@ -25,7 +25,7 @@
   Block.prototype.bonk = function(power) {
     if (power > 0 && this.breakable) {
       this.break;
-    } else {
+    } else if (this.standing){
       this.standing = false;
       this.opos = [];
       this.opos[0] = this.pos[0];

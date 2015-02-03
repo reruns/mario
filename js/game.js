@@ -17,9 +17,10 @@ var updateables = [];
 //but this method should let us make it however big.
 //Cool!
 //TODO: Automatically scale the game to work and look good on widescreen.
-canvas.width = 512;
-canvas.height = 480;
-ctx.scale(2,2);
+//TODO: Figure out how to make sprites not break when scaled.
+canvas.width = 256;
+canvas.height = 240;
+ctx.scale(1,1);
 document.body.appendChild(canvas);
 
 //viewport
@@ -34,13 +35,17 @@ resources.load([
   'sprites/enemy.png',
   'sprites/tiles.png',
   'sprites/playerl.png',
-  'sprites/items.png'
+  'sprites/items.png',
+  'sprites/enemyr.png'
 ]);
 resources.onReady(init);
+
+var level = Mario.oneone;
 
 //initialize
 var lastTime;
 function init() {
+  level.call();
   lastTime = Date.now();
   main();
 }

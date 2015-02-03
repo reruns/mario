@@ -11,7 +11,7 @@
       sprite: sprite,
       hitbox: [0,0,16,16]
     });
-    this.vel[0] = -1;
+    this.vel[0] = -.5;
     this.idx = idx;
   }
 
@@ -24,6 +24,13 @@
       return;
     } else if (this.pos[0] - vX < -32) {
       delete enemies[this.idx];
+    }
+
+    if (this.flipping > 0) {
+      this.pos[1] -= 2;
+      this.flipping -= 2;
+    } else if (this.flipping < 0) {
+      this.pos[1] += 2;
     }
 
     if (this.dying) {
@@ -44,6 +51,10 @@
   }
 
   Goomba.prototype.checkCollisions = function() {
+    if (this.flipping) {
+      return;
+    }
+
     var h = this.pos[1] % 16 == 0 ? 1 : 2;
     var w = this.pos[0] % 16 == 0 ? 1 : 2;
 
@@ -90,14 +101,14 @@
     //if the hitboxes actually overlap
     if (!(hpos1[0] > hpos2[0]+ent.hitbox[2] || (hpos1[0]+this.hitbox[2] < hpos2[0]))) {
       if (!(hpos1[1] > hpos2[1]+ent.hitbox[3] || (hpos1[1]+this.hitbox[3] < hpos2[1]))) {
-        if (ent instanceof Mario.Player) { //if we hit the player, hurt 'em'
-          if (ent.vel[1] > 0) {
+        if (ent instanceof Mario.Player) { //if we hit the player
+          if (ent.vel[1] > 0) { //then the goomba dies
             this.stomp();
-          } else {
+          } else { //or the player gets hit
             ent.damage();
           }
-        } else { //otherwise we must have hit another enemy.
-          ent.collideWall();
+        } else {
+          this.collideWall();
         }
       }
     }
@@ -109,5 +120,12 @@
     this.sprite.speed = 0;
     this.vel[0] = 0;
     this.dying = 10;
+  }
+
+  Goomba.prototype.bump = function() {
+    this.sprite.img = 'sprites/enemyr.png';
+    this.flipping = 11;
+    this.vel[0] = 0;
+    this.vel[1] = -2;
   }
 })();
