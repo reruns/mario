@@ -122,7 +122,7 @@
 								break;
 			}
 			if (this.powering.length === 0) {
-				delete items[this.touchedItem];
+				delete level.items[this.touchedItem];
 			}
 			return;
 		}
@@ -191,11 +191,11 @@
 			if (baseY + i < 0 || baseY + i >= 15) continue;
 			for (var j = 0; j < w; j++) {
 				if (baseY < 0) { i++;}
-				if (statics[baseY + i][baseX + j]) {
-					statics[baseY + i][baseX + j].isCollideWith(this);
+				if (level.statics[baseY + i][baseX + j]) {
+					level.statics[baseY + i][baseX + j].isCollideWith(this);
 				}
-				if (blocks[baseY + i][baseX + j]) {
-					blocks[baseY + i][baseX + j].isCollideWith(this);
+				if (level.blocks[baseY + i][baseX + j]) {
+					level.blocks[baseY + i][baseX + j].isCollideWith(this);
 				}
 			}
 		}

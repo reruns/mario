@@ -40,12 +40,12 @@ resources.load([
 ]);
 resources.onReady(init);
 
-var level = Mario.oneone;
+var level;
 
 //initialize
 var lastTime;
 function init() {
-  level.call();
+  Mario.oneone();
   lastTime = Date.now();
   main();
 }
@@ -103,11 +103,11 @@ function updateEntities(dt) {
   }
 
   if (player.powering.length !== 0) { return; }
-  items.forEach (function(ent) {
+  level.items.forEach (function(ent) {
     ent.update(dt);
   });
 
-  enemies.forEach (function(ent) {
+  level.enemies.forEach (function(ent) {
     ent.update(dt, vX);
   })
 }
@@ -118,10 +118,10 @@ function checkCollisions() {
   player.checkCollisions();
 
   //Apparently for each will just skip indices where things were deleted.
-  items.forEach(function(item) {
+  level.items.forEach(function(item) {
     item.checkCollisions();
   });
-  enemies.forEach (function(ent) {
+  level.enemies.forEach (function(ent) {
     ent.checkCollisions();
   })
 }
@@ -136,30 +136,30 @@ function render() {
   //scenery gets drawn first to get layering right.
   for(var i = 0; i < 15; i++) {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
-      if (scenery[i][j]) {
-        renderEntity(scenery[i][j]);
+      if (level.scenery[i][j]) {
+        renderEntity(level.scenery[i][j]);
       }
     }
   }
 
   //then items
-  items.forEach (function (item) {
+  level.items.forEach (function (item) {
     renderEntity(item);
   });
 
-  enemies.forEach (function(enemy) {
+  level.enemies.forEach (function(enemy) {
     renderEntity(enemy);
   })
 
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
-      if (statics[i][j]) {
-        renderEntity(statics[i][j]);
+      if (level.statics[i][j]) {
+        renderEntity(level.statics[i][j]);
       }
-      if (blocks[i][j]) {
-        renderEntity(blocks[i][j]);
-        updateables.push(blocks[i][j]);
+      if (level.blocks[i][j]) {
+        renderEntity(level.blocks[i][j]);
+        updateables.push(level.blocks[i][j]);
       }
     }
   }

@@ -27,7 +27,7 @@
 				//if the entity is over the block, it's basically floor
 				var center = hpos2[0] + ent.hitbox[2] / 2;
 				if (Math.abs(hpos2[1] + ent.hitbox[3] - hpos1[1]) <= ent.vel[1]) {
-					if (statics[(this.pos[1] / 16) - 1][this.pos[0] / 16]) return;
+					if (level.statics[(this.pos[1] / 16) - 1][this.pos[0] / 16]) return;
 					if (!this.standing) {
 						ent.bump();
 					} else {

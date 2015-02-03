@@ -54,15 +54,15 @@
         }
         this.standing = true;
         if (this.item) {
-          this.item.spawn(items.length);
-          items.push(this.item);
+          this.item.spawn(level.items.length);
+          level.items.push(this.item);
         }
       }
     } else {
       if (this.sprite === this.usedSprite) {
         var x = this.pos[0] / 16, y = this.pos[1] / 16;
-        statics[y][x] = new Mario.Floor(this.pos, this.usedSprite);
-        delete blocks[y][x];
+        level.statics[y][x] = new Mario.Floor(this.pos, this.usedSprite);
+        delete level.blocks[y][x];
       }
     }
 

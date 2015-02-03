@@ -23,7 +23,7 @@
     if (this.pos[0] - vX > 336) { //if we're too far away, do nothing.
       return;
     } else if (this.pos[0] - vX < -32) {
-      delete enemies[this.idx];
+      delete level.enemies[this.idx];
     }
 
     if (this.flipping > 0) {
@@ -36,7 +36,7 @@
     if (this.dying) {
       this.dying -= 1;
       if (!this.dying) {
-        delete enemies[this.idx];
+        delete level.enemies[this.idx];
       }
     }
     this.acc[1] = 0.2;
@@ -62,22 +62,22 @@
     var baseY = Math.floor(this.pos[1] / 16);
 
     if (baseY + h > 15) {
-      delete enemies[this.idx];
+      delete level.enemies[this.idx];
       return;
     }
 
     for (var i = 0; i < h; i++) {
       for (var j = 0; j < w; j++) {
-        if (statics[baseY + i][baseX + j]) {
-          statics[baseY + i][baseX + j].isCollideWith(this);
+        if (level.statics[baseY + i][baseX + j]) {
+          level.statics[baseY + i][baseX + j].isCollideWith(this);
         }
-        if (blocks[baseY + i][baseX + j]) {
-          blocks[baseY + i][baseX + j].isCollideWith(this);
+        if (level.blocks[baseY + i][baseX + j]) {
+          level.blocks[baseY + i][baseX + j].isCollideWith(this);
         }
       }
     }
     var that = this;
-    enemies.forEach(function(enemy){
+    level.enemies.forEach(function(enemy){
       if (enemy === that) { //don't check collisions with ourselves.
         return;
       } else if (enemy.pos[0] - vX > 336){ //stop checking once we get to far away dudes.
