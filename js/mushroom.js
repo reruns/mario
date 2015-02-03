@@ -13,6 +13,8 @@
     });
   }
 
+  Mario.Util.inherits(Mushroom, Mario.Entity);
+
   Mushroom.prototype.render = function(ctx, vX, vY) {
     this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
   }
@@ -89,6 +91,10 @@
         player.powerUp(this.idx);
       }
     }
+  }
+
+  Mushroom.prototype.bump = function() {
+    this.vel[1] = -2;
   }
 
 })();
