@@ -170,6 +170,11 @@
 		this.vel[1] += this.acc[1];
 		this.pos[0] += this.vel[0];
 		this.pos[1] += this.vel[1];
+
+		if (this.pos[1] > 240) {
+			this.die();
+		}
+		
     this.setAnimation();
 		this.sprite.update(dt);
 	}
@@ -230,6 +235,7 @@
 	}
 
 	Player.prototype.die = function () {
-		//TODO: This will work the same way as block#bonk.
+		level.loader.call();
+		vX = 0;
 	}
 })();

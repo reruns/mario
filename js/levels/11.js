@@ -6,7 +6,7 @@
 var oneone = Mario.oneone = function() {
   level = new Mario.Level({
     playerPos: [56,192],
-    loader: this,
+    loader: Mario.oneone,
     floorSprite:  new Mario.Sprite('sprites/tiles.png', [0,0],[16,16],0),
     cloudSprite:  new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0),
     wallSprite: new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0),
@@ -40,6 +40,8 @@ var oneone = Mario.oneone = function() {
   ground = [[0,69],[71,86],[89,153],[155,212]];
 
   //TODO: Put things other than mushrooms in blocks
+  player.pos[0] = level.playerPos[0];
+  player.pos[1] = level.playerPos[1];
 
   //build THE GROUND
   ground.forEach(function(loc) {
