@@ -63,7 +63,7 @@ var oneone = Mario.oneone = function() {
     level.putThreeCloud(cloud[0],cloud[1]);
   })
 
-  bHills = [0,48,89,144,192]
+  bHills = [0,48,96,144,192]
   bHills.forEach(function(hill) {
     level.putBigHill(hill, 12);
   })
