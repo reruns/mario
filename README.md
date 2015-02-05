@@ -17,12 +17,11 @@ The level is constructed using a series of calls to functions that generate the 
 
 Known Bugs and Features to Come
 ===============================
-Sometimes objects moved by a block being punched underneath them will trigger the wrong collision code and teleport below it.
-Jumping on two enemies at the same time will cause Mario to take damage.
-Scaling the size of the game causes some sprites to be drawn with the wrong dimensions, causing unsightly borders to appear.
-Question blocks and Goombas don't animate in sync.
-The left edge of the screen doesn't act as a wall.
-Sometimes goombas can get stuck inside each other. This happens offscreen, seemingly at random, so I'm not sure what causes it yet.
+-Jumping on two enemies at the same time will cause Mario to take damage.
+-Scaling the size of the game causes some sprites to be drawn with the wrong dimensions, causing unsightly borders to appear.
+-Question blocks and Goombas don't animate in sync with each other.
+-The left edge of the screen doesn't yet act as a wall.
+-Sometimes goombas can get stuck inside each other. This happens offscreen, seemingly at random, so I'm not sure what causes it yet.
 
 All of the features to be implemented are the actual features of the game!
 Namely, the run button, destroying bricks, a score counter, working pipes, sounds and music, more types of enemies, fire flowers, stars, and 1up mushrooms.
