@@ -93,7 +93,7 @@ function handleInput(dt) {
 
 //update all the moving stuff
 function updateEntities(dt) {
-  player.update(dt);
+  player.update(dt, vX);
   updateables.forEach (function(ent) {
     ent.update(dt);
   });

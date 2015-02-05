@@ -85,7 +85,11 @@
 				if (this.vel[0] * this.acc[0] >= 0) {
 					this.sprite.pos[0] = 96;
 					this.sprite.frames = [0,1,2];
-					this.sprite.speed = Math.abs(this.vel[0]) * 5;
+					if (this.vel[0] < 0.2) {
+						this.sprite.speed = 5;
+					} else {
+						this.sprite.speed = Math.abs(this.vel[0]) * 5;
+					}
 				} else {
 					this.left = !this.left;
 					this.sprite.pos[0] = 144;
@@ -105,7 +109,7 @@
 		}
   }
 
-	Player.prototype.update = function(dt) {
+	Player.prototype.update = function(dt, vX) {
 		//TODO: consolidate logic for powering up and down, and make sure this holds for fire flowers.
 		if (this.powering.length !== 0) {
 			switch (this.powering.shift()) {
@@ -155,6 +159,11 @@
 		if (this.bounce) {
 			this.bounce = false;
 			this.vel[1] = -3;
+		}
+
+		if (this.pos[0] <= vX) {
+			this.pos[0] = vX;
+			this.vel[0] = Math.max(this.vel[0], 0);
 		}
 
 		if (Math.abs(this.vel[0]) > 2) {
