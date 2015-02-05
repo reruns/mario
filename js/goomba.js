@@ -125,6 +125,7 @@
   Goomba.prototype.bump = function() {
     this.sprite.img = 'sprites/enemyr.png';
     this.flipping = 11;
+    this.pos[1] -= 1;
     this.vel[0] = 0;
     this.vel[1] = -2;
   }

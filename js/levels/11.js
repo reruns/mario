@@ -91,7 +91,7 @@ var oneone = Mario.oneone = function() {
   //interactable terrain
   level.putQBlock(16, 9, null);
   level.putBrick(20, 9, null);
-  level.putQBlock(21, 9, new Mario.Mushroom([336, 144], level.superShroomSprite));
+  level.putQBlock(21, 9, new Mario.Mushroom([336, 144], level.superShroomSprite, level.items.length));
   level.putBrick(22, 9, null);
   level.putQBlock(22, 5, null);
   level.putQBlock(23, 9, null);
@@ -101,7 +101,7 @@ var oneone = Mario.oneone = function() {
   level.putPipe(46, 13, 4);
   level.putPipe(57, 13, 4);
   level.putBrick(77, 9, null);
-  level.putQBlock(78, 9, new Mario.Mushroom([1248, 144], level.superShroomSprite));
+  level.putQBlock(78, 9, new Mario.Mushroom([1248, 144], level.superShroomSprite, level.items.length));
   level.putBrick(79, 9, null);
   level.putBrick(80, 5, null);
   level.putBrick(81, 5, null);

@@ -2,7 +2,7 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
-  var Mushroom = Mario.Mushroom = function(pos, sprite) {
+  var Mushroom = Mario.Mushroom = function(pos, sprite, idx) {
     this.spawning = false;
     this.waiting = 0;
 
@@ -11,6 +11,8 @@
       sprite: sprite,
       hitbox: [0,0,16,16]
     });
+
+    this.idx = idx;
   }
 
   Mario.Util.inherits(Mushroom, Mario.Entity);
@@ -64,6 +66,11 @@
 
     var baseX = Math.floor(this.pos[0] / 16);
     var baseY = Math.floor(this.pos[1] / 16);
+
+    if (baseY + h > 15) {
+      delete level.items[this.idx];
+      return;
+    }
 
     for (var i = 0; i < h; i++) {
       for (var j = 0; j < w; j++) {
