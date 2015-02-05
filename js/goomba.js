@@ -115,7 +115,7 @@
   }
 
   Goomba.prototype.stomp = function() {
-    player.vel[1] = -3;
+    player.bounce = true;
     this.sprite.pos[0] = 32;
     this.sprite.speed = 0;
     this.vel[0] = 0;

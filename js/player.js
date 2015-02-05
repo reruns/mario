@@ -3,8 +3,11 @@
 		window.Mario = {};
 
 	var Player = Mario.Player = function(pos) {
+		//I know, I know, there are a lot of variables tracking Mario's state.
+		//Maybe these can be consolidated some way? We'll see once they're all in.
 		this.power = 0;
 		this.powering = this.damaging = [];
+		this.bounce = false;
 		this.jumping = 0;
 		this.canJump = true;
 		this.invincibility = 0;
@@ -149,6 +152,11 @@
 			this.invincibility -= Math.round(dt * 60);
 		}
 
+		if (this.bounce) {
+			this.bounce = false;
+			this.vel[1] = -3;
+		}
+
 		if (Math.abs(this.vel[0]) > 2) {
 			this.vel[0] = 2 * this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
@@ -174,7 +182,7 @@
 		if (this.pos[1] > 240) {
 			this.die();
 		}
-		
+
     this.setAnimation();
 		this.sprite.update(dt);
 	}
