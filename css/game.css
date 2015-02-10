@@ -2,7 +2,6 @@ html, body, ul, li {
   margin: 0;
   border: 0;
   padding: 0;
-
 }
 
 canvas {
@@ -10,4 +9,10 @@ canvas {
   top: 0;
   left: 0;
   background-color: blue;
+}
+
+p {
+  position: absolute;
+  top: 256px;
+  left: 10px;
 }
