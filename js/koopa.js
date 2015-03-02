@@ -119,18 +119,20 @@
     if (!(hpos1[0] > hpos2[0]+ent.hitbox[2] || (hpos1[0]+this.hitbox[2] < hpos2[0]))) {
       if (!(hpos1[1] > hpos2[1]+ent.hitbox[3] || (hpos1[1]+this.hitbox[3] < hpos2[1]))) {
         if (ent instanceof Mario.Player) {
+          if (ent.vel[1] > 0) {
+            player.bounce = true;
+          }
           if (this.shell) {
             if (this.vel[0] === 0) {
-              if (ent.vel[1] > 0) {
-                player.bounce = true;
-              }
               if (ent.left) {
                 this.vel[0] = -5;
               } else {
                 this.vel[0] = 5;
               }
             } else {
-              ent.damage();
+              if (ent.bounce) {
+                this.vel[0] = 0;
+              } else ent.damage();
             }
           } else if (ent.vel[1] > 0) { //then we get BOPPED.
             this.stomp();
