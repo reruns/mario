@@ -2,7 +2,7 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
-  var Mushroom = Mario.Mushroom = function(pos, sprite, idx) {
+  var Mushroom = Mario.Mushroom = function(pos, sprite) {
     this.spawning = false;
     this.waiting = 0;
 
@@ -12,7 +12,7 @@
       hitbox: [0,0,16,16]
     });
 
-    this.idx = idx;
+    this.idx = level.items.length;
   }
 
   Mario.Util.inherits(Mushroom, Mario.Entity);

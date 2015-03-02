@@ -45,7 +45,7 @@ var level;
 //initialize
 var lastTime;
 function init() {
-  Mario.oneone();
+  Mario.oneonetunnel();
   lastTime = Date.now();
   main();
 }
@@ -98,7 +98,7 @@ function updateEntities(dt) {
     ent.update(dt);
   });
 
-  if (player.pos[0] > vX + 80) {
+  if (level.scrolling && player.pos[0] > vX + 80) {
     vX = player.pos[0] - 80;
   }
 
@@ -130,7 +130,7 @@ function checkCollisions() {
 function render() {
   updateables = [];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#7974FF";
+  ctx.fillStyle = level.background;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //scenery gets drawn first to get layering right.

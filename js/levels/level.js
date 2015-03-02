@@ -1,7 +1,9 @@
 (function() {
   var Level = Mario.Level = function(options) {
     this.playerPos = options.playerPos;
+    this.scrolling = options.scrolling;
     this.loader = options.loader;
+    this.background = options.background
 
     this.floorSprite = options.floorSprite;
     this.cloudSprite = options.cloudSprite;
@@ -61,6 +63,14 @@
         this.statics[i][x+1] = new Mario.Floor([16*x+16, 16*i], this.pipeRMidSprite);
       }
     }
+  }
+
+  Level.prototype.putCoin = function(x, y) {
+    
+  }
+
+  Level.putLeftPipe = function(x,y) {
+
   }
 
   Level.prototype.putCloud = function(x, y) {
