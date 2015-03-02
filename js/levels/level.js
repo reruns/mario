@@ -17,6 +17,7 @@
     this.pipeREndSprite = options.pipeREndSprite;
     this.pipeLMidSprite = options.pipeLMidSprite;
     this.pipeRMidSprite = options.pipeRMidSprite;
+    this.LPipeSprites = options.LPipeSprites;
     this.cloudSprites = options.cloudSprites;
     this.hillSprites = options.hillSprites;
     this.bushSprite = options.bushSprite;
@@ -66,15 +67,21 @@
     }
   }
 
+  //sometimes, pipes don't go straight up and down.
+  Level.prototype.putLeftPipe = function(x,y) {
+    this.statics[y][x] = new Mario.Floor([16*x, 16*y], this.LPipeSprites[0])
+    this.statics[y+1][x] = new Mario.Floor([16*x,16*(y+1)], this.LPipeSprites[1])
+    this.statics[y][x+1] = new Mario.Floor([16*(x+1),16*y], this.LPipeSprites[2])
+    this.statics[y+1][x+1] = new Mario.Floor([16*(x+1),16*(y+1)], this.LPipeSprites[3])
+    this.statics[y][x+2] = new Mario.Floor([16*(x+2),16*y], this.LPipeSprites[4])
+    this.statics[y+1][x+2] = new Mario.Floor([16*(x+2),16*(y+1)], this.LPipeSprites[5])
+  }
+
   Level.prototype.putCoin = function(x, y) {
     this.items.push(new Mario.Coin(
       [x*16, y*16],
       this.coinSprite()
     ))
-  }
-
-  Level.putLeftPipe = function(x,y) {
-
   }
 
   Level.prototype.putCloud = function(x, y) {
