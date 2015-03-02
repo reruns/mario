@@ -118,8 +118,21 @@
     //if the hitboxes actually overlap
     if (!(hpos1[0] > hpos2[0]+ent.hitbox[2] || (hpos1[0]+this.hitbox[2] < hpos2[0]))) {
       if (!(hpos1[1] > hpos2[1]+ent.hitbox[3] || (hpos1[1]+this.hitbox[3] < hpos2[1]))) {
-        if (ent instanceof Mario.Player) { //if we hit the player
-          if (ent.vel[1] > 0) { //then we get BOPPED.
+        if (ent instanceof Mario.Player) {
+          if (this.shell) {
+            if (this.vel[0] === 0) {
+              if (ent.vel[1] > 0) {
+                player.bounce = true;
+              }
+              if (ent.left) {
+                this.vel[0] = -5;
+              } else {
+                this.vel[0] = 5;
+              }
+            } else {
+              ent.damage();
+            }
+          } else if (ent.vel[1] > 0) { //then we get BOPPED.
             this.stomp();
           } else { //or the player gets hit
             ent.damage();
@@ -137,17 +150,15 @@
     if (this.para) {
       this.para = false;
       this.sprite.pos[0] -= 32;
-    } else if (this.shell) {
-      //kick the shell
-      //What determines the direction a shell gets kicked? Probably location or smth
     } else {
       this.shell = true;
       this.sprite.pos[0] += 64;
       this.sprite.pos[1] += 16;
       this.sprite.size = [16,16];
-      this.hitbox = [0,0,16,16];
+      this.hitbox = [2,6,10,10];
       this.sprite.speed = 0;
       this.vel = [0,0];
+      this.pos[1] += 16;
     }
 
   };

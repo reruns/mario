@@ -186,4 +186,5 @@ var oneone = Mario.oneone = function() {
   level.putGoomba(126, 12);
   level.putGoomba(170, 12);
   level.putGoomba(171, 12);
-}
+  level.putKoopa(7, 11);
+};

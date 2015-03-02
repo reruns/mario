@@ -1,5 +1,5 @@
 to really finish 1-1
-koopas + shells
+finish koopas
 pipes
 dying animation
 flag + ending the level
