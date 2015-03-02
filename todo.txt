@@ -1,7 +1,6 @@
-1-1
+to really finish 1-1
 koopas + shells
 pipes
-  changing the background color
 dying animation
 flag + ending the level
 blocks breaking
@@ -12,7 +11,6 @@ other kinds of items
     player color changing appropriately
       just change the y-pos of the sprite object every frame, but...
   coins
-    also coins just floating around in the world
 All of the scripting for fire mario
   Generating projectiles
   Fireballs flyin' around and colliding with stuff

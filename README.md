@@ -19,7 +19,7 @@ Known Bugs and Features to Come
 ===============================
 -Scaling the size of the game causes some sprites to be drawn with the wrong dimensions, causing unsightly borders to appear.
 -Question blocks and Goombas don't animate in sync with each other.
--Sometimes goombas can get stuck inside each other. This happens offscreen, seemingly at random, so I'm not sure what causes it yet.
+-Sometimes goombas can get stuck inside each other. I believe this is caused by walking exactly far enough to activate one of them (offscreen), and then coincidentally activating the second one while they are closely overlapped.
 
 All of the features to be implemented are the actual features of the game!
 Namely, the run button, destroying bricks, a score counter, working pipes, sounds and music, more types of enemies, fire flowers, stars, and 1up mushrooms.
