@@ -4,22 +4,27 @@
 
   //TODO: On console the hitbox is smaller. Measure it and edit this.
 
-  var Goomba = Mario.Goomba = function(pos, sprite) {
+  var Koopa = Mario.Koopa = function(pos, sprite, para) {
     this.dying = false;
+    this.shell = true;
+
+    this.para = para; //para. As in, is it a paratroopa?
+
     Mario.Entity.call(this, {
       pos: pos,
       sprite: sprite,
-      hitbox: [0,0,16,16]
+      hitbox: [16,0,16,16]
     });
-    this.vel[0] = -0.5;
+    this.sprite.pos[0] += 64;
+    this.vel[0] = -0;
     this.idx = level.enemies.length;
   };
 
-  Goomba.prototype.render = function(ctx, vX, vY) {
+  Koopa.prototype.render = function(ctx, vX, vY) {
     this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
   };
 
-  Goomba.prototype.update = function(dt, vX) {
+  Koopa.prototype.update = function(dt, vX) {
     if (this.pos[0] - vX > 336) { //if we're too far away, do nothing.
       return;
     } else if (this.pos[0] - vX < -32) {
@@ -46,15 +51,19 @@
     this.sprite.update(dt);
   };
 
-  Goomba.prototype.collideWall = function() {
+  Koopa.prototype.collideWall = function() {
     this.vel[0] = -this.vel[0];
   };
 
-  Goomba.prototype.checkCollisions = function() {
+  Koopa.prototype.checkCollisions = function() {
     if (this.flipping) {
       return;
     }
 
+    // var h = this.shell ? 1 : 2;
+    // if (this.pos[1] % 16 !== 0) {
+    //   h += 1;
+    // }
     var h = this.pos[1] % 16 === 0 ? 1 : 2;
     var w = this.pos[0] % 16 === 0 ? 1 : 2;
 
@@ -89,7 +98,7 @@
     this.isCollideWith(player);
   };
 
-  Goomba.prototype.isCollideWith = function(ent) {
+  Koopa.prototype.isCollideWith = function(ent) {
     if (ent instanceof Mario.Player && (this.dying || ent.invincibility)) {
       return;
     }
@@ -102,7 +111,7 @@
     if (!(hpos1[0] > hpos2[0]+ent.hitbox[2] || (hpos1[0]+this.hitbox[2] < hpos2[0]))) {
       if (!(hpos1[1] > hpos2[1]+ent.hitbox[3] || (hpos1[1]+this.hitbox[3] < hpos2[1]))) {
         if (ent instanceof Mario.Player) { //if we hit the player
-          if (ent.vel[1] > 0) { //then the goomba dies
+          if (ent.vel[1] > 0) { //then we get BOPPED.
             this.stomp();
           } else { //or the player gets hit
             ent.damage();
@@ -114,15 +123,26 @@
     }
   };
 
-  Goomba.prototype.stomp = function() {
+  Koopa.prototype.stomp = function() {
+    //Turn this thing into a shell if it isn't already. Kick it if it is.
     player.bounce = true;
-    this.sprite.pos[0] = 32;
-    this.sprite.speed = 0;
-    this.vel[0] = 0;
-    this.dying = 10;
+    if (this.para) {
+      this.para = false;
+      this.sprite.pos[0] -= 32;
+    } else if (this.shell) {
+      //kick the shell
+      //What determines the direction a shell gets kicked? Probably location or smth
+    } else {
+      this.shell = true;
+      this.hitbox = [0,0,16,16];
+      this.sprite.pos[0] += 64;
+      this.sprite.speed = 0;
+      this.vel = [0,0];
+    }
+
   };
 
-  Goomba.prototype.bump = function() {
+  Koopa.prototype.bump = function() {
     this.sprite.img = 'sprites/enemyr.png';
     this.flipping = 11;
     this.pos[1] -= 1;

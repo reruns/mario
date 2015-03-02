@@ -45,7 +45,7 @@ var level;
 //initialize
 var lastTime;
 function init() {
-  Mario.oneone();
+  Mario.oneonetunnel();
   lastTime = Date.now();
   main();
 }

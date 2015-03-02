@@ -18,26 +18,26 @@
 			sprite: new Mario.Sprite('sprites/player.png',[80,32],[16,16],0),
 			hitbox: [0,0,16,16]
 		});
-	}
+	};
 
 	Mario.Util.inherits(Player, Mario.Entity);
 
 	Player.prototype.moveRight = function() {
 		//we're on the ground
 		if (this.vel[1] === 0) {
-			this.acc[0] = .1;
+			this.acc[0] = 0.1;
 		} else {
 			this.acc[0] = 0.05;
 		}
-	}
+	};
 
 	Player.prototype.moveLeft = function() {
 		if (this.vel[1] === 0) {
-			this.acc[0] = -.1
+			this.acc[0] = -0.1;
 		} else {
 			this.acc[0] = -0.05;
 		}
-	}
+	};
 
 	Player.prototype.noWalk = function() {
 		this.acc[0] = 0;
@@ -50,7 +50,7 @@
 
 		if (Math.abs(this.vel[0]) <= 0.3)
 			this.vel[0] = 0;
-	}
+	};
 
 	Player.prototype.jump = function() {
 		if (this.vel[1] > 0) {
@@ -64,7 +64,7 @@
 			this.standing = false;
 			this.vel[1] = -3;
 		}
-	}
+	};
 
 	Player.prototype.noJump = function() {
 		this.canJump = true;
@@ -74,7 +74,7 @@
 			this.jumping -= 1;
 		}
 
-	}
+	};
 
   Player.prototype.setAnimation = function() {
 		//okay cool, now set the sprite
@@ -104,11 +104,11 @@
 
 		//which way are we facing?
 		if (this.left) {
-			this.sprite.img = 'sprites/playerl.png'
+			this.sprite.img = 'sprites/playerl.png';
 		} else {
-			this.sprite.img = 'sprites/player.png'
+			this.sprite.img = 'sprites/player.png';
 		}
-  }
+  };
 
 	Player.prototype.update = function(dt, vX) {
 		//TODO: consolidate logic for powering up and down, and make sure this holds for fire flowers.
@@ -172,7 +172,7 @@
 			this.acc[0] = 0;
 		}
 		if (this.vel[0] < 0) {
-			this.left = true
+			this.left = true;
 		} else if (this.vel[0] > 0){
 			this.left = false;
 		}
@@ -180,7 +180,7 @@
 		if (this.jumping) {
 			this.acc[1] = 0;
 		} else {
-			this.acc[1] = .2;
+			this.acc[1] = 0.2;
 		}
 
 		//approximate acceleration
@@ -195,16 +195,16 @@
 
     this.setAnimation();
 		this.sprite.update(dt);
-	}
+	};
 
 	Player.prototype.checkCollisions = function() {
 		//x-axis first!
 		var h = this.power > 0 ? 2 : 1;
 		var w = 1;
-		if (this.pos[1] % 16 != 0) {
+		if (this.pos[1] % 16 !== 0) {
 			h += 1;
 		}
-		if (this.pos[0] % 16 != 0) {
+		if (this.pos[0] % 16 !== 0) {
 			w += 1;
 		}
 		var baseX = Math.floor(this.pos[0] / 16);
@@ -222,7 +222,7 @@
 				}
 			}
 		}
-	}
+	};
 
 	Player.prototype.powerUp = function(idx) {
 		//TODO: This animation still plays too fast
@@ -236,7 +236,7 @@
 			this.power = 1;
 			this.hitbox = [0,0,16,32];
 		}
-	}
+	};
 
 	Player.prototype.damage = function() {
 		if (this.power === 0) { //if you're already small, you dead!
@@ -250,10 +250,10 @@
 			this.power = 0;
 			this.hitbox = [0,0,16,16];
 		}
-	}
+	};
 
 	Player.prototype.die = function () {
 		level.loader.call();
 		vX = 0;
-	}
+	};
 })();

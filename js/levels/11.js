@@ -32,8 +32,11 @@ var oneone = Mario.oneone = function() {
     bushSprites: [
      new Mario.Sprite('sprites/tiles.png', [176,144], [16,16],0),
      new Mario.Sprite('sprites/tiles.png', [192,144], [16,16],0),
-     new Mario.Sprite('sprites/tiles.png', [208,144], [16,16],0)]
-  })
+     new Mario.Sprite('sprites/tiles.png', [208,144], [16,16],0)],
+   goombaSprite: function() {
+     return new Mario.Sprite('sprites/enemy.png', [0, 16], [16,16], 3, [0,1]);
+   }
+ });
   ground = [[0,69],[71,86],[89,153],[155,212]];
 
   //TODO: Put things other than mushrooms in blocks
@@ -42,43 +45,43 @@ var oneone = Mario.oneone = function() {
   //build THE GROUND
   ground.forEach(function(loc) {
     level.putFloor(loc[0],loc[1]);
-  })
+  });
 
   //build scenery
   clouds = [[7,3],[19, 2],[56, 3],[67, 2],[87, 2],[103, 2],[152, 3],[163, 2],[200, 3]];
   clouds.forEach(function(cloud){
     level.putCloud(cloud[0],cloud[1]);
-  })
+  });
 
   twoClouds = [[36,2],[132,2],[180,2]];
   twoClouds.forEach(function(cloud){
     level.putTwoCloud(cloud[0],cloud[1]);
-  })
+  });
 
   threeClouds = [[27,3],[75,3],[123,3],[171,3]];
   threeClouds.forEach(function(cloud){
     level.putThreeCloud(cloud[0],cloud[1]);
-  })
+  });
 
   bHills = [0,48,96,144,192]
   bHills.forEach(function(hill) {
     level.putBigHill(hill, 12);
-  })
+  });
 
   sHills = [16,64,111,160];
   sHills.forEach(function(hill) {
     level.putSmallHill(hill, 12);
-  })
+  });
 
   bushes = [23,71,118,167];
   bushes.forEach(function(bush) {
     level.putBush(bush, 12);
-  })
+  });
 
   twoBushes = [41,89,137];
   twoBushes.forEach(function(bush) {
     level.putTwoBush(bush, 12);
-  })
+  });
 
   threeBushes = [11,59,106];
   threeBushes.forEach(function(bush) {
