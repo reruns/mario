@@ -50,7 +50,7 @@ function init() {
   main();
 }
 
-var player = new Mario.Player([56,192]);
+var player = new Mario.Player();
 var gameTime = 0;
 
 //set up the game loop

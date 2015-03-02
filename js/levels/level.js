@@ -12,6 +12,7 @@
     this.brickBounceSprite = options.brickBounceSprite;
     this.ublockSprite = options.ublockSprite;
     this.superShroomSprite = options.superShroomSprite;
+    this.coinSprite = options.coinSprite;
     this.pipeLEndSprite = options.pipeLEndSprite;
     this.pipeREndSprite = options.pipeREndSprite;
     this.pipeLMidSprite = options.pipeLMidSprite;
@@ -66,7 +67,10 @@
   }
 
   Level.prototype.putCoin = function(x, y) {
-    
+    this.items.push(new Mario.Coin(
+      [x*16, y*16],
+      this.coinSprite()
+    ))
   }
 
   Level.putLeftPipe = function(x,y) {

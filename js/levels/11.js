@@ -37,7 +37,7 @@ var oneone = Mario.oneone = function() {
   ground = [[0,69],[71,86],[89,153],[155,212]];
 
   //TODO: Put things other than mushrooms in blocks
-  player = new Mario.Player([56,192]);
+  player = new Mario.Player(level.playerPos);
 
   //build THE GROUND
   ground.forEach(function(loc) {
