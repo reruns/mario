@@ -159,6 +159,7 @@
 
 		if (this.bounce) {
 			this.bounce = false;
+			this.standing = false;
 			this.vel[1] = -3;
 		}
 

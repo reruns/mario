@@ -35,6 +35,9 @@ var oneone = Mario.oneone = function() {
      new Mario.Sprite('sprites/tiles.png', [208,144], [16,16],0)],
    goombaSprite: function() {
      return new Mario.Sprite('sprites/enemy.png', [0, 16], [16,16], 3, [0,1]);
+   },
+   koopaSprite: function() {
+     return new Mario.Sprite('sprites/enemy.png', [96,0], [16,32], 2, [0,1]);
    }
  });
   ground = [[0,69],[71,86],[89,153],[155,212]];

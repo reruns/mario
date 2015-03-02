@@ -3,20 +3,21 @@
   window.Mario = {};
 
   //TODO: On console the hitbox is smaller. Measure it and edit this.
+  //TODO: Shell kicking logic.
+  //TODO: Getting back up after being a shell for a while.
 
   var Koopa = Mario.Koopa = function(pos, sprite, para) {
     this.dying = false;
-    this.shell = true;
+    this.shell = false;
 
     this.para = para; //para. As in, is it a paratroopa?
 
     Mario.Entity.call(this, {
       pos: pos,
       sprite: sprite,
-      hitbox: [16,0,16,16]
+      hitbox: [0,0,16,32]
     });
-    this.sprite.pos[0] += 64;
-    this.vel[0] = -0;
+    this.vel[0] = -0.5;
     this.idx = level.enemies.length;
   };
 
@@ -25,6 +26,14 @@
   };
 
   Koopa.prototype.update = function(dt, vX) {
+    this.left = (this.vel[0] < 0) ? true : false;
+
+    if (this.left) {
+      this.sprite.img = 'sprites/enemy.png';
+    } else {
+      this.sprite.img = 'sprites/enemyr.png';
+    }
+
     if (this.pos[0] - vX > 336) { //if we're too far away, do nothing.
       return;
     } else if (this.pos[0] - vX < -32) {
@@ -52,7 +61,7 @@
   };
 
   Koopa.prototype.collideWall = function() {
-    this.vel[0] = -this.vel[0];
+    this.vel[0] = 0.5;
   };
 
   Koopa.prototype.checkCollisions = function() {
@@ -60,11 +69,10 @@
       return;
     }
 
-    // var h = this.shell ? 1 : 2;
-    // if (this.pos[1] % 16 !== 0) {
-    //   h += 1;
-    // }
-    var h = this.pos[1] % 16 === 0 ? 1 : 2;
+    var h = this.shell ? 1 : 2;
+    if (this.pos[1] % 16 !== 0) {
+      h += 1;
+    }
     var w = this.pos[0] % 16 === 0 ? 1 : 2;
 
     var baseX = Math.floor(this.pos[0] / 16);
@@ -134,8 +142,10 @@
       //What determines the direction a shell gets kicked? Probably location or smth
     } else {
       this.shell = true;
-      this.hitbox = [0,0,16,16];
       this.sprite.pos[0] += 64;
+      this.sprite.pos[1] += 16;
+      this.sprite.size = [16,16];
+      this.hitbox = [0,0,16,16];
       this.sprite.speed = 0;
       this.vel = [0,0];
     }
@@ -143,10 +153,5 @@
   };
 
   Koopa.prototype.bump = function() {
-    this.sprite.img = 'sprites/enemyr.png';
-    this.flipping = 11;
-    this.pos[1] -= 1;
-    this.vel[0] = 0;
-    this.vel[1] = -2;
   };
 })();

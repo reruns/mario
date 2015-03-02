@@ -45,7 +45,7 @@ var level;
 //initialize
 var lastTime;
 function init() {
-  Mario.oneonetunnel();
+  Mario.oneone();
   lastTime = Date.now();
   main();
 }
@@ -109,7 +109,7 @@ function updateEntities(dt) {
 
   level.enemies.forEach (function(ent) {
     ent.update(dt, vX);
-  })
+  });
 }
 
 //scan for collisions
@@ -123,7 +123,7 @@ function checkCollisions() {
   });
   level.enemies.forEach (function(ent) {
     ent.checkCollisions();
-  })
+  });
 }
 
 //draw the game!
@@ -149,7 +149,7 @@ function render() {
 
   level.enemies.forEach (function(enemy) {
     renderEntity(enemy);
-  })
+  });
 
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
@@ -170,7 +170,7 @@ function render() {
   }
 
   //and if we get to them, those little rope thingies on bridges
-};
+}
 
 function renderEntity(entity) {
   entity.render(ctx, vX, vY);
