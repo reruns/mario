@@ -18,9 +18,9 @@ var updateables = [];
 //Cool!
 //TODO: Automatically scale the game to work and look good on widescreen.
 //TODO: Figure out how to make sprites not break when scaled.
-canvas.width = 256;
-canvas.height = 240;
-ctx.scale(1,1);
+canvas.width = 762;
+canvas.height = 720;
+ctx.scale(3,3);
 document.body.appendChild(canvas);
 
 //viewport
