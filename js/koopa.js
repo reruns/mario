@@ -2,8 +2,6 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
-  //TODO: On console the hitbox is smaller. Measure it and edit this.
-  //TODO: Shell kicking logic.
   //TODO: Getting back up after being a shell for a while.
 
   var Koopa = Mario.Koopa = function(pos, sprite, para) {
@@ -12,10 +10,13 @@
 
     this.para = para; //para. As in, is it a paratroopa?
 
+    //So, funny story. The actual hitboxes don't reach all the way to the ground.
+    //What that means is, as long as I use them to keep things on the floor
+    //making the hitboxes accurate will make enemies sink into the ground.
     Mario.Entity.call(this, {
       pos: pos,
       sprite: sprite,
-      hitbox: [0,0,16,32]
+      hitbox: [2,8,12,24]
     });
     this.vel[0] = -0.5;
     this.idx = level.enemies.length;
@@ -26,7 +27,11 @@
   };
 
   Koopa.prototype.update = function(dt, vX) {
-    this.left = (this.vel[0] < 0) ? true : false;
+    this.vel[0] = this.turn ? -this.vel[0] : this.vel[0];
+    this.turn = false;
+    if (this.vel[0] != 0) {
+      this.left = (this.vel[0] < 0);
+    }
 
     if (this.left) {
       this.sprite.img = 'sprites/enemy.png';
@@ -40,17 +45,36 @@
       delete level.enemies[this.idx];
     }
 
-    if (this.flipping > 0) {
-      this.pos[1] -= 2;
-      this.flipping -= 2;
-    } else if (this.flipping < 0) {
-      this.pos[1] += 2;
-    }
-
     if (this.dying) {
       this.dying -= 1;
       if (!this.dying) {
         delete level.enemies[this.idx];
+      }
+    }
+
+    if (this.shell) {
+      if (this.vel[0] == 0) {
+        this.shell -= 1;
+        if (this.shell < 120) {
+          this.sprite.speed = 5;
+        }
+        if (this.shell == 0) {
+          this.sprite = level.koopaSprite();
+          this.hitbox = [2,8,12,24]
+          if (this.left) {
+            this.sprite.img = 'sprites/enemyr.png';
+            this.vel[0] = 0.5;
+            this.left = false;
+          } else {
+            this.vel[0] = -0.5;
+            this.left = true;
+          }
+          this.pos[1] -= 16;
+        }
+      } else {
+        this.shell = 360;
+        this.sprite.speed = 0;
+        this.sprite.setFrame(0);
       }
     }
     this.acc[1] = 0.2;
@@ -61,7 +85,9 @@
   };
 
   Koopa.prototype.collideWall = function() {
-    this.vel[0] = 0.5;
+    //This stops us from flipping twice on the same frame if we collide
+    //with multiple wall tiles simultaneously.
+    this.turn = true;
   };
 
   Koopa.prototype.checkCollisions = function() {
@@ -124,10 +150,10 @@
           }
           if (this.shell) {
             if (this.vel[0] === 0) {
-              if (ent.left) {
-                this.vel[0] = -5;
+              if (ent.left) { //I'm pretty sure this isn't the real logic.
+                this.vel[0] = -4;
               } else {
-                this.vel[0] = 5;
+                this.vel[0] = 4;
               }
             } else {
               if (ent.bounce) {
@@ -140,7 +166,9 @@
             ent.damage();
           }
         } else {
-          this.collideWall();
+          if (this.shell && (ent instanceof Mario.Goomba)) {
+            ent.bump();
+          } else this.collideWall();
         }
       }
     }
@@ -153,12 +181,13 @@
       this.para = false;
       this.sprite.pos[0] -= 32;
     } else {
-      this.shell = true;
+      this.shell = 360;
       this.sprite.pos[0] += 64;
       this.sprite.pos[1] += 16;
       this.sprite.size = [16,16];
-      this.hitbox = [2,6,10,10];
+      this.hitbox = [2,0,12,16];
       this.sprite.speed = 0;
+      this.frames = [0,1];
       this.vel = [0,0];
       this.pos[1] += 16;
     }
@@ -166,5 +195,7 @@
   };
 
   Koopa.prototype.bump = function() {
+    //koopas getting hit by shells isn't actually possible in 1-1
+    //so this can wait.
   };
 })();

@@ -16,6 +16,10 @@
     this._index += this.speed*dt;
   }
 
+  Sprite.prototype.setFrame = function(frame) {
+    this._index = frame;
+  }
+
   Sprite.prototype.render = function(ctx, posx, posy, vX, vY) {
     var frame;
 
@@ -36,6 +40,8 @@
     var y = this.pos[1];
 
     x += frame*this.size[0];
-    ctx.drawImage(resources.get(this.img), x, y, this.size[0], this.size[1], Math.round(posx - vX),Math.round(posy - vY), this.size[0],this.size[1]);
+    //TODO: Add a scaling factor here to flip the image instead of using a second
+    //sprite sheet.
+    ctx.drawImage(resources.get(this.img), x,y, this.size[0], this.size[1], Math.round(posx - vX),Math.round(posy - vY), this.size[0],this.size[1]);
   }
 })();

@@ -26,13 +26,6 @@
       delete level.enemies[this.idx];
     }
 
-    if (this.flipping > 0) {
-      this.pos[1] -= 2;
-      this.flipping -= 2;
-    } else if (this.flipping < 0) {
-      this.pos[1] += 2;
-    }
-
     if (this.dying) {
       this.dying -= 1;
       if (!this.dying) {
@@ -124,9 +117,9 @@
 
   Goomba.prototype.bump = function() {
     this.sprite.img = 'sprites/enemyr.png';
-    this.flipping = 11;
+    this.flipping = true;
     this.pos[1] -= 1;
     this.vel[0] = 0;
-    this.vel[1] = -2;
+    this.vel[1] = -2.5;
   };
 })();
