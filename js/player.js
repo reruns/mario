@@ -12,6 +12,7 @@
 		this.jumping = 0;
 		this.canJump = true;
 		this.invincibility = 0;
+		this.crouching = false;
 
 		Mario.Entity.call(this, {
 			pos: pos,
@@ -23,7 +24,7 @@
 	Mario.Util.inherits(Player, Mario.Entity);
 
 	Player.prototype.run = function() {
-		this.maxSpeed = 2.25;
+		this.maxSpeed = 2.5;
 	}
 
 	Player.prototype.noRun = function() {
@@ -34,31 +35,33 @@
 	Player.prototype.moveRight = function() {
 		//we're on the ground
 		if (this.vel[1] === 0 && this.standing) {
+			if (this.crouching) {
+				this.noWalk();
+				return;
+			}
 			this.acc[0] = this.moveAcc;
 			this.left = false;
 		} else {
-			this.acc[0] = 0.05;
+			this.acc[0] = this.moveAcc;
 		}
 	};
 
 	Player.prototype.moveLeft = function() {
 		if (this.vel[1] === 0 && this.standing) {
+			if (this.crouching) {
+				this.noWalk();
+				return;
+			}
 			this.acc[0] = -this.moveAcc;
 			this.left = true;
 		} else {
-			this.acc[0] = -0.05;
+			this.acc[0] = -this.moveAcc;
 		}
 	};
 
 	Player.prototype.noWalk = function() {
+		this.maxSpeed = 0;
 		if (this.vel[0] === 0) return;
-		if (this.vel[1] === 0) {
-			if (this.vel[0] < 0) {
-				this.acc[0] = 0.01;
-			} else {
-				this.acc[0] -= 0.01;
-			}
-		}
 
 		if (Math.abs(this.vel[0]) <= 0.1) {
 			this.vel[0] = 0;
@@ -66,6 +69,19 @@
 		}
 
 	};
+
+	Player.prototype.crouch = function() {
+		if (this.power === 0) {
+			this.crouching = false;
+			return;
+		}
+
+		if (this.standing) this.crouching = true;
+	}
+
+	Player.prototype.noCrouch = function() {
+		this.crouching = false;
+	}
 
 	Player.prototype.jump = function() {
 		if (this.vel[1] > 0) {
@@ -93,6 +109,11 @@
 
   Player.prototype.setAnimation = function() {
 		//okay cool, now set the sprite
+		if (this.crouching) {
+			this.sprite.pos[0] = 176;
+			this.sprite.speed = 0;
+			return;
+		}
     if (this.jumping) {
 			this.sprite.pos[0] = 160;
 			this.sprite.speed = 0;

@@ -86,6 +86,13 @@ function handleInput(dt) {
     //we need this to handle the timing for how long you hold it
     player.noJump();
   }
+
+  if (input.isDown('DOWN')) {
+    player.crouch();
+  } else {
+    player.noCrouch();
+  }
+
   if (input.isDown('LEFT')) { // 'd' or left arrow
     player.moveLeft();
   }
