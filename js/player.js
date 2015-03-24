@@ -11,6 +11,7 @@
 		this.bounce = false;
 		this.jumping = 0;
 		this.canJump = true;
+		this.maxSpeed = 1.5
 		this.invincibility = 0;
 
 		Mario.Entity.call(this, {
@@ -41,11 +42,12 @@
 
 	Player.prototype.noWalk = function() {
 		this.acc[0] = 0;
-
-		if (this.left) {
-			this.vel[0] += 0.2;
-		} else {
-			this.vel[0] -= 0.2;
+		if (this.vel[1] == 0) {
+			if (this.left) {
+				this.vel[0] += 0.05;
+			} else {
+				this.vel[0] -= 0.05;
+			}
 		}
 
 		if (Math.abs(this.vel[0]) <= 0.3)
@@ -59,21 +61,21 @@
 		if (this.jumping) {
 			this.jumping -= 1;
 		} else if (this.standing && this.canJump) {
-			this.jumping = 16;
+			this.jumping = 20;
 			this.canJump = false;
 			this.standing = false;
-			this.vel[1] = -3;
+			this.vel[1] = -6;
 		}
 	};
 
 	Player.prototype.noJump = function() {
 		this.canJump = true;
-		if (this.jumping <= 8) {
-			this.jumping = 0;
-		} else {
-			this.jumping -= 1;
+		if (this.jumping) {
+			if (this.jumping <= 16) {
+				this.vel[1] = 0;
+				this.jumping = 0;
+			} else this.jumping -= 1;
 		}
-
 	};
 
   Player.prototype.setAnimation = function() {
@@ -149,7 +151,6 @@
 								// this.pos[1] += 16;
 								break;
 			}
-			console.log(this.sprite);
 			return;
 		}
 
@@ -168,8 +169,8 @@
 			this.vel[0] = Math.max(this.vel[0], 0);
 		}
 
-		if (Math.abs(this.vel[0]) > 2) {
-			this.vel[0] = 2 * this.vel[0] / Math.abs(this.vel[0]);
+		if (Math.abs(this.vel[0]) > this.maxSpeed) {
+			this.vel[0] = this.maxSpeed * this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
 		}
 		if (this.vel[0] < 0) {
@@ -178,11 +179,7 @@
 			this.left = false;
 		}
 
-		if (this.jumping) {
-			this.acc[1] = 0;
-		} else {
-			this.acc[1] = 0.2;
-		}
+		this.acc[1] = 0.25
 
 		//approximate acceleration
 		this.vel[0] += this.acc[0];

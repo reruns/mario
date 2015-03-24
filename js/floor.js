@@ -13,8 +13,6 @@
 
 	Mario.Util.inherits(Floor, Mario.Entity);
 
-	//TODO: Figure out why some blocks are having non-integer positions
-	//TODO: Prevent holding left/right against a wall from making you float
 	Floor.prototype.isCollideWith = function (ent) {
 		//the first two elements of the hitbox array are an offset, so let's do this now.
 		var hpos1 = [Math.floor(this.pos[0] + this.hitbox[0]), Math.floor(this.pos[1] + this.hitbox[1])];
@@ -33,6 +31,9 @@
 						ent.vel[1] = 0;
 						ent.pos[1] = hpos1[1] - ent.hitbox[3] - ent.hitbox[1];
 						ent.standing = true;
+						if (ent instanceof Mario.Player) {
+							ent.jumping = 0;
+						}
 					} else if (Math.abs(hpos2[1] - hpos1[1] - this.hitbox[3]) > ent.vel[1] &&
 					center + 2 >= hpos1[0] && center - 2 <= hpos1[0] + this.hitbox[2]) {
 						//ent is under the block.
