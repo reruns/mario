@@ -17,7 +17,7 @@ var updateables = [];
 //but this method should let us make it however big.
 //Cool!
 //TODO: Automatically scale the game to work and look good on widescreen.
-//TODO: Figure out how to make sprites not break when scaled.
+//TODO: fiddling with scaled sprites looks BETTER, but not perfect. Hmm.
 canvas.width = 762;
 canvas.height = 720;
 ctx.scale(3,3);
@@ -75,6 +75,11 @@ function update(dt) {
 }
 
 function handleInput(dt) {
+  if (input.isDown('RUN')){
+    player.run();
+  } else {
+    player.noRun();
+  }
   if (input.isDown('JUMP')) {
     player.jump();
   } else {

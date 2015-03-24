@@ -11,7 +11,6 @@
 		this.bounce = false;
 		this.jumping = 0;
 		this.canJump = true;
-		this.maxSpeed = 1.5
 		this.invincibility = 0;
 
 		Mario.Entity.call(this, {
@@ -23,35 +22,49 @@
 
 	Mario.Util.inherits(Player, Mario.Entity);
 
+	Player.prototype.run = function() {
+		this.maxSpeed = 2.25;
+	}
+
+	Player.prototype.noRun = function() {
+		this.maxSpeed = 1.5;
+		this.moveAcc = 0.04;
+	}
+
 	Player.prototype.moveRight = function() {
 		//we're on the ground
-		if (this.vel[1] === 0) {
-			this.acc[0] = 0.1;
+		if (this.vel[1] === 0 && this.standing) {
+			this.acc[0] = this.moveAcc;
+			this.left = false;
 		} else {
 			this.acc[0] = 0.05;
 		}
 	};
 
 	Player.prototype.moveLeft = function() {
-		if (this.vel[1] === 0) {
-			this.acc[0] = -0.1;
+		if (this.vel[1] === 0 && this.standing) {
+			this.acc[0] = -this.moveAcc;
+			this.left = true;
 		} else {
 			this.acc[0] = -0.05;
 		}
 	};
 
 	Player.prototype.noWalk = function() {
-		this.acc[0] = 0;
-		if (this.vel[1] == 0) {
-			if (this.left) {
-				this.vel[0] += 0.05;
+		if (this.vel[0] === 0) return;
+		if (this.vel[1] === 0) {
+			if (this.vel[0] < 0) {
+				this.acc[0] = 0.01;
 			} else {
-				this.vel[0] -= 0.05;
+				this.acc[0] -= 0.01;
 			}
 		}
 
-		if (Math.abs(this.vel[0]) <= 0.3)
+		if (Math.abs(this.vel[0]) <= 0.1) {
 			this.vel[0] = 0;
+			this.acc[0] = 0;
+		}
+
 	};
 
 	Player.prototype.jump = function() {
@@ -91,10 +104,9 @@
 					if (this.vel[0] < 0.2) {
 						this.sprite.speed = 5;
 					} else {
-						this.sprite.speed = Math.abs(this.vel[0]) * 5;
+						this.sprite.speed = Math.abs(this.vel[0]) * 8;
 					}
-				} else {
-					this.left = !this.left;
+				} else if ((this.vel[0] > 0 && this.left) || (this.vel[0] < 0 && !this.left)){
 					this.sprite.pos[0] = 144;
 					this.sprite.speed = 0;
 				}
@@ -170,13 +182,8 @@
 		}
 
 		if (Math.abs(this.vel[0]) > this.maxSpeed) {
-			this.vel[0] = this.maxSpeed * this.vel[0] / Math.abs(this.vel[0]);
+			this.vel[0] -= 0.05 *  this.vel[0] / Math.abs(this.vel[0]);
 			this.acc[0] = 0;
-		}
-		if (this.vel[0] < 0) {
-			this.left = true;
-		} else if (this.vel[0] > 0){
-			this.left = false;
 		}
 
 		this.acc[1] = 0.25
