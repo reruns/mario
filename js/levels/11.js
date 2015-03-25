@@ -15,6 +15,10 @@ var oneone = Mario.oneone = function() {
     pipeREndSprite: new Mario.Sprite('sprites/tiles.png', [16, 128], [16,16], 0),
     pipeLMidSprite: new Mario.Sprite('sprites/tiles.png', [0, 144], [16,16], 0),
     pipeRMidSprite: new Mario.Sprite('sprites/tiles.png', [16, 144], [16,16], 0),
+    qblockSprite: new Mario.Sprite('sprites/tiles.png', [384, 0], [16,16], 8, [0,0,0,0,1,2,1]),
+    bcoinSprite: function() {
+      return new Mario.Sprite('sprites/items.png', [0,112],[16,16], 20,[0,1,2,3]);
+    },
     cloudSprites:[
       new Mario.Sprite('sprites/tiles.png', [0,320],[16,32],0),
       new Mario.Sprite('sprites/tiles.png', [16,320],[16,32],0),
@@ -92,19 +96,19 @@ var oneone = Mario.oneone = function() {
   });
 
   //interactable terrain
-  level.putQBlock(16, 9, null);
+  level.putQBlock(16, 9, new Mario.Bcoin([256, 144]));
   level.putBrick(20, 9, null);
-  level.putQBlock(21, 9, new Mario.Mushroom([336, 144], level.superShroomSprite));
+  level.putQBlock(21, 9, new Mario.Mushroom([336, 144]));
   level.putBrick(22, 9, null);
-  level.putQBlock(22, 5, null);
-  level.putQBlock(23, 9, null);
+  level.putQBlock(22, 5, new Mario.Bcoin([352, 80]));
+  level.putQBlock(23, 9, new Mario.Bcoin([368, 144]));
   level.putBrick(24, 9, null);
   level.putPipe(28, 13, 2);
   level.putPipe(38, 13, 3);
   level.putPipe(46, 13, 4);
   level.putPipe(57, 13, 4);
   level.putBrick(77, 9, null);
-  level.putQBlock(78, 9, new Mario.Mushroom([1248, 144], level.superShroomSprite));
+  level.putQBlock(78, 9, new Mario.Mushroom([1248, 144]));
   level.putBrick(79, 9, null);
   level.putBrick(80, 5, null);
   level.putBrick(81, 5, null);
@@ -117,23 +121,23 @@ var oneone = Mario.oneone = function() {
   level.putBrick(91, 5, null);
   level.putBrick(92, 5, null);
   level.putBrick(93, 5, null);
-  level.putQBlock(94, 5, null);
+  level.putQBlock(94, 5, new Mario.Bcoin([1504, 80]));
   level.putBrick(94, 9, null);
   level.putBrick(100, 9, null);
   level.putBrick(101, 9, null);
-  level.putQBlock(105, 9, null);
-  level.putQBlock(108, 9, null);
-  level.putQBlock(108, 5, null);
-  level.putQBlock(111, 9, null);
+  level.putQBlock(105, 9, new Mario.Bcoin([1680, 144]));
+  level.putQBlock(108, 9, new Mario.Bcoin([1728, 144]));
+  level.putQBlock(108, 5, new Mario.Mushroom([1728, 80]));
+  level.putQBlock(111, 9, new Mario.Bcoin([1776, 144]));
   level.putBrick(117, 9, null);
   level.putBrick(120, 5, null);
   level.putBrick(121, 5, null);
   level.putBrick(122, 5, null);
   level.putBrick(123, 5, null);
   level.putBrick(128, 5, null);
-  level.putQBlock(129, 5, null);
+  level.putQBlock(129, 5, new Mario.Bcoin([2074, 80]));
   level.putBrick(129, 9, null);
-  level.putQBlock(130, 5, null);
+  level.putQBlock(130, 5, new Mario.Bcoin([2080, 80]));
   level.putBrick(130, 9, null);
   level.putBrick(131, 5, null);
   level.putWall(134, 13, 1);
@@ -156,7 +160,7 @@ var oneone = Mario.oneone = function() {
   level.putPipe(163, 13, 2);
   level.putBrick(168, 9, null);
   level.putBrick(169, 9, null);
-  level.putQBlock(170, 9, null);
+  level.putQBlock(170, 9, new Mario.Bcoin([2720, 144]));
   level.putBrick(171, 9, null);
   level.putPipe(179, 13, 2);
   level.putWall(181, 13, 1);

@@ -27,6 +27,10 @@
       this.break;
     } else if (this.standing){
       this.standing = false;
+      if (this.item) {
+        this.item.spawn();
+        this.item = null;
+      }
       this.opos = [];
       this.opos[0] = this.pos[0];
       this.opos[1] = this.pos[1];
@@ -41,7 +45,7 @@
     }
   }
 
-  Block.prototype.update = function(dt) {
+  Block.prototype.update = function(dt, gameTime) {
     if (!this.standing) {
       if (this.pos[1] < this.opos[1] - 8) {
         this.vel[1] = 2;
@@ -53,10 +57,6 @@
           this.sprite = this.osprite;
         }
         this.standing = true;
-        if (this.item) {
-          this.item.spawn(level.items.length);
-          level.items.push(this.item);
-        }
       }
     } else {
       if (this.sprite === this.usedSprite) {
@@ -67,7 +67,7 @@
     }
 
     this.pos[1] += this.vel[1];
-    this.sprite.update(dt);
+    this.sprite.update(dt, gameTime);
   }
 
 })();

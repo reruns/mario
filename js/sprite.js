@@ -12,8 +12,10 @@
     this.frames = frames;
   }
 
-  Sprite.prototype.update = function(dt) {
+  Sprite.prototype.update = function(dt, gameTime) {
+    if (gameTime && gameTime == this.lastUpdated) return;
     this._index += this.speed*dt;
+    if (gameTime) this.lastUpdated = gameTime;
   }
 
   Sprite.prototype.setFrame = function(frame) {

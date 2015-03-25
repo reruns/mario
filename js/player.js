@@ -29,7 +29,7 @@
 
 	Player.prototype.noRun = function() {
 		this.maxSpeed = 1.5;
-		this.moveAcc = 0.04;
+		this.moveAcc = 0.07;
 	}
 
 	Player.prototype.moveRight = function() {

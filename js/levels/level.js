@@ -13,6 +13,7 @@
     this.ublockSprite = options.ublockSprite;
     this.superShroomSprite = options.superShroomSprite;
     this.coinSprite = options.coinSprite;
+    this.bcoinSprite = options.bcoinSprite;
     this.goombaSprite = options.goombaSprite;
     this.koopaSprite = options.koopaSprite;
     this.pipeLEndSprite = options.pipeLEndSprite;
@@ -24,6 +25,7 @@
     this.hillSprites = options.hillSprites;
     this.bushSprite = options.bushSprite;
     this.bushSprites = options.bushSprites;
+    this.qblockSprite = options.qblockSprite;
 
     this.statics = [];
     this.scenery = [];
@@ -99,7 +101,7 @@
     this.blocks[y][x] = new Mario.Block( {
       pos: [x*16, y*16],
       item: item,
-      sprite: new Mario.Sprite('sprites/tiles.png', [384, 0], [16,16], 8, [0,0,0,0,1,2,1]),
+      sprite: this.qblockSprite,
       usedSprite: this.ublockSprite
     });
   };

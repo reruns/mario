@@ -2,41 +2,48 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
-  var Mushroom = Mario.Mushroom = function(pos, sprite) {
+  var Mushroom = Mario.Mushroom = function(pos) {
     this.spawning = false;
     this.waiting = 0;
 
     Mario.Entity.call(this, {
       pos: pos,
-      sprite: sprite,
+      sprite: level.superShroomSprite,
       hitbox: [0,0,16,16]
     });
-
-    this.idx = level.items.length;
   }
 
   Mario.Util.inherits(Mushroom, Mario.Entity);
 
   Mushroom.prototype.render = function(ctx, vX, vY) {
+    if (this.spawning > 1) return;
     this.sprite.render(ctx, this.pos[0], this.pos[1], vX, vY);
   }
 
-  Mushroom.prototype.spawn = function(idx) {
-    this.idx = idx;
-    this.spawning = true;
+  Mushroom.prototype.spawn = function() {
+    if (player.power > 0) {
+      //replace this with a fire flower
+    }
+    this.idx = level.items.length;
+    level.items.push(this);
+    this.spawning = 12;
     this.targetpos = [];
     this.targetpos[0] = this.pos[0];
     this.targetpos[1] = this.pos[1] - 16;
-    this.vel[1] = -.5;
   }
 
   Mushroom.prototype.update = function(dt) {
+    if (this.spawning > 1) {
+      this.spawning -= 1;
+      if (this.spawning == 1) this.vel[1] = -.5;
+      return;
+    }
     if (this.spawning) {
       if (this.pos[1] <= this.targetpos[1]) {
         this.pos[1] = this.targetpos[1];
         this.vel[1] = 0;
         this.waiting = 5;
-        this.spawning = false;
+        this.spawning = 0;
         this.vel[0] = 1;
       }
     } else {

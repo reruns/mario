@@ -69,7 +69,7 @@ function update(dt) {
   gameTime += dt;
 
   handleInput(dt);
-  updateEntities(dt);
+  updateEntities(dt, gameTime);
 
   checkCollisions();
 }
@@ -104,10 +104,10 @@ function handleInput(dt) {
 }
 
 //update all the moving stuff
-function updateEntities(dt) {
+function updateEntities(dt, gameTime) {
   player.update(dt, vX);
   updateables.forEach (function(ent) {
-    ent.update(dt);
+    ent.update(dt, gameTime);
   });
 
   if (level.scrolling && player.pos[0] > vX + 80) {
@@ -174,6 +174,7 @@ function render() {
         updateables.push(level.blocks[i][j]);
       }
     }
+
   }
 
   //then the player
