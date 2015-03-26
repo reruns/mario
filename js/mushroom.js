@@ -23,6 +23,9 @@
   Mushroom.prototype.spawn = function() {
     if (player.power > 0) {
       //replace this with a fire flower
+      var ff = new Mario.Fireflower(this.pos)
+      ff.spawn();
+      return;
     }
     this.idx = level.items.length;
     level.items.push(this);

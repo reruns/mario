@@ -12,6 +12,7 @@
     this.brickBounceSprite = options.brickBounceSprite;
     this.ublockSprite = options.ublockSprite;
     this.superShroomSprite = options.superShroomSprite;
+    this.fireFlowerSprite = options.fireFlowerSprite;
     this.coinSprite = options.coinSprite;
     this.bcoinSprite = options.bcoinSprite;
     this.goombaSprite = options.goombaSprite;
