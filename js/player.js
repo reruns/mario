@@ -13,6 +13,8 @@
 		this.canJump = true;
 		this.invincibility = 0;
 		this.crouching = false;
+		this.fireballs = 0;
+		this.runheld = false;
 
 		Mario.Entity.call(this, {
 			pos: pos,
@@ -25,11 +27,24 @@
 
 	Player.prototype.run = function() {
 		this.maxSpeed = 2.5;
+		if (this.power == 2 && !this.runheld) {
+			this.shoot();
+		}
+		this.runheld = true;
+	}
+
+	Player.prototype.shoot = function() {
+		if (this.fireballs >= 2) return; //Projectile limit!
+		this.fireballs += 1;
+		var fb = new Mario.Fireball([this.pos[0]+8,this.pos[1]]); //I hate you, Javascript.
+		fb.spawn(this.left);
+		this.shooting = 2;
 	}
 
 	Player.prototype.noRun = function() {
 		this.maxSpeed = 1.5;
 		this.moveAcc = 0.07;
+		this.runheld = false;
 	}
 
 	Player.prototype.moveRight = function() {
@@ -135,6 +150,10 @@
 				this.sprite.pos[0] = 80;
 				this.sprite.speed = 0;
 			}
+			if (this.shooting) {
+				this.sprite.pos[0] += 160;
+				this.shooting -= 1;
+			}
 		}
 
 		//which way are we facing?
@@ -148,22 +167,11 @@
 	Player.prototype.update = function(dt, vX) {
 		//TODO: consolidate logic for powering up and down, and make sure this holds for fire flowers.
 		if (this.powering.length !== 0) {
-			switch (this.powering.shift()) {
-				case 0: this.sprite.pos[0] = 80;
-								this.startSprite = this.sprite;
-								break;
-				case 1: this.sprite = this.startSprite;
-								this.pos[1] += 16;
-								break;
-				case 2: this.sprite = this.twoSprite;
-								this.pos[1] -= 16;
-								break;
-				case 3: this.sprite = this.threeSprite;
-								break;
-				case 4: this.sprite = this.endSprite;
-								this.pos[1] -= 16;
-								break;
-			}
+			var next = this.powering.shift();
+			if (next == 5) return;
+			this.sprite.pos = this.powerSprites[next];
+			this.sprite.size = this.powerSizes[next];
+			this.pos[1] += this.shift[next];
 			if (this.powering.length === 0) {
 				delete level.items[this.touchedItem];
 			}
@@ -251,16 +259,27 @@
 	};
 
 	Player.prototype.powerUp = function(idx) {
-		//TODO: This animation still plays too fast
-	  this.powering = [0,2,1,2,1,2,3,1,2,3,1,4];
+	  this.powering = [0,5,2,5,1,5,2,5,1,5,2,5,3,5,1,5,2,5,3,5,1,5,4];
 		this.touchedItem = idx;
 
 		if (this.power === 0) {
-			this.twoSprite = new Mario.Sprite('sprites/player.png', [320, this.sprite.pos[1] - 32], [16, 32], 0);
-			this.threeSprite = new Mario.Sprite('sprites/player.png', [80, this.sprite.pos[1] - 32], [16, 32], 0);
-			this.endSprite = new Mario.Sprite('sprites/player.png', [128, this.sprite.pos[1]- 32], [16,32], 0);
+			this.sprite.pos[0] = 80;
+			var newy = this.sprite.pos[1] - 32;
+			this.powerSprites = [[80, newy+32], [80, newy+32], [320, newy], [80, newy], [128, newy]];
+			this.powerSizes = [[16,16],[16,16],[16,32],[16,32],[16,32]];
+			this.shift = [0,16,-16,0,-16];
 			this.power = 1;
 			this.hitbox = [0,0,16,32];
+		} else if (this.power == 1) {
+			var curx = this.sprite.pos[0];
+			this.powerSprites = [[curx, 96], [curx, level.invincibility[0]],
+				[curx, level.invincibility[1]], [curx, level.invincibility[2]],
+				[curx, 96]];
+			this.powerSizes[[16,32],[16,32],[16,32],[16,32],[16,32]];
+			this.shift = [0,0,0,0,0];
+			this.power = 2;
+		} else {
+			//no animation, but we play the sound and you get 5000 points.
 		}
 	};
 
@@ -268,10 +287,11 @@
 		if (this.power === 0) { //if you're already small, you dead!
 			this.die();
 		} else { //otherwise, you get turned into small mario
-			this.damaging = [0,1,2,1,2,1,2,1,2,1,2,3];
-			this.twoSprite = new Mario.Sprite('sprites/player.png', [240, 32], [16, 16], 0);
-			this.threeSprite = new Mario.Sprite('sprites/player.png', [240, 0], [16, 32], 0);
-			this.endSprite = new Mario.Sprite('sprites/player.png', [160, 32], [16,16], 0);
+			this.powering = [0,5,1,5,2,5,1,5,2,5,1,5,2,5,1,5,2,5,1,5,2,5,3];
+			this.shift = [0,16,-16,16];
+			this.sprite.pos = [160, 0];
+			this.powerSprites = [[160,0], [240, 32], [240, 0], [160, 32]];
+			this.powerSizes = [[16, 32], [16,16], [16,32], [16,16]];
 			this.invincibility = 120;
 			this.power = 0;
 			this.hitbox = [0,0,16,16];

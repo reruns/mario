@@ -4,6 +4,7 @@ var oneone = Mario.oneone = function() {
     loader: Mario.oneone,
     background: "#7974FF",
     scrolling: true,
+    invincibility: [144, 192, 240],
     floorSprite:  new Mario.Sprite('sprites/tiles.png', [0,0],[16,16],0),
     cloudSprite:  new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0),
     wallSprite: new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0),
@@ -192,5 +193,4 @@ var oneone = Mario.oneone = function() {
   level.putGoomba(170, 12);
   level.putGoomba(171, 12);
   level.putKoopa(35, 11);
-  player.powerUp();
 };

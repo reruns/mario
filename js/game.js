@@ -13,6 +13,7 @@ var requestAnimFrame = (function(){
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext('2d');
 var updateables = [];
+var fireballs = [];
 //we might have to get the size and calculate the scaling
 //but this method should let us make it however big.
 //Cool!
@@ -122,6 +123,10 @@ function updateEntities(dt, gameTime) {
   level.enemies.forEach (function(ent) {
     ent.update(dt, vX);
   });
+
+  fireballs.forEach(function(fireball) {
+    fireball.update(dt);
+  });
 }
 
 //scan for collisions
@@ -135,6 +140,9 @@ function checkCollisions() {
   });
   level.enemies.forEach (function(ent) {
     ent.checkCollisions();
+  });
+  fireballs.forEach(function(fireball){
+    fireball.checkCollisions();
   });
 }
 
@@ -176,6 +184,10 @@ function render() {
     }
 
   }
+
+  fireballs.forEach(function(fireball) {
+    renderEntity(fireball);
+  })
 
   //then the player
   if (player.invincibility % 2 === 0) {

@@ -28,6 +28,7 @@
     this.bushSprites = options.bushSprites;
     this.qblockSprite = options.qblockSprite;
 
+    this.invincibility = options.invincibility;
     this.statics = [];
     this.scenery = [];
     this.blocks = [];

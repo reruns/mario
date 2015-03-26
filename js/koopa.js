@@ -195,7 +195,10 @@
   };
 
   Koopa.prototype.bump = function() {
-    //koopas getting hit by shells isn't actually possible in 1-1
+    //Note 3/23 -- koopas getting hit by shells isn't actually possible in 1-1
     //so this can wait.
+
+    //Note 3/26 -- past me is an idiot. Fireball collisions also call this.
+    //Still doing it later, though
   };
 })();
