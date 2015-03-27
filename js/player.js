@@ -123,6 +123,25 @@
 	};
 
   Player.prototype.setAnimation = function() {
+		if (this.starTime) {
+			var index;
+			if (this.starTime > 60)
+				index = Math.floor(this.starTime / 2) % 3;
+			else index = Math.floor(this.starTime / 8) % 3;
+
+			this.sprite.pos[1] = level.invincibility[index];
+			if (this.power == 0) {
+				this.sprite.pos[1] += 32;
+			}
+			this.starTime -= 1;
+			if (this.starTime == 0) {
+				switch(this.power) {
+					case 0: this.sprite.pos[1] = 32; break;
+					case 1: this.sprite.pos[1] = 0; break;
+					case 2: this.sprite.pos[1] = 96; break;
+				}
+			}
+		}
 		//okay cool, now set the sprite
 		if (this.crouching) {
 			this.sprite.pos[0] = 176;
@@ -165,7 +184,6 @@
   };
 
 	Player.prototype.update = function(dt, vX) {
-		//TODO: consolidate logic for powering up and down, and make sure this holds for fire flowers.
 		if (this.powering.length !== 0) {
 			var next = this.powering.shift();
 			if (next == 5) return;
@@ -174,23 +192,6 @@
 			this.pos[1] += this.shift[next];
 			if (this.powering.length === 0) {
 				delete level.items[this.touchedItem];
-			}
-			return;
-		}
-
-		if (this.damaging.length !== 0) {
-			switch (this.damaging.shift()) {
-				case 0: this.sprite.pos = [160, 0];
-								break;
-				case 1: this.sprite = this.twoSprite;
-								// this.pos[1] += 16;
-								break;
-				case 2: this.sprite = this.threeSprite;
-								// this.pos[1] -= 16;
-								break;
-				case 3: this.sprite = this.endSprite;
-								// this.pos[1] += 16;
-								break;
 			}
 			return;
 		}
@@ -298,8 +299,14 @@
 		}
 	};
 
+	//TODO: death animation, etc.
 	Player.prototype.die = function () {
 		level.loader.call();
 		vX = 0;
 	};
+
+	Player.prototype.star = function(idx) {
+		delete level.items[idx];
+		this.starTime = 660;
+	}
 })();

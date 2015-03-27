@@ -97,6 +97,8 @@
         if (ent instanceof Mario.Player) { //if we hit the player
           if (ent.vel[1] > 0) { //then the goomba dies
             this.stomp();
+          } else if (ent.starTime) {
+            this.bump();
           } else { //or the player gets hit
             ent.damage();
           }

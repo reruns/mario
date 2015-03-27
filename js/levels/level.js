@@ -13,6 +13,7 @@
     this.ublockSprite = options.ublockSprite;
     this.superShroomSprite = options.superShroomSprite;
     this.fireFlowerSprite = options.fireFlowerSprite;
+    this.starSprite = options.starSprite;
     this.coinSprite = options.coinSprite;
     this.bcoinSprite = options.bcoinSprite;
     this.goombaSprite = options.goombaSprite;

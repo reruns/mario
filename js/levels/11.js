@@ -13,6 +13,7 @@ var oneone = Mario.oneone = function() {
     ublockSprite: new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0),
     superShroomSprite: new Mario.Sprite('sprites/items.png', [0,0], [16,16], 0),
     fireFlowerSprite: new Mario.Sprite('sprites/items.png', [0,32], [16,16], 20, [0,1,2,3]),
+    starSprite: new Mario.Sprite('sprites/items.png', [0,48], [16,16], 20, [0,1,2,3]),
     pipeLEndSprite: new Mario.Sprite('sprites/tiles.png', [0, 128], [16,16], 0),
     pipeREndSprite: new Mario.Sprite('sprites/tiles.png', [16, 128], [16,16], 0),
     pipeLMidSprite: new Mario.Sprite('sprites/tiles.png', [0, 144], [16,16], 0),

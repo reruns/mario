@@ -17,12 +17,12 @@ The level is constructed using a series of calls to functions that generate the 
 
 Known Bugs and Features to Come
 ===============================
--Scaling sprites makes them appear with awkward borders. Some fiddling helps this, but they are still not quite perfect.
+-Scaling sprites makes them appear with awkward borders. Some fiddling helps this (as you can see in the live version), but they are still not quite perfect.
 -Goombas don't animate in sync with each other.
 -Sometimes goombas can get stuck inside each other. I believe this is caused by walking exactly far enough to activate one of them (offscreen), and then coincidentally activating the second one while they are closely overlapped.
 
 All of the features to be implemented are the actual features of the game!
-Namely, destroying bricks, a score counter, working pipes, sounds and music, more types of enemies, fire flowers, stars, and 1up mushrooms.
+Namely, destroying bricks, a score counter, working pipes, sounds and music, more types of enemies, and 1up mushrooms.
 
 And more levels!
 
