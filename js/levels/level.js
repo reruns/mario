@@ -9,6 +9,7 @@
     this.cloudSprite = options.cloudSprite;
     this.wallSprite = options.wallSprite;
     this.brickSprite = options.brickSprite;
+    this.rubbleSprite = options.rubbleSprite;
     this.brickBounceSprite = options.brickBounceSprite;
     this.ublockSprite = options.ublockSprite;
     this.superShroomSprite = options.superShroomSprite;
@@ -115,7 +116,8 @@
       item: item,
       sprite: this.brickSprite,
       bounceSprite: this.brickBounceSprite,
-      usedSprite: this.ublockSprite
+      usedSprite: this.ublockSprite,
+      breakable: !item
     });
   };
 

@@ -22,9 +22,15 @@
 
   Mario.Util.inherits(Block, Mario.Floor);
 
+  Block.prototype.break = function() {
+    (new Mario.Rubble()).spawn(this.pos);
+    var x = this.pos[0] / 16, y = this.pos[1] / 16;
+    delete level.blocks[y][x];
+  }
+
   Block.prototype.bonk = function(power) {
     if (power > 0 && this.breakable) {
-      this.break;
+      this.break();
     } else if (this.standing){
       this.standing = false;
       if (this.item) {

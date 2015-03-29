@@ -1,4 +1,7 @@
 var oneone = Mario.oneone = function() {
+  //The things that need to be passed in are basically just dependent on what
+  //tileset we're in, so it makes more sense to just make one variable for that, so
+  //TODO: put as much of this in the Level object definition as possible.
   level = new Mario.Level({
     playerPos: [56,192],
     loader: Mario.oneone,
@@ -10,6 +13,9 @@ var oneone = Mario.oneone = function() {
     wallSprite: new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0),
     brickSprite: new Mario.Sprite('sprites/tiles.png', [16, 0], [16,16], 0),
     brickBounceSprite: new Mario.Sprite('sprites/tiles.png',[32,0],[16,16],0),
+    rubbleSprite: function () {
+      return new Mario.Sprite('sprites/items.png', [64,0], [8,8], 3, [0,1])
+    },
     ublockSprite: new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0),
     superShroomSprite: new Mario.Sprite('sprites/items.png', [0,0], [16,16], 0),
     fireFlowerSprite: new Mario.Sprite('sprites/items.png', [0,32], [16,16], 20, [0,1,2,3]),
@@ -194,4 +200,7 @@ var oneone = Mario.oneone = function() {
   level.putGoomba(170, 12);
   level.putGoomba(171, 12);
   level.putKoopa(35, 11);
+
+  //TODO: Remove test code
+  player.powerUp();
 };
