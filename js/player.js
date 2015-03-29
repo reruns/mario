@@ -219,11 +219,10 @@
 		this.acc[1] = 0.25
 
 		if (this.piping) {
-			console.log('um');
 			this.acc = [0,0];
-			this.piping -= 1;
-			if (this.piping === 0) {
-
+			var pos = [Math.round(this.pos[0]), Math.round(this.pos[1])]
+			if (pos[0] === this.targetPos[0] && pos[1] === this.targetPos[1]) {
+				this.piping = false;
 				this.pipeLoc.call();
 			}
 		}
@@ -322,13 +321,26 @@
 	}
 
 	Player.prototype.pipe = function(direction, destination) {
-		this.piping = 60;
+		var shift = 64;
+		this.piping = true;
 		this.pipeLoc = destination;
 		switch(direction) {
-			case "LEFT": this.vel[0] = -1; break;
-			case "RIGHT": this.vel[0] = 1; break;
-			case "DOWN": this.vel[1] = 1; break;
-			case "UP": this.vel[1] = -1; break;
+			case "LEFT":
+				this.vel = [-1,0];
+				this.targetPos = [Math.round(this.pos[0]-shift), Math.round(this.pos[1])]
+				break;
+			case "RIGHT":
+				this.vel = [1,0];
+				this.targetPos = [Math.round(this.pos[0]+shift), Math.round(this.pos[1])]
+				break;
+			case "DOWN":
+				this.vel = [0,1];
+				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]+shift)]
+				break;
+			case "UP":
+				this.vel = [0,-1];
+				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]-shift)]
+				break;
 		}
 
 	}

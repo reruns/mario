@@ -14,6 +14,11 @@ var oneonetunnel = Mario.oneonetunnel = function() {
     ublockSprite: new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0),
     pipeLMidSprite: new Mario.Sprite('sprites/tiles.png', [0, 144], [16,16], 0),
     pipeRMidSprite: new Mario.Sprite('sprites/tiles.png', [16, 144], [16,16], 0),
+    
+    pipeUpMid: new Mario.Sprite('sprites/tiles.png', [0, 144], [32,16], 0),
+    pipeSideMid: new Mario.Sprite('sprites/tiles.png', [48, 128], [16,32], 0),
+    pipeLeft: new Mario.Sprite('sprites/tiles.png', [32, 128], [16,32], 0),
+    pipeTop: new Mario.Sprite('sprites/tiles.png', [0, 128], [32,16], 0),
 
     LPipeSprites:[
       new Mario.Sprite('sprites/tiles.png', [32,128],[16,16],0),
@@ -26,7 +31,9 @@ var oneonetunnel = Mario.oneonetunnel = function() {
 
   });
 
-  player.pos = level.playerPos;
+  player.pos[0] = level.playerPos[0];
+  player.pos[1] = level.playerPos[1];
+  vX = 0;
   level.putFloor(0,16);
   level.putWall(0,13,11);
   walls = [4,5,6,7,8,9,10];
@@ -42,5 +49,6 @@ var oneonetunnel = Mario.oneonetunnel = function() {
     level.putCoin(pos[0],pos[1]);
   });
 
-  level.putLeftPipe(13,11);
+  //level.putLeftPipe(13,11);
+  level.putRealPipe(13,11,2,"RIGHT",Mario.oneone)
 };
