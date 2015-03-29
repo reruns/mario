@@ -70,7 +70,11 @@
 
     level.items.forEach (function(ent) {
       that.isCollideWith(ent);
-    })
+    });
+
+    fireballs.forEach(function(ent){
+      that.isCollideWith(ent)
+    });
 
     if (!player.piping) this.isCollideWith(player);
   }

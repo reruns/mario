@@ -14,6 +14,8 @@ var canvas = document.createElement("canvas");
 var ctx = canvas.getContext('2d');
 var updateables = [];
 var fireballs = [];
+var player = new Mario.Player([0,0]);
+
 //we might have to get the size and calculate the scaling
 //but this method should let us make it however big.
 //Cool!
@@ -39,8 +41,8 @@ resources.load([
   'sprites/items.png',
   'sprites/enemyr.png'
 ]);
-resources.onReady(init);
 
+resources.onReady(init);
 var level;
 
 //initialize
@@ -51,7 +53,6 @@ function init() {
   main();
 }
 
-var player = new Mario.Player();
 var gameTime = 0;
 
 //set up the game loop

@@ -59,8 +59,8 @@ var oneone = Mario.oneone = function() {
    }
  });
   ground = [[0,69],[71,86],[89,153],[155,212]];
-
-  player = new Mario.Player(level.playerPos);
+  player.pos[0] = level.playerPos[0];
+  player.pos[1] = level.playerPos[1];
   vX = 0;
 
   //build THE GROUND
@@ -203,7 +203,7 @@ var oneone = Mario.oneone = function() {
   level.putGoomba(125, 12);
   level.putGoomba(126, 12);
   level.putGoomba(170, 12);
-  level.putGoomba(171, 12);
+  level.putGoomba(172, 12);
   level.putKoopa(35, 11);
-  Mario.oneonetunnel();
+  player.powerUp();
 };

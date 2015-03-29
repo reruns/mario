@@ -311,6 +311,7 @@
 
 	//TODO: death animation, etc.
 	Player.prototype.die = function () {
+		player = new Mario.Player([0,0]);
 		level.loader.call();
 		vX = 0;
 	};
@@ -321,25 +322,24 @@
 	}
 
 	Player.prototype.pipe = function(direction, destination) {
-		var shift = 64;
 		this.piping = true;
 		this.pipeLoc = destination;
 		switch(direction) {
 			case "LEFT":
 				this.vel = [-1,0];
-				this.targetPos = [Math.round(this.pos[0]-shift), Math.round(this.pos[1])]
+				this.targetPos = [Math.round(this.pos[0]-16), Math.round(this.pos[1])]
 				break;
 			case "RIGHT":
 				this.vel = [1,0];
-				this.targetPos = [Math.round(this.pos[0]+shift), Math.round(this.pos[1])]
+				this.targetPos = [Math.round(this.pos[0]+16), Math.round(this.pos[1])]
 				break;
 			case "DOWN":
 				this.vel = [0,1];
-				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]+shift)]
+				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]+this.hitbox[3])]
 				break;
 			case "UP":
 				this.vel = [0,-1];
-				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]-shift)]
+				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]-this.hitbox[3])]
 				break;
 		}
 
