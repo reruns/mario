@@ -218,6 +218,16 @@
 
 		this.acc[1] = 0.25
 
+		if (this.piping) {
+			console.log('um');
+			this.acc = [0,0];
+			this.piping -= 1;
+			if (this.piping === 0) {
+
+				this.pipeLoc.call();
+			}
+		}
+
 		//approximate acceleration
 		this.vel[0] += this.acc[0];
 		this.vel[1] += this.acc[1];
@@ -233,6 +243,7 @@
 	};
 
 	Player.prototype.checkCollisions = function() {
+		if (this.piping) return;
 		//x-axis first!
 		var h = this.power > 0 ? 2 : 1;
 		var w = 1;
@@ -308,5 +319,17 @@
 	Player.prototype.star = function(idx) {
 		delete level.items[idx];
 		this.starTime = 660;
+	}
+
+	Player.prototype.pipe = function(direction, destination) {
+		this.piping = 60;
+		this.pipeLoc = destination;
+		switch(direction) {
+			case "LEFT": this.vel[0] = -1; break;
+			case "RIGHT": this.vel[0] = 1; break;
+			case "DOWN": this.vel[1] = 1; break;
+			case "UP": this.vel[1] = -1; break;
+		}
+
 	}
 })();

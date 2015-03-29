@@ -19,10 +19,19 @@
     this.bcoinSprite = options.bcoinSprite;
     this.goombaSprite = options.goombaSprite;
     this.koopaSprite = options.koopaSprite;
+
+    //prop pipe sprites, to be phased out
     this.pipeLEndSprite = options.pipeLEndSprite;
     this.pipeREndSprite = options.pipeREndSprite;
     this.pipeLMidSprite = options.pipeLMidSprite;
     this.pipeRMidSprite = options.pipeRMidSprite;
+
+    //real pipe sprites, use these.
+    this.pipeUpMid = options.pipeUpMid;
+    this.pipeSideMid = options.pipeSideMid;
+    this.pipeLeft = options.pipeLeft;
+    this.pipeTop = options.pipeTop;
+
     this.LPipeSprites = options.LPipeSprites;
     this.cloudSprites = options.cloudSprites;
     this.hillSprites = options.hillSprites;
@@ -36,6 +45,7 @@
     this.blocks = [];
     this.enemies = [];
     this.items = [];
+    this.pipes = [];
 
     for (var i = 0; i < 15; i++) {
       this.statics[i] = [];
@@ -183,4 +193,15 @@
     this.scenery[y][x+3] = new Mario.Prop([px+48, py], this.cloudSprites[1]);
     this.scenery[y][x+4] = new Mario.Prop([px+64, py], this.cloudSprites[2]);
   };
+
+  Level.prototype.putRealPipe = function(x, y, length, direction, destination) {
+    px = x*16;
+    py = y*16;
+    this.pipes.push(new Mario.Pipe({
+      pos: [px, py],
+      length: length,
+      direction: direction,
+      destination: destination
+    }));
+  }
 })();

@@ -76,6 +76,8 @@ function update(dt) {
 }
 
 function handleInput(dt) {
+  if (player.piping) return; //don't accept input
+
   if (input.isDown('RUN')){
     player.run();
   } else {
@@ -127,6 +129,9 @@ function updateEntities(dt, gameTime) {
   fireballs.forEach(function(fireball) {
     fireball.update(dt);
   });
+  level.pipes.forEach (function(pipe) {
+    pipe.update(dt);
+  });
 }
 
 //scan for collisions
@@ -143,6 +148,9 @@ function checkCollisions() {
   });
   fireballs.forEach(function(fireball){
     fireball.checkCollisions();
+  });
+  level.pipes.forEach (function(pipe) {
+    pipe.checkCollisions();
   });
 }
 
@@ -171,6 +179,17 @@ function render() {
     renderEntity(enemy);
   });
 
+
+
+  fireballs.forEach(function(fireball) {
+    renderEntity(fireball);
+  })
+
+  //then the player
+  if (player.invincibility % 2 === 0) {
+    renderEntity(player);
+  }
+
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
@@ -182,19 +201,12 @@ function render() {
         updateables.push(level.blocks[i][j]);
       }
     }
-
   }
 
-  fireballs.forEach(function(fireball) {
-    renderEntity(fireball);
-  })
-
-  //then the player
-  if (player.invincibility % 2 === 0) {
-    renderEntity(player);
-  }
-
-  //and if we get to them, those little rope thingies on bridges
+  //Mario goes INTO pipes, so naturally they go after.
+  level.pipes.forEach (function(pipe) {
+    renderEntity(pipe);
+  });
 }
 
 function renderEntity(entity) {

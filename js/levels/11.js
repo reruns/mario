@@ -24,6 +24,11 @@ var oneone = Mario.oneone = function() {
     pipeREndSprite: new Mario.Sprite('sprites/tiles.png', [16, 128], [16,16], 0),
     pipeLMidSprite: new Mario.Sprite('sprites/tiles.png', [0, 144], [16,16], 0),
     pipeRMidSprite: new Mario.Sprite('sprites/tiles.png', [16, 144], [16,16], 0),
+
+    pipeUpMid: new Mario.Sprite('sprites/tiles.png', [0, 144], [32,16], 0),
+    pipeSideMid: new Mario.Sprite('sprites/tiles.png', [48, 128], [16,32], 0),
+    pipeLeft: new Mario.Sprite('sprites/tiles.png', [32, 128], [16,32], 0),
+    pipeTop: new Mario.Sprite('sprites/tiles.png', [0, 128], [32,16], 0),
     qblockSprite: new Mario.Sprite('sprites/tiles.png', [384, 0], [16,16], 8, [0,0,0,0,1,2,1]),
     bcoinSprite: function() {
       return new Mario.Sprite('sprites/items.png', [0,112],[16,16], 20,[0,1,2,3]);
@@ -203,4 +208,5 @@ var oneone = Mario.oneone = function() {
 
   //TODO: Remove test code
   player.powerUp();
+  level.putRealPipe(5, 10, 3, "DOWN", Mario.oneonetunnel);
 };
