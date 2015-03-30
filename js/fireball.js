@@ -16,7 +16,6 @@
   Mario.Util.inherits(Fireball, Mario.Entity);
 
   Fireball.prototype.spawn = function(left) {
-    console.log(this);
     if (fireballs[0]) {
       this.idx = 1;
       fireballs[1] = this;
@@ -38,10 +37,10 @@
       this.sprite.pos = [96, 160];
       this.sprite.size = [16,16];
       this.sprite.frames = [0,1,2];
-      this.sprite.speed = 20;
+      this.sprite.speed = 8;
       this.hit += 1;
       return;
-    } else if (this.hit == 10) {
+    } else if (this.hit == 5) {
       delete fireballs[this.idx];
       player.fireballs -= 1;
       return;
@@ -62,11 +61,14 @@
     this.vel[1] += this.acc[1];
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
+    if (this.pos[0] < vX) {
+      this.hit = 1;
+    }
     this.sprite.update(dt);
   }
 
   Fireball.prototype.collideWall = function() {
-    this.hit = 1;
+    if (!this.hit) this.hit = 1;
   }
 
   Fireball.prototype.checkCollisions = function() {
