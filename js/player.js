@@ -123,6 +123,8 @@
 	};
 
   Player.prototype.setAnimation = function() {
+		if (this.dying) return;
+
 		if (this.starTime) {
 			var index;
 			if (this.starTime > 60)
@@ -148,6 +150,7 @@
 			this.sprite.speed = 0;
 			return;
 		}
+
     if (this.jumping) {
 			this.sprite.pos[0] = 160;
 			this.sprite.speed = 0;
@@ -216,7 +219,28 @@
 			this.acc[0] = 0;
 		}
 
-		this.acc[1] = 0.25
+		if (this.dying){
+			if (this.waiting) {
+				this.waiting -= dt;
+				if (this.waiting <= 0) {
+					this.waiting = 0;
+				} else return;
+			}
+			if (this.pos[1] < this.targetPos[1]) {
+				this.vel[1] = 1;
+			}
+			this.dying -= 1 * dt;
+			if (this.dying <= 0) {
+				player = new Mario.Player(level.playerPos);
+				level.loader.call();
+			}
+		}
+		else {
+			this.acc[1] = 0.25
+			if (this.pos[1] > 240) {
+				this.die();
+			}
+		}
 
 		if (this.piping) {
 			this.acc = [0,0];
@@ -233,16 +257,12 @@
 		this.pos[0] += this.vel[0];
 		this.pos[1] += this.vel[1];
 
-		if (this.pos[1] > 240) {
-			this.die();
-		}
-
     this.setAnimation();
 		this.sprite.update(dt);
 	};
 
 	Player.prototype.checkCollisions = function() {
-		if (this.piping) return;
+		if (this.piping || this.dying) return;
 		//x-axis first!
 		var h = this.power > 0 ? 2 : 1;
 		var w = 1;
@@ -311,9 +331,19 @@
 
 	//TODO: death animation, etc.
 	Player.prototype.die = function () {
-		player = new Mario.Player([0,0]);
-		level.loader.call();
-		vX = 0;
+		this.sprite.pos = [176, 32];
+		this.sprite.speed = 0;
+		this.power = 0;
+		this.waiting = 0.5;
+		this.dying = 2;
+
+		if (this.pos[1] < 240) { //falling into a pit doesn't do the animation.
+			this.targetPos = [this.pos[0], this.pos[1]-128];
+			this.vel = [0,-5];
+		} else {
+			this.vel = [0,0];
+			this.targetPos = [this.pos[0], this.pos[1] - 16];
+		}
 	};
 
 	Player.prototype.star = function(idx) {

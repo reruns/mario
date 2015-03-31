@@ -77,7 +77,7 @@ function update(dt) {
 }
 
 function handleInput(dt) {
-  if (player.piping) return; //don't accept input
+  if (player.piping || player.dying) return; //don't accept input
 
   if (input.isDown('RUN')){
     player.run();
@@ -118,7 +118,7 @@ function updateEntities(dt, gameTime) {
     vX = player.pos[0] - 80;
   }
 
-  if (player.powering.length !== 0) { return; }
+  if (player.powering.length !== 0 || player.dying) { return; }
   level.items.forEach (function(ent) {
     ent.update(dt);
   });
@@ -137,7 +137,7 @@ function updateEntities(dt, gameTime) {
 
 //scan for collisions
 function checkCollisions() {
-  if (player.powering.length !== 0) { return; }
+  if (player.powering.length !== 0 || player.dying) { return; }
   player.checkCollisions();
 
   //Apparently for each will just skip indices where things were deleted.
@@ -186,11 +186,6 @@ function render() {
     renderEntity(fireball);
   })
 
-  //then the player
-  if (player.invincibility % 2 === 0) {
-    renderEntity(player);
-  }
-
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
@@ -202,6 +197,11 @@ function render() {
         updateables.push(level.blocks[i][j]);
       }
     }
+  }
+
+  //then the player
+  if (player.invincibility % 2 === 0) {
+    renderEntity(player);
   }
 
   //Mario goes INTO pipes, so naturally they go after.
