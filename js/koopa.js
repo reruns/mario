@@ -2,8 +2,6 @@
   if (typeof Mario === 'undefined')
   window.Mario = {};
 
-  //TODO: Getting back up after being a shell for a while.
-
   var Koopa = Mario.Koopa = function(pos, sprite, para) {
     this.dying = false;
     this.shell = false;

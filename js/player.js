@@ -332,7 +332,6 @@
 		}
 	};
 
-	//TODO: death animation, etc.
 	Player.prototype.die = function () {
 		this.noWalk();
 		this.noRun();

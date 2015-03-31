@@ -42,3 +42,4 @@ Should be a free performance gain.
 Should also make item deletion less weird.
 
 TODO: Make gravity exist higher up instead of having a magic number.
+Note from the future: Nope. Different objects have different gravity.

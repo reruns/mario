@@ -110,7 +110,6 @@
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.cloudSprite);
   };
 
-  //TODO: Figure out a way to sync up the flashing animation on these.
   Level.prototype.putQBlock = function(x, y, item) {
     this.blocks[y][x] = new Mario.Block( {
       pos: [x*16, y*16],

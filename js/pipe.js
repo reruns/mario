@@ -128,8 +128,7 @@
   //I honestly have no idea if javascript does this, but I feel like it makes sense
   //stylistically to prefer branching outside of loops when possible as convention
 
-  //TODO: rewrite the render function so that we can just pass in a param to flip sprites
-  //Until then, UP and LEFT pipes are going to look messed up.
+  //TODO: edit the spritesheet so UP and LEFT pipes aren't backwards.
   Pipe.prototype.render = function(ctx, vX, vY) {
     switch (this.direction) {
       case "DOWN":
