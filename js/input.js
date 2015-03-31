@@ -42,6 +42,13 @@
     window.input = {
         isDown: function(key) {
             return pressedKeys[key.toUpperCase()];
+        },
+        reset: function() {
+          pressedKeys['RUN'] = false;
+          pressedKeys['LEFT'] = false;
+          pressedKeys['RIGHT'] = false;
+          pressedKeys['DOWN'] = false;
+          pressedKeys['JUMP'] = false;
         }
     };
 })();

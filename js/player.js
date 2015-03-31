@@ -7,7 +7,7 @@
 		//Maybe these can be consolidated some way? We'll see once they're all in.
 		this.power = 0;
 		this.coins = 0;
-		this.powering = this.damaging = [];
+		this.powering = [];
 		this.bounce = false;
 		this.jumping = 0;
 		this.canJump = true;
@@ -233,6 +233,7 @@
 			if (this.dying <= 0) {
 				player = new Mario.Player(level.playerPos);
 				level.loader.call();
+				input.reset();
 			}
 		}
 		else {
@@ -333,6 +334,11 @@
 
 	//TODO: death animation, etc.
 	Player.prototype.die = function () {
+		this.noWalk();
+		this.noRun();
+		this.noJump();
+
+		this.acc[0] = 0;
 		this.sprite.pos = [176, 32];
 		this.sprite.speed = 0;
 		this.power = 0;
