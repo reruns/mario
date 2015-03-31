@@ -195,6 +195,14 @@
   };
 
   Koopa.prototype.bump = function() {
+    this.flipping = true;
+    this.sprite.img = 'sprites/enemyr.png';
+    this.sprite.pos = [160, 0];
+    this.sprite.size = [16,16];
+    this.sprite.speed = 0;
+    this.pos[1] -= 1;
+    this.vel[0] = 0;
+    this.vel[1] = -2.5;
     //Note 3/23 -- koopas getting hit by shells isn't actually possible in 1-1
     //so this can wait.
 

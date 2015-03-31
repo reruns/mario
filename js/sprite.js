@@ -42,8 +42,6 @@
     var y = this.pos[1];
 
     x += frame*this.size[0];
-    //TODO: Add a scaling factor here to flip the image instead of using a second
-    //sprite sheet.
-    ctx.drawImage(resources.get(this.img), x + (1/3),y + (1/3), this.size[0] - (2/3), this.size[1] - (2/3), Math.round(posx - vX),Math.round(posy - vY), this.size[0],this.size[1]);
+    ctx.drawImage(resources.get(this.img), x + (1/3),y + (1/3), this.size[0] - (2/3), this.size[1] - (2/3), Math.round(posx - vX), Math.round(posy - vY), this.size[0],this.size[1]);
   }
 })();

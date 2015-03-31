@@ -310,6 +310,8 @@
 			this.shift = [0,0,0,0,0];
 			this.power = 2;
 		} else {
+			this.powering = [];
+			delete level.items[idx];
 			//no animation, but we play the sound and you get 5000 points.
 		}
 	};

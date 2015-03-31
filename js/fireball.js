@@ -23,7 +23,7 @@
       this.idx = 0;
       fireballs[0] = this;
     }
-    this.vel[0] = (left ? -3 : 3);
+    this.vel[0] = (left ? -5 : 5);
     this.standing = false;
     this.vel[1] = 0;
   }
@@ -53,15 +53,15 @@
     //but I don't have to use some horrible kludge for this.
     if (this.standing) {
       this.standing = false;
-      this.vel[1] = -3;
+      this.vel[1] = -4;
     }
 
-    this.acc[1] = 0.3;
+    this.acc[1] = 0.5;
 
     this.vel[1] += this.acc[1];
     this.pos[0] += this.vel[0];
     this.pos[1] += this.vel[1];
-    if (this.pos[0] < vX) {
+    if (this.pos[0] < vX || this.pos[0] > vX + 256) {
       this.hit = 1;
     }
     this.sprite.update(dt);
