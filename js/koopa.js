@@ -91,10 +91,6 @@
   };
 
   Koopa.prototype.checkCollisions = function() {
-    if (this.flipping) {
-      return;
-    }
-
     var h = this.shell ? 1 : 2;
     if (this.pos[1] % 16 !== 0) {
       h += 1;
@@ -106,6 +102,10 @@
 
     if (baseY + h > 15) {
       delete level.enemies[this.idx];
+      return;
+    }
+
+    if (this.flipping) {
       return;
     }
 
@@ -195,18 +195,13 @@
   };
 
   Koopa.prototype.bump = function() {
+    if (this.flipping) return;
     this.flipping = true;
-    this.sprite.img = 'sprites/enemyr.png';
     this.sprite.pos = [160, 0];
     this.sprite.size = [16,16];
+    this.hitbox = [2, 0, 12, 16];
     this.sprite.speed = 0;
-    this.pos[1] -= 1;
     this.vel[0] = 0;
     this.vel[1] = -2.5;
-    //Note 3/23 -- koopas getting hit by shells isn't actually possible in 1-1
-    //so this can wait.
-
-    //Note 3/26 -- past me is an idiot. Fireball collisions also call this.
-    //Still doing it later, though
   };
 })();
