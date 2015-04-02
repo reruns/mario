@@ -274,8 +274,11 @@
 				this.sprite.size = [0,0];
 				this.vel = [0,0];
 				window.setTimeout(function() {
-					player = new Mario.Player([0,0]);
-					level.loader()
+					player.sprite.size = player.power===0 ? [16,16] : [16,32];
+					player.exiting = false;
+					player.noInput = false;
+					level.loader();
+					if (player.power !== 0) player.pos[1] -= 16;
 				}, 2000);
 			}
 		}
