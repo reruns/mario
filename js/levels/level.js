@@ -32,6 +32,8 @@
     this.pipeLeft = options.pipeLeft;
     this.pipeTop = options.pipeTop;
 
+    this.flagpoleSprites = options.flagPoleSprites;
+
     this.LPipeSprites = options.LPipeSprites;
     this.cloudSprites = options.cloudSprites;
     this.hillSprites = options.hillSprites;
@@ -202,5 +204,14 @@
       direction: direction,
       destination: destination
     }));
+  }
+
+  Level.prototype.putFlagpole = function(x) {
+    this.statics[12][x] = new Mario.Floor([16*x, 192], this.wallSprite);
+    for (i=3; i < 12; i++) {
+      this.scenery[i][x] = new Mario.Prop([16*x, 16*i], this.flagpoleSprites[1])
+    }
+    this.scenery[2][x] = new Mario.Prop([16*x, 32], this.flagpoleSprites[0]);
+    this.items.push(new Mario.Flag(16*x));
   }
 })();

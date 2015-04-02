@@ -56,7 +56,12 @@ var oneone = Mario.oneone = function() {
    },
    koopaSprite: function() {
      return new Mario.Sprite('sprites/enemy.png', [96,0], [16,32], 2, [0,1]);
-   }
+   },
+   flagPoleSprites: [
+     new Mario.Sprite('sprites/tiles.png', [256, 128], [16,16], 0),
+     new Mario.Sprite('sprites/tiles.png', [256, 144], [16,16], 0),
+     new Mario.Sprite('sprites/items.png', [128, 32], [16,16], 0)
+   ]
  });
   ground = [[0,69],[71,86],[89,153],[155,212]];
   player.pos[0] = level.playerPos[0];
@@ -186,6 +191,7 @@ var oneone = Mario.oneone = function() {
   level.putWall(187, 13, 7);
   level.putWall(188, 13, 8);
   level.putWall(189, 13, 8);
+  level.putFlagpole(7);
 
   //and enemies
   level.putGoomba(22, 12);
