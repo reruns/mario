@@ -15,10 +15,12 @@
 		this.crouching = false;
 		this.fireballs = 0;
 		this.runheld = false;
+		this.noInput = false;
+		this.targetPos = [];
 
 		Mario.Entity.call(this, {
 			pos: pos,
-			sprite: new Mario.Sprite('sprites/player.png',[80,32],[16,16],0),
+			sprite: new Mario.Sprite('sprites/player.png', [80,32],[16,16],0),
 			hitbox: [0,0,16,16]
 		});
 	};
@@ -178,6 +180,13 @@
 			}
 		}
 
+		if (this.flagging) {
+			this.sprite.pos[0] = 192;
+			this.sprite.frames = [0,1];
+			this.sprite.speed = 10;
+			if (this.vel[1] === 0) this.sprite.frames = [0];
+		}
+
 		//which way are we facing?
 		if (this.left) {
 			this.sprite.img = 'sprites/playerl.png';
@@ -203,6 +212,13 @@
 			this.invincibility -= Math.round(dt * 60);
 		}
 
+		if (this.waiting) {
+			this.waiting -= dt;
+			if (this.waiting <= 0) {
+				this.waiting = 0;
+			} else return;
+		}
+
 		if (this.bounce) {
 			this.bounce = false;
 			this.standing = false;
@@ -220,12 +236,6 @@
 		}
 
 		if (this.dying){
-			if (this.waiting) {
-				this.waiting -= dt;
-				if (this.waiting <= 0) {
-					this.waiting = 0;
-				} else return;
-			}
 			if (this.pos[1] < this.targetPos[1]) {
 				this.vel[1] = 1;
 			}
@@ -249,6 +259,24 @@
 			if (pos[0] === this.targetPos[0] && pos[1] === this.targetPos[1]) {
 				this.piping = false;
 				this.pipeLoc.call();
+			}
+		}
+
+		if (this.flagging) {
+			this.acc = [0,0];
+		}
+
+		if (this.exiting) {
+			this.left = false;
+			this.flagging = false;
+			this.vel[0] = 1.5;
+			if (this.pos[0] >= this.targetPos[0]) {
+				this.sprite.size = [0,0];
+				this.vel = [0,0];
+				window.setTimeout(function() {
+					player = new Mario.Player([0,0]);
+					level.loader()
+				}, 2000);
 			}
 		}
 
@@ -379,6 +407,21 @@
 				this.targetPos = [Math.round(this.pos[0]), Math.round(this.pos[1]-this.hitbox[3])]
 				break;
 		}
+	}
 
+	Player.prototype.flag = function() {
+		this.noInput = true;
+		this.flagging = true;
+		this.vel = [0, 2];
+		this.acc = [0, 0];
+	}
+
+	Player.prototype.exit = function() {
+		this.pos[0] += 16;
+		this.targetPos[0] = level.exit * 16;
+		this.left = true;
+		this.setAnimation();
+		this.waiting = 1;
+		this.exiting = true;
 	}
 })();

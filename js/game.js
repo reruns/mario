@@ -77,7 +77,7 @@ function update(dt) {
 }
 
 function handleInput(dt) {
-  if (player.piping || player.dying) return; //don't accept input
+  if (player.piping || player.dying || player.noInput) return; //don't accept input
 
   if (input.isDown('RUN')){
     player.run();

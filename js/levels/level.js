@@ -4,6 +4,7 @@
     this.scrolling = options.scrolling;
     this.loader = options.loader;
     this.background = options.background;
+    this.exit = options.exit;
 
     this.floorSprite = options.floorSprite;
     this.cloudSprite = options.cloudSprite;

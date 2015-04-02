@@ -8,6 +8,7 @@ var oneone = Mario.oneone = function() {
     background: "#7974FF",
     scrolling: true,
     invincibility: [144, 192, 240],
+    exit: 204,
     floorSprite:  new Mario.Sprite('sprites/tiles.png', [0,0],[16,16],0),
     cloudSprite:  new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0),
     wallSprite: new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0),
@@ -191,7 +192,7 @@ var oneone = Mario.oneone = function() {
   level.putWall(187, 13, 7);
   level.putWall(188, 13, 8);
   level.putWall(189, 13, 8);
-  level.putFlagpole(7);
+  level.putFlagpole(198);
 
   //and enemies
   level.putGoomba(22, 12);
