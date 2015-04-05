@@ -212,4 +212,6 @@ var oneone = Mario.oneone = function() {
   level.putGoomba(170, 12);
   level.putGoomba(172, 12);
   level.putKoopa(35, 11);
+
+  music.overworld.play();
 };

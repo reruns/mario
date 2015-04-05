@@ -55,4 +55,6 @@ var oneonetunnel = Mario.oneonetunnel = function() {
     player.pos = [2616, 177]
     player.pipe("UP", function() {;});
   });
+
+  music.underground.play();
 };

@@ -111,6 +111,9 @@
 			this.canJump = false;
 			this.standing = false;
 			this.vel[1] = -6;
+			if (this.power === 0) {
+				sounds.smallJump.play();
+			}
 		}
 	};
 
