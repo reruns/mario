@@ -25,8 +25,11 @@
   };
 
   Koopa.prototype.update = function(dt, vX) {
-    this.vel[0] = this.turn ? -this.vel[0] : this.vel[0];
-    this.turn = false;
+    if (this.turn) {
+      this.vel[0] = -this.vel[0];
+      sounds.bump.play();
+      this.turn = false;
+    }
     if (this.vel[0] != 0) {
       this.left = (this.vel[0] < 0);
     }
@@ -147,6 +150,7 @@
             player.bounce = true;
           }
           if (this.shell) {
+            sounds.kick.play();
             if (this.vel[0] === 0) {
               if (ent.left) { //I'm pretty sure this isn't the real logic.
                 this.vel[0] = -4;
@@ -179,6 +183,7 @@
       this.para = false;
       this.sprite.pos[0] -= 32;
     } else {
+      sounds.stomp.play();
       this.shell = 360;
       this.sprite.pos[0] += 64;
       this.sprite.pos[1] += 16;
@@ -193,6 +198,7 @@
   };
 
   Koopa.prototype.bump = function() {
+    sounds.kick.play();
     if (this.flipping) return;
     this.flipping = true;
     this.sprite.pos = [160, 0];

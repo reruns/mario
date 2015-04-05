@@ -39,6 +39,7 @@
   }
 
   Coin.prototype.collect = function() {
+    sounds.coin.play();
     player.coins += 1;
     delete level.items[this.idx]
   }

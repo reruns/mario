@@ -27,6 +27,7 @@
       ff.spawn();
       return;
     }
+    sounds.itemAppear.play();
     this.idx = level.items.length;
     level.items.push(this);
     this.spawning = 12;
