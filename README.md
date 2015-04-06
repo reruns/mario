@@ -22,9 +22,10 @@ Known Bugs and Features to Come
 -Scaling sprites makes them appear with awkward borders. Some fiddling helps this (as you can see in the live version), but they are still not quite perfect.
 -Goombas don't animate in sync with each other.
 -Sometimes goombas can get stuck inside each other. I'm not entirely sure what causes this.
+-Some sounds might not work due to format compatibility, especially in IE. Yes, IE doesn't support Microsoft's own file format. Really.
 
 All of the features to be implemented are the actual features of the game!
-Namely, a score counter, sounds and music, more types of enemies, and 1up mushrooms.
+Namely, a score counter, more types of enemies, and 1up mushrooms.
 
 And more levels!
 
