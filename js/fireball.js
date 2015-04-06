@@ -16,7 +16,8 @@
   Mario.Util.inherits(Fireball, Mario.Entity);
 
   Fireball.prototype.spawn = function(left) {
-    sounds.fireball.spawn();
+    sounds.fireball.currentTime = 0;
+    sounds.fireball.play();
     if (fireballs[0]) {
       this.idx = 1;
       fireballs[1] = this;
