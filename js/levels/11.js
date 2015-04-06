@@ -213,5 +213,7 @@ var oneone = Mario.oneone = function() {
   level.putGoomba(172, 12);
   level.putKoopa(35, 11);
 
+  music.underground.pause();
+  // music.overworld.currentTime = 0;
   music.overworld.play();
 };

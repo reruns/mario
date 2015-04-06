@@ -286,7 +286,8 @@
 					player.noInput = false;
 					level.loader();
 					if (player.power !== 0) player.pos[1] -= 16;
-				}, 2000);
+					music.overworld.currentTime = 0;
+				}, 5000);
 			}
 		}
 
@@ -373,6 +374,11 @@
 	};
 
 	Player.prototype.die = function () {
+		//TODO: rewrite the way sounds work to emulate the channels of an NES.
+		music.overworld.pause();
+		music.underground.pause();
+		music.overworld.currentTime = 0;
+		music.death.play();
 		this.noWalk();
 		this.noRun();
 		this.noJump();

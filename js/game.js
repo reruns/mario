@@ -53,7 +53,8 @@ function init() {
   music = {
     overworld: new Audio('sounds/aboveground_bgm.ogg'),
     underground: new Audio('sounds/underground_bgm.ogg'),
-    clear: new Audio('sounds/stage_clear.wav')
+    clear: new Audio('sounds/stage_clear.wav'),
+    death: new Audio('sounds/mariodie.wav')
   };
   sounds = {
     smallJump: new Audio('sounds/jump-small.wav'),
@@ -65,7 +66,7 @@ function init() {
     flagpole: new Audio('sounds/flagpole.wav'),
     kick: new Audio('sounds/kick.wav'),
     pipe: new Audio('sounds/pipe.wav'),
-    itemAppear: new Audio('powerup_appears.wav'),
+    itemAppear: new Audio('sounds/itemAppear.wav'),
     powerup: new Audio('sounds/powerup.wav'),
     stomp: new Audio('sounds/stomp.wav')
   };

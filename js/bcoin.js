@@ -16,6 +16,7 @@
   //in order to keep with convention, or to just use a single value, since
   //it's literally impossible for these to move left or right.
   Bcoin.prototype.spawn = function() {
+    sounds.coin.currentTime = 0.05;
     sounds.coin.play();
     this.idx = level.items.length;
     level.items.push(this);

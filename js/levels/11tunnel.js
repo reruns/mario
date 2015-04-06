@@ -56,5 +56,7 @@ var oneonetunnel = Mario.oneonetunnel = function() {
     player.pipe("UP", function() {;});
   });
 
+  music.overworld.pause();
+  music.underground.currentTime = 0;
   music.underground.play();
 };
