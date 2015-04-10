@@ -143,7 +143,7 @@ var oneone = Mario.oneone = function() {
   level.putBrick(93, 5, null);
   level.putQBlock(94, 5, new Mario.Bcoin([1504, 80]));
   level.putBrick(94, 9, null);
-  level.putBrick(100, 9, null);
+  level.putBrick(100, 9, new Mario.Star([1600, 144]);
   level.putBrick(101, 9, null);
   level.putQBlock(105, 9, new Mario.Bcoin([1680, 144]));
   level.putQBlock(108, 9, new Mario.Bcoin([1728, 144]));
