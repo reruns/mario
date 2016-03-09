@@ -136,7 +136,11 @@ function updateEntities(dt, gameTime) {
     ent.update(dt, gameTime);
   });
 
-  if (level.scrolling && player.pos[0] > vX + 80) {
+  //This should stop the jump when he switches sides on the flag.
+  if (player.exiting) {
+    if (player.pos[0] > vX + 96)
+      vX = player.pos[0] - 96
+  }else if (level.scrolling && player.pos[0] > vX + 80) {
     vX = player.pos[0] - 80;
   }
 
