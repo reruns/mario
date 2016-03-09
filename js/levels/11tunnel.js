@@ -14,7 +14,8 @@ var oneonetunnel = Mario.oneonetunnel = function() {
     ublockSprite: new Mario.Sprite('sprites/tiles.png', [48, 0], [16,16],0),
     pipeLMidSprite: new Mario.Sprite('sprites/tiles.png', [0, 144], [16,16], 0),
     pipeRMidSprite: new Mario.Sprite('sprites/tiles.png', [16, 144], [16,16], 0),
-
+    pipeLEndSprite: new Mario.Sprite('sprites/tiles.png', [0, 128], [16,16], 0),
+    pipeREndSprite: new Mario.Sprite('sprites/tiles.png', [16, 128], [16,16], 0),
     pipeUpMid: new Mario.Sprite('sprites/tiles.png', [0, 144], [32,16], 0),
     pipeSideMid: new Mario.Sprite('sprites/tiles.png', [48, 128], [16,32], 0),
     pipeLeft: new Mario.Sprite('sprites/tiles.png', [32, 128], [16,32], 0),
@@ -50,11 +51,13 @@ var oneonetunnel = Mario.oneonetunnel = function() {
   });
 
   //level.putLeftPipe(13,11);
-  level.putRealPipe(13,11,2,"RIGHT", function() {
+  level.putRealPipe(13,11,3,"RIGHT", function() {
     Mario.oneone.call();
     player.pos = [2616, 177]
     player.pipe("UP", function() {;});
   });
+
+  level.putPipe(15,13,13);
 
   music.overworld.pause();
   music.underground.currentTime = 0;

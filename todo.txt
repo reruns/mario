@@ -1,22 +1,4 @@
 to really finish 1-1
-finish koopas
-pipes
-dying animation
-flag + ending the level
-blocks breaking
-other kinds of items
-  q-blocks popping out different things depending on what your power is
-  stars
-    invincibility killing enemies
-    player color changing appropriately
-      just change the y-pos of the sprite object every frame, but...
-  coins
-All of the scripting for fire mario
-  Generating projectiles
-  Fireballs flyin' around and colliding with stuff
-  Killing enemies
-  The animation when they hit something
-music + sound
 timer
   so we can have the sped up music, it's cute
   how fast does the Mario timer go, anyway?
