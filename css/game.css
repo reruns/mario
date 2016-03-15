@@ -5,14 +5,22 @@ html, body, ul, li {
 }
 
 canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
+  display: block;
+  width: 762;
+  margin: 0 auto;
   background-color: blue;
 }
 
 p {
-  position: absolute;
-  top: 720px;
-  left: 10px;
+  text-align: center;
+}
+
+body {
+  overflow: hidden;
+  height: 100%;
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
 }
