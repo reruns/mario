@@ -24,3 +24,9 @@ html {
   overflow: hidden;
   height: 100%;
 }
+
+.info {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
