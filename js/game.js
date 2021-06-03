@@ -90,6 +90,8 @@ function main() {
 }
 
 function update(dt) {
+  music.overworld.play();
+
   gameTime += dt;
 
   handleInput(dt);
