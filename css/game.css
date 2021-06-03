@@ -2,13 +2,19 @@ html, body, ul, li {
   margin: 0;
   border: 0;
   padding: 0;
+  background-color: black;
 }
 
 canvas {
   display: block;
-  width: 762;
+  width: calc(100vh * 1.0666666666666667);
+  height: 100vh;
   margin: 0 auto;
   background-color: blue;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 p {
@@ -26,6 +32,8 @@ html {
 }
 
 .info {
+  font-family: monospace;
+  color: white;
   position: absolute;
   top: 0;
   left: 0;
