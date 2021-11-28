@@ -1,13 +1,13 @@
 
 [![Mario](http://www.garrettjohnson.net/images/fulls/mariofull.png)](http://www.garrettjohnson.net/mario)
-#Mario
+# Mario
 [Mario.js](www.garrettjohnson.net/mario "Mario.js") is a clone of Super Mario Bros. for the Nintendo Entertainment System, implemented in Javascript.  It implements a hand-built game engine using the HTML5 Canvas.
 
 Disclaimer: This project is for demonstration only. If you really want to play Mario, please do it on a console. The graphics, sounds, and original design of Super Mario Bros. are all owned by Nintendo.
 
-#Engine
+# Engine
 
-##Game Flow
+## Game Flow
 The main loop tries to render at 60fps. Each frame, we go through a few steps to update the game, and then render.
 
 First, we get the controls. Depending on what the player is pressing, we make some changes to the player object.
@@ -18,7 +18,7 @@ Scrolling is implemented using a viewport position that increases as Mario trave
 
 The update function contains all of the logic for mutating the object's state without data from other entities. Once each object has updated, we check collisions. Independent movement, such as coins popping out of blocks, or Mario grabbing the flag and running out of the stage, are controlled here.
 
-##Collision
+## Collision
 For obstacles such as walls, the ground, and the various blocks, they are indexed by their position in the game, so each entity only needs to check the area around itself for collision with those.
 
 Then, each entity iterates through the other active entities to determine collision with moving objects, calling functions to update positions and state as appropriate.
@@ -27,7 +27,7 @@ The player object only checks collision with terrain. Enemies and items check th
 
 Note that collision boxes are separate from the display position of the entity's sprite. This was the case in the original game as well. Generally speaking, making the collision slightly more generous improves game feel.
 
-##Rendering
+## Rendering
 Once everything is in its proper place, we call each object's render function. Since the canvas doesn't implement a z-axis, the layering effect is handled entirely by rendering the objects in this order:
 
 Background
@@ -46,7 +46,7 @@ Sprites assume that the entire animation is contained on a single row of the she
 Similarly, entities which need to face left and right replace the image reference in their sprite object with a flipped counterpart.
 
 
-#Level Generation
+# Level Generation
 Each level object is created with references to the sprites to use for each type of object in the game. In this case, there are only a few tile sets, so individual levels could inherit from level subclasses for overworld, underground, castle, etc.
 
 The level is constructed using a series of calls to functions that populate the tables of objects in the game world.
