@@ -50,6 +50,8 @@
     this.items = [];
     this.pipes = [];
 
+    this.levelNumber = options.levelNumber || 1
+
     for (var i = 0; i < 15; i++) {
       this.statics[i] = [];
       this.scenery[i] = [];

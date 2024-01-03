@@ -3,6 +3,7 @@ var oneone = Mario.oneone = function() {
   //tileset we're in, so it makes more sense to just make one variable for that, so
   //TODO: put as much of this in the Level object definition as possible.
   level = new Mario.Level({
+    levelNumber: 1,
     playerPos: [56,192],
     loader: Mario.oneone,
     background: "#7974FF",
@@ -217,3 +218,9 @@ var oneone = Mario.oneone = function() {
   // music.overworld.currentTime = 0;
   music.overworld.play();
 };
+
+
+
+function levelIsComplete() {
+  return player.pos[0] >= 198 * 16; 
+}
