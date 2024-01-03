@@ -70,7 +70,8 @@ function init() {
     powerup: new Audio('sounds/powerup.wav'),
     stomp: new Audio('sounds/stomp.wav')
   };
-  Mario.oneone();
+  Mario.onetwo()
+  //Mario.oneone();
   lastTime = Date.now();
   main();
 }
