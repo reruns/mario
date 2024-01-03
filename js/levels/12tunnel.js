@@ -279,7 +279,3 @@ var onetwotunnel = Mario.onetwotunnel = function() {
     music.overworld.play();
   };
   
-  function levelIsComplete() {
-    return player.pos[0] >= 198 * 16;
-  }
-  

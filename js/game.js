@@ -86,12 +86,7 @@ function main() {
   update(dt);
   render();
 
-  if (levelIsComplete()) {
-    if (level.levelNumber === 1) {
-      Mario.onetwo(); // Load level 2
-    } else {
-      // Handle other logic or reset the level as needed
-    }  }
+
 
 
   lastTime = now;

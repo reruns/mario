@@ -38,7 +38,24 @@
       this.hit = true;
       player.flag();
       this.vel = [0, 2];
+
+
+      setTimeout(function() {
+        if (level.levelNumber === 1) {
+          Mario.onetwo(); // Load level 2
+        } else {
+          // Handle other logic or reset the level as needed
+        }
+        }, 8000)
+
+
+
+      
     }
+
+   
+
+
   }
 
   Flag.prototype.render = function() {
