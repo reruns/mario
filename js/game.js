@@ -70,8 +70,8 @@ function init() {
     powerup: new Audio('sounds/powerup.wav'),
     stomp: new Audio('sounds/stomp.wav')
   };
-  Mario.onetwotunnel()
-  //Mario.oneone();
+  //Mario.onetwoCointunnel()
+  Mario.oneone();
   lastTime = Date.now();
   main();
 }
@@ -221,6 +221,10 @@ function render() {
       if (level.blocks[i][j]) {
         renderEntity(level.blocks[i][j]);
         updateables.push(level.blocks[i][j]);
+      }
+      if (level.ladders[i][j]) {
+        renderEntity(level.ladders[i][j]);
+        updateables.push(level.ladders[i][j]);
       }
     }
   }

@@ -24,6 +24,9 @@ var onetwotunnel = Mario.onetwotunnel = function() {
       pipeLMidSprite: new Mario.Sprite('sprites/tiles.png', [0, 144], [16,16], 0),
       pipeRMidSprite: new Mario.Sprite('sprites/tiles.png', [16, 144], [16,16], 0),
   
+      ladderSprite: new Mario.Sprite('sprites/items.png', [64,128], [16,16], 0),
+
+
       pipeUpMid: new Mario.Sprite('sprites/tiles.png', [0, 144], [32,16], 0),
       pipeSideMid: new Mario.Sprite('sprites/tiles.png', [48, 128], [16,32], 0),
       pipeLeft: new Mario.Sprite('sprites/tiles.png', [32, 128], [16,32], 0),
@@ -88,9 +91,14 @@ var onetwotunnel = Mario.onetwotunnel = function() {
     level.putBrick(0, 12, null );
   
     //Build ceiling 
-    for (let x = 6; x <= 138; x++) {
+    for (let x = 6; x <= 137; x++) {
       level.putBrick(x, 2, null);
     }
+
+    for (let x = 161; x <= 200; x++) {
+      level.putBrick(x, 2, null);
+    }
+
     level.putQBlock(10, 9, new Mario.Mushroom([160, 144]));
     level.putQBlock(11, 9, new Mario.Bcoin([175, 144]));
     level.putQBlock(12, 9, new Mario.Bcoin([190, 144]));
@@ -242,20 +250,47 @@ var onetwotunnel = Mario.onetwotunnel = function() {
     level.putBrick(148, 8, null);
     level.putBrick(149, 8, null);
     level.putBrick(150, 8, null);
-    level.putBrick(160, 13, null);
-    level.putBrick(160, 12, null);
-    level.putBrick(161, 13, null);
-    level.putBrick(161, 12, null);
-    level.putBrick(162, 13, null);
-    level.putBrick(162, 12, null);
-    level.putBrick(163, 13, null);
-    level.putBrick(163, 12, null);
-    level.putBrick(164, 13, null);
-    level.putBrick(164, 12, null);
-    level.putBrick(165, 13, null);
-    level.putBrick(165, 12, null);
-    level.putBrick(166, 13, null);
-    level.putBrick(166, 12, null);
+
+    level.putLadder(140,  "DOWN");
+    level.putLadder(155,  "UP");
+    
+    for (var i = 160; i <= 176; i++) {
+      level.putBrick(i, 10, null);
+      level.putBrick(i, 11, null);
+      level.putBrick(i, 12, null);
+    }
+
+    for (var i = 170; i <= 176; i++) {
+      level.putBrick(i, 2, null);
+      level.putBrick(i, 3, null);
+      level.putBrick(i, 4, null);
+      level.putBrick(i, 5, null);
+      level.putBrick(i, 6, null);
+      level.putBrick(i, 7, null);
+      level.putBrick(i, 8, null);
+      level.putBrick(i, 9, null);
+    }
+    
+    
+
+    
+    level.putPipe(168,10,7);
+  
+
+
+
+
+    //level.putLeftPipe(13,11);
+    level.putRealPipe(166 , 8 ,2, "RIGHT", function() {
+      Mario.oneone.call();
+      player.pos = [2870, 176]
+      player.pipe("UP", function() {;});
+    });
+
+
+
+
+
   
     level.putFlagpole(198);
   

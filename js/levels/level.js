@@ -21,6 +21,8 @@
     this.goombaSprite = options.goombaSprite;
     this.koopaSprite = options.koopaSprite;
 
+    this.ladderSprite = options.ladderSprite;
+
     //prop pipe sprites, to be phased out
     this.pipeLEndSprite = options.pipeLEndSprite;
     this.pipeREndSprite = options.pipeREndSprite;
@@ -58,12 +60,16 @@
     this.items = [];
     this.pipes = [];
 
+    this.ladders =[];
+
     this.levelNumber = options.levelNumber || 1
 
     for (var i = 0; i < 15; i++) {
       this.statics[i] = [];
       this.scenery[i] = [];
       this.blocks[i] = [];
+      this.ladders[i] =[];
+
     }
 
   };
@@ -233,12 +239,6 @@
     destination: destination
   }));
   }
-
-
-
-
-
-
   
 
   Level.prototype.putFlagpole = function(x) {
@@ -287,5 +287,41 @@
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRightWindowSprite);
   };
 
+  
+
+  Level.prototype.putLadder = function(x, direction) {
+    const createLadderSet = () => {
+      const currentY1 = 2;
+      for (let i = 0; i < 3; i++) {
+        this.ladders[currentY1][x + i] = new Mario.Ladder({
+          pos: [(x + i) * 16, currentY1 * 16],
+          sprite: this.ladderSprite,
+          direction: direction,
+        });
+      }
+      const currentY2 = currentY1 + 5;
+      for (let i = 0; i < 3; i++) {
+        this.ladders[currentY2][x + i] = new Mario.Ladder({
+          pos: [(x + i) * 16, currentY2 * 16],
+          sprite: this.ladderSprite,
+          direction: direction,
+        });
+      }
+      this.ladders.push(new Mario.Ladder({
+        pos: [x, currentY1],
+       direction: direction,
+     }));
+
+    };
+    createLadderSet();
+    const intervalId = setInterval(() => {
+      setTimeout(() => {
+        createLadderSet();
+      }, 0);
+    }, 3000);
+    return intervalId;
+    
+  };
+  
 
 })();
