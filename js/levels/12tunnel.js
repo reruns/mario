@@ -187,7 +187,7 @@ var onetwotunnel = Mario.onetwotunnel = function() {
     level.putBrick(67, 9, null);
     level.putBrick(68, 9, null);
     level.putBrick(69, 9, null);
-    level.putBrick(69, 8, Mario.Mushroom([1120, 144]) );
+    level.putBrick(69, 8, new Mario.Mushroom([1104, 128]) );
     level.putBrick(72, 9, null);
     level.putBrick(72, 8, null);
     level.putBrick(72, 7, null);

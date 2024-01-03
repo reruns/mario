@@ -70,8 +70,8 @@ function init() {
     powerup: new Audio('sounds/powerup.wav'),
     stomp: new Audio('sounds/stomp.wav')
   };
-  //Mario.onetwoCointunnel()
-  Mario.oneone();
+  Mario.onetwotunnel()
+  //Mario.oneone();
   lastTime = Date.now();
   main();
 }
@@ -82,19 +82,11 @@ var gameTime = 0;
 function main() {
   var now = Date.now();
   var dt = (now - lastTime) / 1000.0;
-
   update(dt);
   render();
-
-
-
-
   lastTime = now;
   requestAnimFrame(main);
 }
-
-
-
 
 
 function update(dt) {
