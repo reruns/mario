@@ -35,6 +35,14 @@
 
     this.flagpoleSprites = options.flagPoleSprites;
 
+    this.houseRoofSprite = options.houseRoofSprite;
+    this.houseRoofTopSprite = options.houseRoofTopSprite;
+    this.houseSprite = options.houseSprite;
+    this.houseLeftWindowSprite = options.houseLeftWindowSprite;
+    this.houseRightWindowSprite = options.houseRightWindowSprite;
+    this.houseDoorTopSprite = options.houseDoorTopSprite;
+    this.houseDoorBottomSprite = options.houseDoorBottomSprite;
+
     this.LPipeSprites = options.LPipeSprites;
     this.cloudSprites = options.cloudSprites;
     this.hillSprites = options.hillSprites;
@@ -217,4 +225,43 @@
     this.scenery[2][x] = new Mario.Prop([16*x, 32], this.flagpoleSprites[0]);
     this.items.push(new Mario.Flag(16*x));
   }
+
+
+  Level.prototype.buildHouseRoof = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRoofSprite);
+  };
+  Level.prototype.buildhouseRoofTop = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRoofTopSprite);
+  };
+
+  Level.prototype.buildHouse = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseSprite);
+  };
+
+  Level.prototype.buildHouseDoorTop = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseDoorTopSprite);
+  };
+
+  
+  Level.prototype.buildHouseDoorBottom = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseDoorBottomSprite);
+  };
+
+
+  Level.prototype.buildHouseLeftWindow = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseLeftWindowSprite);
+  };
+
+  Level.prototype.buildHouseRightWindow = function(x, y) {
+
+    this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRightWindowSprite);
+  };
+
+
 })();
