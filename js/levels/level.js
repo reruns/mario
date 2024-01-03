@@ -217,6 +217,30 @@
     }));
   }
 
+  Level.prototype.putRealLeftPipe = function(x, y, length, direction, destination) {
+  px = x * 16;
+  py = y * 16;
+  this.statics[y][x] = new Mario.Floor([px, py], this.LPipeSprites[0]);
+  this.statics[y + 1][x] = new Mario.Floor([px, py + 16], this.LPipeSprites[1]);
+  this.statics[y][x + 1] = new Mario.Floor([px + 16, py], this.LPipeSprites[2]);
+  this.statics[y + 1][x + 1] = new Mario.Floor([px + 16, py + 16], this.LPipeSprites[3]);
+  this.statics[y][x + 2] = new Mario.Floor([px + 32, py], this.LPipeSprites[4]);
+  this.statics[y + 1][x + 2] = new Mario.Floor([px + 32, py + 16], this.LPipeSprites[5]);
+  this.pipes.push(new Mario.Pipe({
+    pos: [px, py],
+    length: length,
+    direction: direction,
+    destination: destination
+  }));
+  }
+
+
+
+
+
+
+  
+
   Level.prototype.putFlagpole = function(x) {
     this.statics[12][x] = new Mario.Floor([16*x, 192], this.wallSprite);
     for (i=3; i < 12; i++) {

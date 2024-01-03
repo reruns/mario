@@ -130,21 +130,12 @@ var onetwo = Mario.onetwo = function() {
   level.buildHouseRoof(3, 8);
   level.buildHouseRightWindow (3, 9);
   level.buildHouse(2, 9);
-
-
   level.putPipe(12, 13, 4);
-
-  
-  //level.putLeftPipe(10, 11, 4);
-
- 
-
-  level.putRealPipe(10 , 11 ,3,"RIGHT", function() {
+  level.putRealLeftPipe(10 , 11 ,1 ,"RIGHT", function() {
     Mario.onetwotunnel.call();
     player.pos = [42,0]
     player.pipe("DOWN", function() {;});
   });
-  
   
 
   music.underground.pause();
