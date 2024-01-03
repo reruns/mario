@@ -1,6 +1,6 @@
 var onetwoCointunnel = Mario.onetwoCointunnel = function() {
   level = new Mario.Level({
-    playerPos: [40,16],
+    playerPos: [24,16],
     loader: Mario.onetwoCointunnel,
     background: "#000000",
     scrolling: false,
@@ -37,27 +37,51 @@ var onetwoCointunnel = Mario.onetwoCointunnel = function() {
   vX = 0;
   level.putFloor(0,16);
   level.putWall(0,13,11);
-  walls = [4,5,6,7,8,9,10];
+  level.putWall(3,10,1);
+  level.putWall(4,10,1);
+  level.putWall(5,10,1);
+  level.putWall(6,10,1);
+  level.putWall(7,10,1);
+  level.putWall(8,10,1);
+  level.putWall(9,10,1);
+  level.putWall(10,10,1);
+  level.putWall(11,10,1);
+  level.putWall(12,10,1);
+  level.putWall(13,10,1);
+  level.putWall(14,10,1);
+  level.putWall(13,9,1);
+  level.putWall(14,9,1);
+  level.putWall(13,8,1);
+  level.putWall(14,8,1);
+  level.putWall(13,7,1);
+  level.putWall(14,7,1);
+  level.putWall(13,11,1);
+  level.putWall(14,11,1);
+  walls = [3,4,5,6,7,8,9,10,11,12,13,14];
+
   walls.forEach(function(loc){
-    level.putWall(loc,13,3);
-    level.putWall(loc,3,1);
+    level.putWall(loc,6,4);
   });
 
-  coins = [[5,5], [6,5], [7,5], [8,5], [9,5],
-           [4,7], [5,7], [6,7], [7,7], [8,7], [9,7], [10,7],
-           [4,9], [5,9], [6,9], [7,9], [8,9], [9,9], [10,9]];
+  coins = [[3,12], [4,12], [5,12], [6,12], [7,12],
+          [8,12], [9,12], [10,12], [11,12],  [4,8],
+          [5,8], [6,8], [7,8], [8,8], [9,8], [10,8], [11,8]];
   coins.forEach(function(pos){
     level.putCoin(pos[0],pos[1]);
   });
 
-  //level.putLeftPipe(13,11);
-  level.putRealPipe(13,11,3,"RIGHT", function() {
-    Mario.oneone.call();
-    player.pos = [2616, 177]
-    player.pipe("UP", function() {;});
-  });
+  level.putPipe(15,13,11);
 
-  level.putPipe(15,13,13);
+
+    //level.putLeftPipe(13,11);
+    level.putRealPipe(13 , 11 ,2, "RIGHT", function() {
+      Mario.onetwotunnel.call();
+      player.pos = [1848, 177]
+      player.pipe("UP", function() {;});
+    });
+
+
+
 
   music.overworld.pause();
   music.underground.currentTime = 0;
