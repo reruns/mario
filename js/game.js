@@ -34,12 +34,12 @@ var vX = 0,
 
 //load our images
 resources.load([
-  ASSETS_ROOT + '/sprites/player.png',
-  ASSETS_ROOT + '/sprites/enemy.png',
-  ASSETS_ROOT + '/sprites/tiles.png',
-  ASSETS_ROOT + '/sprites/playerl.png',
-  ASSETS_ROOT + '/sprites/items.png',
-  ASSETS_ROOT + '/sprites/enemyr.png',
+  'sprites/player.png',
+  'sprites/enemy.png',
+  'sprites/tiles.png',
+  'sprites/playerl.png',
+  'sprites/items.png',
+  'sprites/enemyr.png',
 ]);
 
 resources.onReady(init);
@@ -51,24 +51,24 @@ var music;
 var lastTime;
 function init() {
   music = {
-    overworld: new Audio(ASSETS_ROOT + '/sounds/aboveground_bgm.ogg'),
-    underground: new Audio(ASSETS_ROOT + '/sounds/underground_bgm.ogg'),
-    clear: new Audio(ASSETS_ROOT + '/sounds/stage_clear.wav'),
-    death: new Audio(ASSETS_ROOT + '/sounds/mariodie.wav')
+    overworld: new Audio('sounds/aboveground_bgm.ogg'),
+    underground: new Audio('sounds/underground_bgm.ogg'),
+    clear: new Audio('sounds/stage_clear.wav'),
+    death: new Audio('sounds/mariodie.wav')
   };
   sounds = {
-    smallJump: new Audio(ASSETS_ROOT + '/sounds/jump-small.wav'),
-    bigJump: new Audio(ASSETS_ROOT + '/sounds/jump-super.wav'),
-    breakBlock: new Audio(ASSETS_ROOT + '/sounds/breakblock.wav'),
-    bump: new Audio(ASSETS_ROOT + '/sounds/bump.wav'),
-    coin: new Audio(ASSETS_ROOT + '/sounds/coin.wav'),
-    fireball: new Audio(ASSETS_ROOT + '/sounds/fireball.wav'),
-    flagpole: new Audio(ASSETS_ROOT + '/sounds/flagpole.wav'),
-    kick: new Audio(ASSETS_ROOT + '/sounds/kick.wav'),
-    pipe: new Audio(ASSETS_ROOT + '/sounds/pipe.wav'),
-    itemAppear: new Audio(ASSETS_ROOT + '/sounds/itemAppear.wav'),
-    powerup: new Audio(ASSETS_ROOT + '/sounds/powerup.wav'),
-    stomp: new Audio(ASSETS_ROOT + '/sounds/stomp.wav')
+    smallJump: new Audio('sounds/jump-small.wav'),
+    bigJump: new Audio('sounds/jump-super.wav'),
+    breakBlock: new Audio('sounds/breakblock.wav'),
+    bump: new Audio('sounds/bump.wav'),
+    coin: new Audio('sounds/coin.wav'),
+    fireball: new Audio('sounds/fireball.wav'),
+    flagpole: new Audio('sounds/flagpole.wav'),
+    kick: new Audio('sounds/kick.wav'),
+    pipe: new Audio('sounds/pipe.wav'),
+    itemAppear: new Audio('sounds/itemAppear.wav'),
+    powerup: new Audio('sounds/powerup.wav'),
+    stomp: new Audio('sounds/stomp.wav')
   };
   Mario.oneone();
   lastTime = Date.now();
