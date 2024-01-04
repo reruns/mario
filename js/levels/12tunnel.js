@@ -250,9 +250,9 @@ var onetwotunnel = Mario.onetwotunnel = function() {
     level.putBrick(148, 8, null);
     level.putBrick(149, 8, null);
     level.putBrick(150, 8, null);
-
     level.putLadder(140,  "DOWN");
     level.putLadder(155,  "UP");
+
     
     for (var i = 160; i <= 176; i++) {
       level.putBrick(i, 10, null);

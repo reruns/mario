@@ -68,8 +68,6 @@
       this.statics[i] = [];
       this.scenery[i] = [];
       this.blocks[i] = [];
-      this.ladders[i] =[];
-
     }
 
   };
@@ -224,22 +222,21 @@
   }
 
   Level.prototype.putRealLeftPipe = function(x, y, length, direction, destination) {
-  px = x * 16;
-  py = y * 16;
-  this.statics[y][x] = new Mario.Floor([px, py], this.LPipeSprites[0]);
-  this.statics[y + 1][x] = new Mario.Floor([px, py + 16], this.LPipeSprites[1]);
-  this.statics[y][x + 1] = new Mario.Floor([px + 16, py], this.LPipeSprites[2]);
-  this.statics[y + 1][x + 1] = new Mario.Floor([px + 16, py + 16], this.LPipeSprites[3]);
-  this.statics[y][x + 2] = new Mario.Floor([px + 32, py], this.LPipeSprites[4]);
-  this.statics[y + 1][x + 2] = new Mario.Floor([px + 32, py + 16], this.LPipeSprites[5]);
-  this.pipes.push(new Mario.Pipe({
-    pos: [px, py],
-    length: length,
-    direction: direction,
-    destination: destination
-  }));
+    px = x * 16;
+    py = y * 16;
+    this.statics[y][x] = new Mario.Floor([px, py], this.LPipeSprites[0]);
+    this.statics[y + 1][x] = new Mario.Floor([px, py + 16], this.LPipeSprites[1]);
+    this.statics[y][x + 1] = new Mario.Floor([px + 16, py], this.LPipeSprites[2]);
+    this.statics[y + 1][x + 1] = new Mario.Floor([px + 16, py + 16], this.LPipeSprites[3]);
+    this.statics[y][x + 2] = new Mario.Floor([px + 32, py], this.LPipeSprites[4]);
+    this.statics[y + 1][x + 2] = new Mario.Floor([px + 32, py + 16], this.LPipeSprites[5]);
+    this.pipes.push(new Mario.Pipe({
+      pos: [px, py],
+      length: length,
+      direction: direction,
+      destination: destination
+    }));
   }
-  
 
   Level.prototype.putFlagpole = function(x) {
     this.statics[12][x] = new Mario.Floor([16*x, 192], this.wallSprite);
@@ -250,11 +247,11 @@
     this.items.push(new Mario.Flag(16*x));
   }
 
-
   Level.prototype.buildHouseRoof = function(x, y) {
 
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRoofSprite);
   };
+ 
   Level.prototype.buildhouseRoofTop = function(x, y) {
 
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRoofTopSprite);
@@ -269,13 +266,11 @@
 
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseDoorTopSprite);
   };
-
   
   Level.prototype.buildHouseDoorBottom = function(x, y) {
 
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseDoorBottomSprite);
   };
-
 
   Level.prototype.buildHouseLeftWindow = function(x, y) {
 
@@ -287,41 +282,36 @@
     this.scenery[y][x] = new Mario.Prop([x*16, y*16], this.houseRightWindowSprite);
   };
 
-  
-
   Level.prototype.putLadder = function(x, direction) {
     const createLadderSet = () => {
-      const currentY1 = 2;
+      let currentY1 = (direction === 'UP') ? 13*16 : 0; 
+      const yIncrement = (direction === 'UP') ? -1 : 1;   
       for (let i = 0; i < 3; i++) {
-        this.ladders[currentY1][x + i] = new Mario.Ladder({
-          pos: [(x + i) * 16, currentY1 * 16],
+        this.ladders.push(new Mario.Ladder({
+          pos: [((x + i) * 16), currentY1],
           sprite: this.ladderSprite,
           direction: direction,
-        });
+        }));
       }
-      const currentY2 = currentY1 + 5;
-      for (let i = 0; i < 3; i++) {
-        this.ladders[currentY2][x + i] = new Mario.Ladder({
-          pos: [(x + i) * 16, currentY2 * 16],
-          sprite: this.ladderSprite,
-          direction: direction,
-        });
-      }
-      this.ladders.push(new Mario.Ladder({
-        pos: [x, currentY1],
-       direction: direction,
-     }));
-
+      let intervalId = setInterval(() => {
+        setTimeout(() => {
+          for (let i = 0; i < 3; i++) {
+            this.ladders.push(new Mario.Ladder({
+              pos: [((x + i) * 16), currentY1],
+              sprite: this.ladderSprite,
+              direction: direction,
+            }));
+          }
+          currentY1 += yIncrement;
+        }, 0);
+      }, 3500);
     };
+  
     createLadderSet();
-    const intervalId = setInterval(() => {
-      setTimeout(() => {
-        createLadderSet();
-      }, 0);
-    }, 3000);
-    return intervalId;
-    
   };
+  
+  
+  
   
 
 })();
