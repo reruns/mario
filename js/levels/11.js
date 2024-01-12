@@ -3,6 +3,7 @@ var oneone = Mario.oneone = function() {
   //tileset we're in, so it makes more sense to just make one variable for that, so
   //TODO: put as much of this in the Level object definition as possible.
   level = new Mario.Level({
+    levelNumber: 1,
     playerPos: [56,192],
     loader: Mario.oneone,
     background: "#7974FF",
@@ -12,6 +13,16 @@ var oneone = Mario.oneone = function() {
     floorSprite:  new Mario.Sprite('sprites/tiles.png', [0,0],[16,16],0),
     cloudSprite:  new Mario.Sprite('sprites/tiles.png', [0,320],[48,32],0),
     wallSprite: new Mario.Sprite('sprites/tiles.png', [0, 16],[16,16],0),
+
+    houseRoofSprite: new Mario.Sprite('sprites/tiles.png', [176, 00],[16,16],0),
+    houseRoofTopSprite: new Mario.Sprite('sprites/tiles.png', [176, 16],[16,16],0),
+    houseSprite: new Mario.Sprite('sprites/tiles.png', [208, 00],[16,16],0),
+    houseLeftWindowSprite: new Mario.Sprite('sprites/tiles.png', [192, 00],[16,16],0),
+    houseRightWindowSprite: new Mario.Sprite('sprites/tiles.png', [224, 00],[16,16],0),
+    houseDoorTopSprite: new Mario.Sprite('sprites/tiles.png', [192, 16],[16,16],0),
+    houseDoorBottomSprite: new Mario.Sprite('sprites/tiles.png', [208, 16],[16,16],0),
+
+
     brickSprite: new Mario.Sprite('sprites/tiles.png', [16, 0], [16,16], 0),
     brickBounceSprite: new Mario.Sprite('sprites/tiles.png',[32,0],[16,16],0),
     rubbleSprite: function () {
@@ -194,6 +205,29 @@ var oneone = Mario.oneone = function() {
   level.putWall(189, 13, 8);
   level.putFlagpole(198);
 
+  level.buildHouse(202, 11);
+  level.buildHouse(202, 12);
+  level.buildHouse(203, 11);
+  level.buildHouse(203, 12);
+  level.buildHouse(205, 11);
+  level.buildHouse(205, 12);
+  level.buildHouse(206, 11);
+  level.buildHouse(206, 12);
+  level.buildHouseDoorBottom (204, 12);
+  level.buildHouseDoorTop (204, 11);
+  level.buildHouseRoof(202, 10);
+  level.buildhouseRoofTop(203, 10);
+  level.buildhouseRoofTop(204, 10);
+  level.buildhouseRoofTop(205, 10);
+  level.buildHouseRoof(206, 10);
+  level.buildHouseLeftWindow (203, 9);
+  level.buildHouseRoof(203, 8);
+  level.buildHouseRoof(204, 8);
+  level.buildHouseRoof(205, 8);
+  level.buildHouseRightWindow (205, 9);
+  level.buildHouse(204, 9);
+
+  
   //and enemies
   level.putGoomba(22, 12);
   level.putGoomba(40, 12);
@@ -217,3 +251,5 @@ var oneone = Mario.oneone = function() {
   // music.overworld.currentTime = 0;
   music.overworld.play();
 };
+
+

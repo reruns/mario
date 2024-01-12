@@ -38,6 +38,11 @@
       this.hit = true;
       player.flag();
       this.vel = [0, 2];
+      setTimeout(function() {
+        if (level.levelNumber === 1) {
+          Mario.onetwo();
+        } else {}
+        }, 8000)
     }
   }
 

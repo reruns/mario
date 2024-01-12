@@ -70,6 +70,8 @@ function init() {
     powerup: new Audio('sounds/powerup.wav'),
     stomp: new Audio('sounds/stomp.wav')
   };
+  //Mario.onetwoCointunnel()
+  //Mario.onetwotunnel();
   Mario.oneone();
   lastTime = Date.now();
   main();
@@ -81,13 +83,12 @@ var gameTime = 0;
 function main() {
   var now = Date.now();
   var dt = (now - lastTime) / 1000.0;
-
   update(dt);
   render();
-
   lastTime = now;
   requestAnimFrame(main);
 }
+
 
 function update(dt) {
   gameTime += dt;
@@ -159,6 +160,11 @@ function updateEntities(dt, gameTime) {
   level.pipes.forEach (function(pipe) {
     pipe.update(dt);
   });
+
+  level.ladders.forEach(function (ladder) {
+    ladder.update(dt, gameTime);
+  });
+  
 }
 
 //scan for collisions
@@ -178,6 +184,10 @@ function checkCollisions() {
   });
   level.pipes.forEach (function(pipe) {
     pipe.checkCollisions();
+  });
+  
+  level.ladders.forEach (function(ladder) {
+    ladder.checkCollisions();
   });
 }
 
@@ -206,12 +216,15 @@ function render() {
     renderEntity(enemy);
   });
 
+  level.ladders.forEach (function(ladder) {
+    renderEntity(ladder);
+  });
+
 
 
   fireballs.forEach(function(fireball) {
     renderEntity(fireball);
   })
-
   //then we draw every static object.
   for(var i = 0; i < 15; i++) {
     for (var j = Math.floor(vX / 16) - 1; j < Math.floor(vX / 16) + 20; j++){
